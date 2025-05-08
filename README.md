@@ -1,6 +1,9 @@
 # COSC 102 Testing Guide Website
 
-A modern, simple website for teaching COSC 102 students how to write and test their code.
+## Running:
+```git clone https://github.com/jon-cook1/testing-102```
+
+open `index` file with chrome
 
 ## Project Structure
 
