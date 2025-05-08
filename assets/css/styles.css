@@ -1,4 +1,179 @@
 /* Base Styles */
+
+/* Expandable Section Styles */
+.expandable-sections {
+    margin-top: 2rem;
+}
+
+/* Button container for multiple buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Limitations section styling */
+.limitations-section {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.limitations-preview {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.limitation-preview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.limitation-preview-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.limitation-preview-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.limitation-preview-item p {
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Detailed limitations styles */
+.limitations-intro, .limitations-conclusion {
+    text-align: center;
+    max-width: 800px;
+    margin: 1.5rem auto;
+}
+
+.limitations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.limitation-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid var(--primary-color);
+}
+
+.limitation-icon {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.limitation-card h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.limitation-tag {
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--border-color);
+    margin-top: 1rem;
+}
+
+.limitation-tag span {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.section-content {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.section-content.hidden {
+    display: none;
+}
+
+.section-close {
+    display: block;
+    margin: 1.5rem auto 0;
+}
+
+.approach-step {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.approach-step .step-number {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.step-content {
+    margin-left: 1rem;
+}
+
+.example-overview {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+}
+
+.example-conclusion {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+}
 :root {
     --primary-color: #4a6de5;
     --secondary-color: #f0f2ff;

@@ -16,9 +16,9 @@
             <ul>
                 <li><a href="#home" class="active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#overview" data-page="overview"><i class="fas fa-map"></i> 4-Step Approach</a></li>
-                <li><a href="#step1" data-page="step1"><i class="fas fa-1"></i> Step 1</a></li>
-                <li><a href="#step2" data-page="step2"><i class="fas fa-2"></i> Step 2</a></li>
-                <li><a href="#step3" data-page="step3"><i class="fas fa-3"></i> Step 3</a></li>
+                <li><a href="#example1" data-page="example1"><i class="fas fa-1"></i> Example 1</a></li>
+                <li><a href="#example2" data-page="example2"><i class="fas fa-2"></i> Example 2</a></li>
+                <li><a href="#example3" data-page="example3"><i class="fas fa-3"></i> Example 3</a></li>
                 <li><a href="#advanced" data-page="advanced"><i class="fas fa-code"></i> Advanced</a></li>
             </ul>
         </nav>
@@ -77,76 +77,76 @@
             <div class="step-overview">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Understanding Requirements</h3>
-                    <p>[Overview of step 1]</p>
-                    <a href="#step1" class="btn-secondary step-details" data-page="step1">Learn More</a>
+                    <h3>Robust Boundary-Value Tests</h3>
+                    <p>Filter valid vs invalid cases</p>
+                    <button class="btn-secondary expand-details" data-section="section1">Learn More</button>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Designing Test Cases</h3>
-                    <p>[Overview of step 2]</p>
-                    <a href="#step2" class="btn-secondary step-details" data-page="step2">Learn More</a>
+                    <h3>Edge-Focused Weak Normal Equivalence-Class Test</h3>
+                    <p>Cover the valid outputs</p>
+                    <button class="btn-secondary expand-details" data-section="section2">Learn More</button>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Implementing Tests</h3>
-                    <p>[Overview of step 3]</p>
-                    <a href="#step3" class="btn-secondary step-details" data-page="step3">Learn More</a>
+                    <h3>Structural Coverage Sweep</h3>
+                    <p>Hunt for blind spots</p>
+                    <button class="btn-secondary expand-details" data-section="section3">Learn More</button>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Refining Your Code</h3>
-                    <p>[Overview of step 4]</p>
-                    <a href="#step3" class="btn-secondary step-details" data-page="step3">Learn More</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Step 1 Page -->
-        <section id="step1" class="page">
-            <h2>Step 1: Understanding Requirements</h2>
-            <div class="content-container">
-                <div class="text-content">
-                    <p>[Detailed content about understanding requirements]</p>
-                    
-                    <h3>Key Points</h3>
-                    <ul>
-                        <li>[Point 1]</li>
-                        <li>[Point 2]</li>
-                        <li>[Point 3]</li>
-                    </ul>
-                </div>
-                
-                <div class="table-container">
-                    <h3>Example Requirements Analysis</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Requirement</th>
-                                <th>Test Consideration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>[Requirement 1]</td>
-                                <td>[Test consideration 1]</td>
-                            </tr>
-                            <tr>
-                                <td>[Requirement 2]</td>
-                                <td>[Test consideration 2]</td>
-                            </tr>
-                            <tr>
-                                <td>[Requirement 3]</td>
-                                <td>[Test consideration 3]</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h3>Suite Refinement</h3>
+                    <p>Keep what matters, drop the rest</p>
+                    <button class="btn-secondary expand-details" data-section="section4">Learn More</button>
                 </div>
             </div>
             
-            <div class="code-example">
-                <h3>Example Code</h3>
-                <pre><code>
+            <!-- Expandable Sections -->
+            <div class="expandable-sections">
+                <div id="section1" class="section-content hidden">
+                    <h3>Robust Boundary-Value Tests - Detailed</h3>
+                    <div class="content-container">
+                        <div class="text-content">
+                            <p>[Detailed content about understanding requirements]</p>
+                            
+                            <h4>Key Points</h4>
+                            <ul>
+                                <li>[Point 1]</li>
+                                <li>[Point 2]</li>
+                                <li>[Point 3]</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="table-container">
+                            <h4>Example Requirements Analysis</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Requirement</th>
+                                        <th>Test Consideration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>[Requirement 1]</td>
+                                        <td>[Test consideration 1]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>[Requirement 2]</td>
+                                        <td>[Test consideration 2]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>[Requirement 3]</td>
+                                        <td>[Test consideration 3]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Example Code</h4>
+                        <pre><code>
 // Example code for understanding requirements
 public class Calculator {
     /**
@@ -159,59 +159,59 @@ public class Calculator {
         return a + b;
     }
 }
-                </code></pre>
-            </div>
-        </section>
-        
-        <!-- Step 2 Page -->
-        <section id="step2" class="page">
-            <h2>Step 2: Designing Test Cases</h2>
-            <div class="content-container">
-                <div class="text-content">
-                    <p>[Detailed content about designing test cases]</p>
-                    
-                    <h3>Test Case Categories</h3>
-                    <ul>
-                        <li>[Category 1]</li>
-                        <li>[Category 2]</li>
-                        <li>[Category 3]</li>
-                    </ul>
+                        </code></pre>
+                    </div>
+                    <button class="btn-primary section-close">Close</button>
                 </div>
                 
-                <div class="table-container">
-                    <h3>Example Test Cases</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Input</th>
-                                <th>Expected Output</th>
-                                <th>Test Case Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>[Input 1]</td>
-                                <td>[Expected output 1]</td>
-                                <td>[Type 1]</td>
-                            </tr>
-                            <tr>
-                                <td>[Input 2]</td>
-                                <td>[Expected output 2]</td>
-                                <td>[Type 2]</td>
-                            </tr>
-                            <tr>
-                                <td>[Input 3]</td>
-                                <td>[Expected output 3]</td>
-                                <td>[Type 3]</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="code-example">
-                <h3>Example Code</h3>
-                <pre><code>
+                <div id="section2" class="section-content hidden">
+                    <h3>Edge-Focused Weak Normal Equivalence-Class Test - Detailed</h3>
+                    <div class="content-container">
+                        <div class="text-content">
+                            <p>[Detailed content about designing test cases]</p>
+                            
+                            <h4>Test Case Categories</h4>
+                            <ul>
+                                <li>[Category 1]</li>
+                                <li>[Category 2]</li>
+                                <li>[Category 3]</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="table-container">
+                            <h4>Example Test Cases</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Input</th>
+                                        <th>Expected Output</th>
+                                        <th>Test Case Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>[Input 1]</td>
+                                        <td>[Expected output 1]</td>
+                                        <td>[Type 1]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>[Input 2]</td>
+                                        <td>[Expected output 2]</td>
+                                        <td>[Type 2]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>[Input 3]</td>
+                                        <td>[Expected output 3]</td>
+                                        <td>[Type 3]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Example Code</h4>
+                        <pre><code>
 // Example test case design
 // Test cases for Calculator.add(int a, int b)
 
@@ -226,89 +226,1037 @@ public class Calculator {
 // Test case 3: mixed sign
 // Input: a=10, b=-5
 // Expected: 5
-                </code></pre>
+                        </code></pre>
+                    </div>
+                    <button class="btn-primary section-close">Close</button>
+                </div>
+                
+                <div id="section3" class="section-content hidden">
+                    <h3>Structural Coverage Sweep - Detailed</h3>
+                    <div class="content-container">
+                        <div class="text-content">
+                            <p>[Detailed content about hunting for blind spots in test coverage]</p>
+                            
+                            <h4>Key Concepts</h4>
+                            <ul>
+                                <li>Code coverage identifies untested execution paths</li>
+                                <li>Statement coverage: ensure every line runs at least once</li>
+                                <li>Branch coverage: ensure every decision (if/else) is tested</li>
+                                <li>Path coverage: ensure all possible execution paths are tested</li>
+                                <li>Finding blind spots leads to discovering untested edge cases</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="btn-primary section-close">Close</button>
+                        <button class="btn-secondary" id="see-implementation">See Implementation</button>
+                    </div>
+                </div>
+                
+                <div id="section4" class="section-content hidden">
+                    <h3>Suite Refinement - Detailed</h3>
+                    <div class="content-container">
+                        <div class="text-content">
+                            <p>[Detailed content about refining test suites]</p>
+                            
+                            <h4>Key Refinement Strategies</h4>
+                            <ul>
+                                <li>Eliminate redundant tests that cover the same cases</li>
+                                <li>Prioritize tests based on importance and risk</li>
+                                <li>Remove tests that don't add value or coverage</li>
+                                <li>Combine similar tests for efficiency</li>
+                                <li>Organize tests for better maintainability</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="btn-primary section-close">Close</button>
+                </div>
+                
+                <div id="section5" class="section-content hidden">
+                    <h3>Approach Limitations in Context</h3>
+                    <p class="limitations-intro">Our 4-step approach excels at systematically testing functional correctness, but like all methods, it has specific limitations to consider when planning your testing strategy.</p>
+                    
+                    <div class="limitations-grid">
+                        <div class="limitation-card">
+                            <div class="limitation-icon">
+                                <i class="fas fa-sitemap fa-2x"></i>
+                            </div>
+                            <h4>State-Based System Limitations</h4>
+                            <p>This approach works well for pure functions but becomes more complex with stateful systems where the outcome depends on previous operations. Testing state-dependent behavior requires more sophisticated strategies beyond this approach.</p>
+                            <div class="limitation-tag">
+                                <span>Supplement with:</span> State transition testing, model-based testing
+                            </div>
+                        </div>
+                        
+                        <div class="limitation-card">
+                            <div class="limitation-icon">
+                                <i class="fas fa-tachometer-alt fa-2x"></i>
+                            </div>
+                            <h4>Performance Testing Gaps</h4>
+                            <p>Our approach focuses primarily on functional correctness rather than performance characteristics. Performance issues like memory leaks, execution time, and resource utilization require specialized testing techniques not covered here.</p>
+                            <div class="limitation-tag">
+                                <span>Supplement with:</span> Load testing, profiling, benchmarking
+                            </div>
+                        </div>
+                        
+                        <div class="limitation-card">
+                            <div class="limitation-icon">
+                                <i class="fas fa-user-friends fa-2x"></i>
+                            </div>
+                            <h4>User Experience Blind Spots</h4>
+                            <p>This technique doesn't address usability or experience aspects of software. For user interfaces or interactive systems, additional human-centered testing approaches are necessary to complement this method.</p>
+                            <div class="limitation-tag">
+                                <span>Supplement with:</span> Usability testing, A/B testing, user feedback
+                            </div>
+                        </div>
+                        
+                        <div class="limitation-card">
+                            <div class="limitation-icon">
+                                <i class="fas fa-shield-alt fa-2x"></i>
+                            </div>
+                            <h4>Security Testing Insufficiency</h4>
+                            <p>While our approach may catch some security issues through boundary testing, it doesn't systematically address security vulnerabilities. Dedicated security testing methodologies should be used alongside this approach for security-critical applications.</p>
+                            <div class="limitation-tag">
+                                <span>Supplement with:</span> Penetration testing, security code review, threat modeling
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="limitations-conclusion">By understanding these limitations, you can better determine when to apply this 4-step approach and when to complement it with other testing strategies for comprehensive quality assurance.</p>
+                    
+                    <button class="btn-primary section-close">Close</button>
+                </div>
+            </div>
+            
+            <div class="cta">
+                <h2>Ready to See It in Action?</h2>
+                <button class="btn-primary" id="see-in-action">See It In Action</button>
+            </div>
+            
+            <div class="limitations-section">
+                <h2>Understanding Approach Limitations</h2>
+                <p>Even the best testing approaches have constraints. Being aware of these limitations helps you supplement with other testing methods when necessary.</p>
+                <div class="limitations-preview">
+                    <div class="limitation-preview-item">
+                        <i class="fas fa-sitemap"></i>
+                        <p>State-Based Systems</p>
+                    </div>
+                    <div class="limitation-preview-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <p>Performance Aspects</p>
+                    </div>
+                    <div class="limitation-preview-item">
+                        <i class="fas fa-user-friends"></i>
+                        <p>User Experience</p>
+                    </div>
+                    <div class="limitation-preview-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <p>Security Concerns</p>
+                    </div>
+                </div>
+                <button class="btn-secondary expand-details" data-section="section5">Explore Limitations in Detail</button>
             </div>
         </section>
         
-        <!-- Step 3 Page -->
-        <section id="step3" class="page">
-            <h2>Step 3: Implementing Tests</h2>
-            <div class="content-container">
-                <div class="text-content">
-                    <p>[Detailed content about implementing tests]</p>
-                    
-                    <h3>Testing Approaches</h3>
-                    <ul>
-                        <li>[Approach 1]</li>
-                        <li>[Approach 2]</li>
-                        <li>[Approach 3]</li>
-                    </ul>
+        <!-- Example 1 Page -->
+        <section id="example1" class="page">
+            <h2>Example 1: Calculator Function</h2>
+            <div class="example-overview">
+                <p>In this example, we'll walk through the process of testing a simple calculator addition function using our 4-step approach.</p>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">0</div>
+                    <h3>Understanding Requirements</h3>
                 </div>
-                
-                <div class="table-container">
-                    <h3>Testing Techniques Comparison</h3>
+                <div class="step-content">
+                    <p>For our calculator addition function, we need to understand exactly what it should do:</p>
+                    
+                    <ul>
+                        <li>Take two integer inputs</li>
+                        <li>Return their sum as an integer</li>
+                        <li>Handle positive numbers, negative numbers, and zero</li>
+                        <li>Handle overflow according to Java integer rules</li>
+                    </ul>
+                    
+                    <div class="code-example">
+                        <h4>The Function We're Testing</h4>
+                        <pre><code>
+public class Calculator {
+    /**
+     * Adds two numbers
+     * @param a first number
+     * @param b second number
+     * @return sum of a and b
+     */
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h3>Step 1: Robust Boundary-Value Tests</h3>
+                </div>
+                <div class="step-content">
+                    <p>In this step, we identify the boundaries where behavior might change and test around those boundaries:</p>
+                    
+                    <ul>
+                        <li>We consider the range of valid inputs (all integers)</li>
+                        <li>We identify boundaries such as zero, positive/negative transitions</li>
+                        <li>We look at extreme values like Integer.MAX_VALUE and Integer.MIN_VALUE</li>
+                        <li>We create test cases that focus on these boundary conditions</li>
+                    </ul>
+                    
+                    <h4>Test Cases Created in Step 1</h4>
                     <table>
                         <thead>
                             <tr>
-                                <th>Technique</th>
-                                <th>Pros</th>
-                                <th>Cons</th>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Boundary Being Tested</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>[Technique 1]</td>
-                                <td>[Pros 1]</td>
-                                <td>[Cons 1]</td>
+                                <td>BVT1</td>
+                                <td>Zero boundary - both zero</td>
+                                <td>a=0, b=0</td>
+                                <td>0</td>
+                                <td>Zero values</td>
                             </tr>
                             <tr>
-                                <td>[Technique 2]</td>
-                                <td>[Pros 2]</td>
-                                <td>[Cons 2]</td>
+                                <td>BVT2</td>
+                                <td>Zero boundary - one zero</td>
+                                <td>a=5, b=0</td>
+                                <td>5</td>
+                                <td>One zero operand</td>
                             </tr>
                             <tr>
-                                <td>[Technique 3]</td>
-                                <td>[Pros 3]</td>
-                                <td>[Cons 3]</td>
+                                <td>BVT3</td>
+                                <td>Maximum value boundary</td>
+                                <td>a=Integer.MAX_VALUE, b=1</td>
+                                <td>Exception expected</td>
+                                <td>Overflow threshold</td>
+                            </tr>
+                            <tr>
+                                <td>BVT4</td>
+                                <td>Minimum value boundary</td>
+                                <td>a=Integer.MIN_VALUE, b=-1</td>
+                                <td>Exception expected</td>
+                                <td>Underflow threshold</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             
-            <div class="code-example">
-                <h3>Example Code</h3>
-                <pre><code>
-// Example test implementation
-public class CalculatorTest {
-    public static void main(String[] args) {
-        Calculator calc = new Calculator();
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
+                </div>
+                <div class="step-content">
+                    <p>In this step, we create test cases that represent different categories of valid input and expected output behaviors:</p>
+                    
+                    <ul>
+                        <li>We identify distinct categories of equivalent input scenarios (positive + positive, negative + negative, etc.)</li>
+                        <li>We choose representative values from each category</li>
+                        <li>We ensure all normal (valid) behaviors are covered</li>
+                        <li>We focus on covering fundamental behaviors rather than all possible inputs</li>
+                    </ul>
+                    
+                    <h4>Test Cases Created in Step 2</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Equivalence Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>EC1</td>
+                                <td>Both positive</td>
+                                <td>a=5, b=3</td>
+                                <td>8</td>
+                                <td>Positive + Positive</td>
+                            </tr>
+                            <tr>
+                                <td>EC2</td>
+                                <td>Both negative</td>
+                                <td>a=-2, b=-7</td>
+                                <td>-9</td>
+                                <td>Negative + Negative</td>
+                            </tr>
+                            <tr>
+                                <td>EC3</td>
+                                <td>Positive + Negative (|a| > |b|)</td>
+                                <td>a=10, b=-5</td>
+                                <td>5</td>
+                                <td>Mixed signs, positive result</td>
+                            </tr>
+                            <tr>
+                                <td>EC4</td>
+                                <td>Positive + Negative (|a| < |b|)</td>
+                                <td>a=5, b=-10</td>
+                                <td>-5</td>
+                                <td>Mixed signs, negative result</td>
+                            </tr>
+                            <tr>
+                                <td>EC5</td>
+                                <td>Equal magnitude opposite signs</td>
+                                <td>a=7, b=-7</td>
+                                <td>0</td>
+                                <td>Mixed signs, zero result</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3>Step 3: Structural Coverage Sweep</h3>
+                </div>
+                <div class="step-content">
+                    <p>Using JaCoCo to analyze our code coverage, we identified additional test cases needed:</p>
+                    
+                    <ul>
+                        <li>Test case for Integer.MAX_VALUE boundary: a=Integer.MAX_VALUE, b=1</li>
+                        <li>Test case for Integer.MIN_VALUE boundary: a=Integer.MIN_VALUE, b=-1</li>
+                        <li>Test case for overflow detection</li>
+                    </ul>
+                    
+                    <div class="placeholder-image">
+                        <p>[JaCoCo coverage results image will be added here]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3>Step 4: Suite Refinement</h3>
+                </div>
+                <div class="step-content">
+                    <p>After reviewing all our test cases, we've refined our test suite to the following essential tests:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Test Case</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>T1</td>
+                                <td>Basic positive</td>
+                                <td>a=5, b=3</td>
+                                <td>8</td>
+                                <td>Core functionality</td>
+                            </tr>
+                            <tr>
+                                <td>T2</td>
+                                <td>Both negative</td>
+                                <td>a=-2, b=-7</td>
+                                <td>-9</td>
+                                <td>Sign handling</td>
+                            </tr>
+                            <tr>
+                                <td>T3</td>
+                                <td>Mixed signs</td>
+                                <td>a=10, b=-5</td>
+                                <td>5</td>
+                                <td>Sign handling</td>
+                            </tr>
+                            <tr>
+                                <td>T4</td>
+                                <td>MAX_VALUE boundary</td>
+                                <td>a=MAX_VALUE, b=1</td>
+                                <td>Exception</td>
+                                <td>Overflow detection</td>
+                            </tr>
+                            <tr>
+                                <td>T5</td>
+                                <td>MIN_VALUE boundary</td>
+                                <td>a=MIN_VALUE, b=-1</td>
+                                <td>Exception</td>
+                                <td>Underflow detection</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p>We eliminated redundant zero-handling tests as they didn't add significant value to the test suite.</p>
+                </div>
+            </div>
+            
+            <div class="example-conclusion">
+                <h3>Example Summary</h3>
+                <p>Our systematic 4-step approach allowed us to create a robust test suite for the calculator function. We identified key boundary conditions and provided essential test coverage while eliminating redundant tests.</p>
+            </div>
+            
+            <div class="cta">
+                <button class="btn-primary next-example" data-next="example2">Next Example</button>
+            </div>
+        </section>
         
-        // Test case 1: positive numbers
-        int result1 = calc.add(5, 3);
-        System.out.println("5 + 3 = " + result1 + ", Expected: 8");
+        <!-- Example 2 Page -->
+        <section id="example2" class="page">
+            <h2>Example 2: String Validator</h2>
+            <div class="example-overview">
+                <p>In this example, we'll apply our 4-step approach to test a string validation function that checks if a string meets certain criteria.</p>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">0</div>
+                    <h3>Understanding Requirements</h3>
+                </div>
+                <div class="step-content">
+                    <p>For our string validator, we need to understand the validation rules:</p>
+                    
+                    <ul>
+                        <li>String must be between 8 and 20 characters long</li>
+                        <li>String must contain at least one uppercase letter</li>
+                        <li>String must contain at least one digit</li>
+                        <li>String must not contain spaces</li>
+                    </ul>
+                    
+                    <div class="code-example">
+                        <h4>The Function We're Testing</h4>
+                        <pre><code>
+public class StringValidator {
+    /**
+     * Validates a string according to specific rules
+     * @param input the string to validate
+     * @return true if the string is valid, false otherwise
+     */
+    public boolean isValid(String input) {
+        // Check length
+        if (input == null || input.length() < 8 || input.length() > 20) {
+            return false;
+        }
         
-        // Test case 2: negative numbers
-        int result2 = calc.add(-2, -7);
-        System.out.println("-2 + -7 = " + result2 + ", Expected: -9");
+        // Check for uppercase letter
+        boolean hasUppercase = false;
+        // Check for digit
+        boolean hasDigit = false;
+        // Check for spaces
+        boolean hasSpace = false;
         
-        // Test case 3: mixed sign
-        int result3 = calc.add(10, -5);
-        System.out.println("10 + -5 = " + result3 + ", Expected: 5");
+        for (char c : input.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUppercase = true;
+            }
+            if (Character.isDigit(c)) {
+                hasDigit = true;
+            }
+            if (Character.isWhitespace(c)) {
+                hasSpace = true;
+            }
+        }
+        
+        return hasUppercase && hasDigit && !hasSpace;
     }
 }
-                </code></pre>
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h3>Step 1: Robust Boundary-Value Tests</h3>
+                </div>
+                <div class="step-content">
+                    <p>In this step, we focus on testing the boundaries specified in the requirements:</p>
+                    
+                    <ul>
+                        <li>We test the minimum and maximum length boundaries (8 and 20 characters)</li>
+                        <li>We test exactly at the boundaries (8 characters, 20 characters)</li>
+                        <li>We test just outside the boundaries (7 characters, 21 characters)</li>
+                        <li>We test special cases like null input</li>
+                    </ul>
+                    
+                    <h4>Test Cases Created in Step 1</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Boundary Being Tested</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BVT1</td>
+                                <td>Null input</td>
+                                <td>null</td>
+                                <td>false</td>
+                                <td>Special null case</td>
+                            </tr>
+                            <tr>
+                                <td>BVT2</td>
+                                <td>Exactly minimum length</td>
+                                <td>"Abcde123" (8 chars)</td>
+                                <td>true</td>
+                                <td>Minimum length boundary</td>
+                            </tr>
+                            <tr>
+                                <td>BVT3</td>
+                                <td>Just under minimum length</td>
+                                <td>"Abcde12" (7 chars)</td>
+                                <td>false</td>
+                                <td>Below minimum length</td>
+                            </tr>
+                            <tr>
+                                <td>BVT4</td>
+                                <td>Exactly maximum length</td>
+                                <td>"Abcdefghij1234567890" (20 chars)</td>
+                                <td>true</td>
+                                <td>Maximum length boundary</td>
+                            </tr>
+                            <tr>
+                                <td>BVT5</td>
+                                <td>Just over maximum length</td>
+                                <td>"Abcdefghij12345678901" (21 chars)</td>
+                                <td>false</td>
+                                <td>Above maximum length</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
+                </div>
+                <div class="step-content">
+                    <p>In this step, we create test cases for different categories of valid and invalid inputs based on the other requirements:</p>
+                    
+                    <ul>
+                        <li>We test combinations of requirements (uppercase, digit, no spaces)</li>
+                        <li>We create tests for each failing condition</li>
+                        <li>We ensure all validation rules are individually tested</li>
+                    </ul>
+                    
+                    <h4>Test Cases Created in Step 2</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Equivalence Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>EC1</td>
+                                <td>Valid input - all requirements met</td>
+                                <td>"Password123"</td>
+                                <td>true</td>
+                                <td>Valid string</td>
+                            </tr>
+                            <tr>
+                                <td>EC2</td>
+                                <td>Missing uppercase letter</td>
+                                <td>"password123"</td>
+                                <td>false</td>
+                                <td>Missing uppercase requirement</td>
+                            </tr>
+                            <tr>
+                                <td>EC3</td>
+                                <td>Missing digit</td>
+                                <td>"PasswordTest"</td>
+                                <td>false</td>
+                                <td>Missing digit requirement</td>
+                            </tr>
+                            <tr>
+                                <td>EC4</td>
+                                <td>Contains space</td>
+                                <td>"Password 123"</td>
+                                <td>false</td>
+                                <td>Contains forbidden character</td>
+                            </tr>
+                            <tr>
+                                <td>EC5</td>
+                                <td>Special characters (allowed)</td>
+                                <td>"P@ssw0rd#$!"</td>
+                                <td>true</td>
+                                <td>Valid with special characters</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3>Step 3: Structural Coverage Sweep</h3>
+                </div>
+                <div class="step-content">
+                    <p>Using JaCoCo to analyze our code coverage, we identified additional test cases needed:</p>
+                    
+                    <ul>
+                        <li>Test case where only the space check fails (other conditions pass)</li>
+                        <li>Test case for input with both uppercase and digits but no other requirements</li>
+                        <li>Test for early return conditions in sequence</li>
+                    </ul>
+                    
+                    <div class="placeholder-image">
+                        <p>[JaCoCo coverage results image will be added here]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3>Step 4: Suite Refinement</h3>
+                </div>
+                <div class="step-content">
+                    <p>After reviewing all our test cases, we've refined our test suite to the following essential tests:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RT1</td>
+                                <td>Valid string</td>
+                                <td>"Password123"</td>
+                                <td>true</td>
+                                <td>Valid case verification</td>
+                            </tr>
+                            <tr>
+                                <td>RT2</td>
+                                <td>Null input</td>
+                                <td>null</td>
+                                <td>false</td>
+                                <td>Special case handling</td>
+                            </tr>
+                            <tr>
+                                <td>RT3</td>
+                                <td>Length boundary - too short</td>
+                                <td>"Abc1"</td>
+                                <td>false</td>
+                                <td>Minimum length verification</td>
+                            </tr>
+                            <tr>
+                                <td>RT4</td>
+                                <td>Length boundary - too long</td>
+                                <td>"Abcdefghij1234567890X"</td>
+                                <td>false</td>
+                                <td>Maximum length verification</td>
+                            </tr>
+                            <tr>
+                                <td>RT5</td>
+                                <td>Missing uppercase</td>
+                                <td>"password123"</td>
+                                <td>false</td>
+                                <td>Uppercase requirement</td>
+                            </tr>
+                            <tr>
+                                <td>RT6</td>
+                                <td>Missing digit</td>
+                                <td>"PasswordTest"</td>
+                                <td>false</td>
+                                <td>Digit requirement</td>
+                            </tr>
+                            <tr>
+                                <td>RT7</td>
+                                <td>Contains space</td>
+                                <td>"Password 123"</td>
+                                <td>false</td>
+                                <td>No-space requirement</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p>We eliminated some redundant test cases and focused on a minimal set that still provides 100% code coverage.</p>
+                </div>
+            </div>
+            
+            <div class="example-conclusion">
+                <h3>Example Summary</h3>
+                <p>Our systematic 4-step approach allowed us to create a comprehensive test suite for the string validator. We identified key validation boundaries and provided complete coverage of all validation rules while avoiding redundant tests.</p>
+            </div>
+            
+            <div class="cta">
+                <button class="btn-primary next-example" data-next="example3">Next Example</button>
+            </div>
+        </section>
+        
+        <!-- Example 3 Page -->
+        <section id="example3" class="page">
+            <h2>Example 3: File Processing Library</h2>
+            <div class="example-overview">
+                <p>In this example, we'll apply our 4-step approach to test a file processing library that reads and processes data files.</p>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">0</div>
+                    <h3>Understanding Requirements</h3>
+                </div>
+                <div class="step-content">
+                    <p>For our file processing library, we need to understand the requirements:</p>
+                    
+                    <ul>
+                        <li>Must read CSV files with comma-separated values</li>
+                        <li>Must handle empty files and files with headers</li>
+                        <li>Must convert string data to appropriate types (integers, doubles)</li>
+                        <li>Must handle file errors gracefully (file not found, permission denied)</li>
+                        <li>Must allow filtering and sorting of data</li>
+                    </ul>
+                    
+                    <div class="code-example">
+                        <h4>The Class We're Testing</h4>
+                        <pre><code>
+public class CSVProcessor {
+    /**
+     * Reads a CSV file and returns processed data
+     * @param filePath the path to the CSV file
+     * @param hasHeader whether the file has a header row
+     * @return DataTable containing the processed data
+     * @throws IOException if there's an error reading the file
+     */
+    public DataTable readCSV(String filePath, boolean hasHeader) throws IOException {
+        File file = new File(filePath);
+        if (!file.exists() || !file.canRead()) {
+            throw new IOException("File does not exist or cannot be read: " + filePath);
+        }
+        
+        DataTable table = new DataTable();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        
+        // Read header if present
+        String line = reader.readLine();
+        if (line == null) {
+            reader.close();
+            return table; // Empty file
+        }
+        
+        if (hasHeader) {
+            String[] headers = line.split(",");
+            table.setHeaders(headers);
+            line = reader.readLine();
+        }
+        
+        // Read data rows
+        while (line != null) {
+            String[] values = line.split(",");
+            table.addRow(values);
+            line = reader.readLine();
+        }
+        
+        reader.close();
+        return table;
+    }
+    
+    // Other methods for filtering, sorting, etc.
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h3>Step 1: Robust Boundary-Value Tests</h3>
+                </div>
+                <div class="step-content">
+                    <p>In this step, we identify boundary conditions for our CSV processor:</p>
+                    
+                    <ul>
+                        <li>File existence and access boundaries (exists vs doesn't exist, readable vs not readable)</li>
+                        <li>File content boundaries (empty file, single line, very large file)</li>
+                        <li>Header presence boundary (with header vs without header)</li>
+                        <li>Special case boundaries (malformed data, invalid paths)</li>
+                    </ul>
+                    
+                    <h4>Test Cases Created in Step 1</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Boundary Being Tested</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BVT1</td>
+                                <td>File doesn't exist</td>
+                                <td>"nonexistent.csv", true</td>
+                                <td>IOException</td>
+                                <td>File existence boundary</td>
+                            </tr>
+                            <tr>
+                                <td>BVT2</td>
+                                <td>Empty file</td>
+                                <td>"empty.csv", true</td>
+                                <td>Empty DataTable</td>
+                                <td>Empty content boundary</td>
+                            </tr>
+                            <tr>
+                                <td>BVT3</td>
+                                <td>Single line file with header</td>
+                                <td>"singleline.csv", true</td>
+                                <td>DataTable with headers, no data</td>
+                                <td>Minimum content with header</td>
+                            </tr>
+                            <tr>
+                                <td>BVT4</td>
+                                <td>Single line file without header</td>
+                                <td>"singleline.csv", false</td>
+                                <td>DataTable with one data row</td>
+                                <td>Minimum content without header</td>
+                            </tr>
+                            <tr>
+                                <td>BVT5</td>
+                                <td>No read permission</td>
+                                <td>"nopermission.csv", true</td>
+                                <td>IOException</td>
+                                <td>File permission boundary</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
+                </div>
+                <div class="step-content">
+                    <p>In this step, we identify categories of valid inputs and design one test case for each category:</p>
+                    
+                    <ul>
+                        <li>We categorize different valid file formats and content types</li>
+                        <li>We test representative files from each category</li>
+                        <li>We ensure normal operation cases are covered</li>
+                    </ul>
+                    
+                    <h4>Test Cases Created in Step 2</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Equivalence Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>EC1</td>
+                                <td>Standard CSV with header</td>
+                                <td>"standard.csv", true</td>
+                                <td>DataTable with headers and rows</td>
+                                <td>Standard CSV with header</td>
+                            </tr>
+                            <tr>
+                                <td>EC2</td>
+                                <td>Standard CSV without header</td>
+                                <td>"standard.csv", false</td>
+                                <td>DataTable with rows, no headers</td>
+                                <td>Standard CSV without header</td>
+                            </tr>
+                            <tr>
+                                <td>EC3</td>
+                                <td>CSV with numeric data only</td>
+                                <td>"numeric.csv", true</td>
+                                <td>DataTable with numeric values</td>
+                                <td>Numeric data CSV</td>
+                            </tr>
+                            <tr>
+                                <td>EC4</td>
+                                <td>CSV with text data only</td>
+                                <td>"text.csv", true</td>
+                                <td>DataTable with text values</td>
+                                <td>Text data CSV</td>
+                            </tr>
+                            <tr>
+                                <td>EC5</td>
+                                <td>CSV with mixed data types</td>
+                                <td>"mixed.csv", true</td>
+                                <td>DataTable with mixed values</td>
+                                <td>Mixed data CSV</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3>Step 3: Structural Coverage Sweep</h3>
+                </div>
+                <div class="step-content">
+                    <p>Using JaCoCo to analyze our code coverage, we identified additional test cases needed:</p>
+                    
+                    <ul>
+                        <li>Test case with malformed CSV (inconsistent column count)</li>
+                        <li>Test case with special characters in CSV data</li>
+                        <li>Test case for the file reading exception handling paths</li>
+                    </ul>
+                    
+                    <div class="placeholder-image">
+                        <p>[JaCoCo coverage results image will be added here]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="approach-step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3>Step 4: Suite Refinement</h3>
+                </div>
+                <div class="step-content">
+                    <p>After reviewing all our test cases, we've refined our test suite to the following essential tests:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RT1</td>
+                                <td>Valid file with header</td>
+                                <td>"data.csv", true</td>
+                                <td>Correct DataTable</td>
+                                <td>Basic functionality with header</td>
+                            </tr>
+                            <tr>
+                                <td>RT2</td>
+                                <td>Valid file without header</td>
+                                <td>"data.csv", false</td>
+                                <td>Correct DataTable</td>
+                                <td>Basic functionality without header</td>
+                            </tr>
+                            <tr>
+                                <td>RT3</td>
+                                <td>Empty file</td>
+                                <td>"empty.csv", true</td>
+                                <td>Empty DataTable</td>
+                                <td>Empty file handling</td>
+                            </tr>
+                            <tr>
+                                <td>RT4</td>
+                                <td>File not found</td>
+                                <td>"nonexistent.csv", true</td>
+                                <td>IOException</td>
+                                <td>Error handling</td>
+                            </tr>
+                            <tr>
+                                <td>RT5</td>
+                                <td>Malformed CSV</td>
+                                <td>"malformed.csv", true</td>
+                                <td>Exception or handling</td>
+                                <td>Malformed data handling</td>
+                            </tr>
+                            <tr>
+                                <td>RT6</td>
+                                <td>File with special characters</td>
+                                <td>"special.csv", true</td>
+                                <td>Correct DataTable</td>
+                                <td>Special character handling</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p>We eliminated redundant test cases focusing on a minimal set that ensures all execution paths are covered.</p>
+                </div>
+            </div>
+            
+            <div class="example-conclusion">
+                <h3>Example Summary</h3>
+                <p>Our systematic 4-step approach allowed us to create a robust test suite for the CSV processor. We identified boundary conditions, provided comprehensive coverage of both normal and error cases, and developed effective error handling strategies.</p>
             </div>
         </section>
         
         <!-- Advanced Page -->
         <section id="advanced" class="page">
             <h2>Advanced Testing Techniques</h2>
-            <div class="advanced-container">
-                <div class="advanced-card">
+            <div class="step-overview">
+                <div class="step">
+                    <div class="step-number">1</div>
                     <h3>Setting Up JUnit</h3>
-                    <p>[Content about setting up and using JUnit]</p>
-                    <div class="code-snippet">
+                    <p>[Overview of JUnit setup]</p>
+                    <button class="btn-secondary expand-details" data-section="advanced1">Learn More</button>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>JaCoCo Code Coverage</h3>
+                    <p>[Overview of JaCoCo]</p>
+                    <button class="btn-secondary expand-details" data-section="advanced2">Learn More</button>
+                </div>
+            </div>
+            
+            <!-- Expandable Sections -->
+            <div class="expandable-sections">
+                <div id="advanced1" class="section-content hidden">
+                    <h3>Setting Up JUnit - Detailed</h3>
+                    <div class="content-container">
+                        <div class="text-content">
+                            <p>[Detailed content about setting up and using JUnit]</p>
+                            
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li>[Feature 1]</li>
+                                <li>[Feature 2]</li>
+                                <li>[Feature 3]</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Example Code</h4>
                         <pre><code>
 // JUnit example code
 import org.junit.Test;
@@ -325,12 +1273,26 @@ public class CalculatorJUnitTest {
 }
                         </code></pre>
                     </div>
+                    <button class="btn-primary section-close">Close</button>
                 </div>
                 
-                <div class="advanced-card">
-                    <h3>JaCoCo Code Coverage</h3>
-                    <p>[Content about setting up and using JaCoCo]</p>
-                    <div class="code-snippet">
+                <div id="advanced2" class="section-content hidden">
+                    <h3>JaCoCo Code Coverage - Detailed</h3>
+                    <div class="content-container">
+                        <div class="text-content">
+                            <p>[Detailed content about setting up and using JaCoCo]</p>
+                            
+                            <h4>Benefits of Code Coverage</h4>
+                            <ul>
+                                <li>[Benefit 1]</li>
+                                <li>[Benefit 2]</li>
+                                <li>[Benefit 3]</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="code-example">
+                        <h4>Configuration Example</h4>
                         <pre><code>
 // JaCoCo Gradle configuration
 plugins {
@@ -349,16 +1311,7 @@ jacocoTestReport {
 }
                         </code></pre>
                     </div>
-                </div>
-                
-                <div class="advanced-card">
-                    <h3>Additional Testing Tools</h3>
-                    <p>[Content about other testing tools and approaches]</p>
-                    <ul class="tool-list">
-                        <li>[Tool 1 with brief description]</li>
-                        <li>[Tool 2 with brief description]</li>
-                        <li>[Tool 3 with brief description]</li>
-                    </ul>
+                    <button class="btn-primary section-close">Close</button>
                 </div>
             </div>
         </section>

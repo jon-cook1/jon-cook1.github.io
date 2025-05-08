@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('#main-nav a');
     const pages = document.querySelectorAll('.page');
     const getStartedBtn = document.getElementById('get-started');
-    const stepLinks = document.querySelectorAll('.step-details');
+    const expandButtons = document.querySelectorAll('.expand-details');
+    const closeButtons = document.querySelectorAll('.section-close');
+    const sectionContents = document.querySelectorAll('.section-content');
     
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
@@ -19,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to switch pages
     function switchPage(pageId) {
+        // First, hide any expanded sections
+        sectionContents.forEach(section => {
+            section.classList.add('hidden');
+        });
+        
         // Hide all pages
         pages.forEach(page => {
             page.classList.remove('active');
@@ -42,6 +49,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Function to show a section
+    function showSection(sectionId) {
+        // Hide all sections first
+        sectionContents.forEach(section => {
+            section.classList.add('hidden');
+        });
+        
+        // Show the selected section
+        const sectionToShow = document.getElementById(sectionId);
+        if (sectionToShow) {
+            sectionToShow.classList.remove('hidden');
+            // Scroll to the section
+            sectionToShow.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+    
     // Set up navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -58,12 +81,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Set up step detail links
-    stepLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const pageId = this.getAttribute('data-page');
-            switchPage(pageId);
+    // Set up "See It In Action" button
+    const seeInActionBtn = document.getElementById('see-in-action');
+    if (seeInActionBtn) {
+        seeInActionBtn.addEventListener('click', function() {
+            switchPage('example1');
+        });
+    }
+    
+    // Set up "See Implementation" button
+    const seeImplementationBtn = document.getElementById('see-implementation');
+    if (seeImplementationBtn) {
+        seeImplementationBtn.addEventListener('click', function() {
+            switchPage('advanced');
+        });
+    }
+    
+    // Set up "Next Example" buttons
+    const nextExampleBtns = document.querySelectorAll('.next-example');
+    nextExampleBtns.forEach(button => {
+        button.addEventListener('click', function() {
+            const nextPage = this.getAttribute('data-next');
+            switchPage(nextPage);
+        });
+    });
+    
+    // Set up expand buttons
+    expandButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const sectionId = this.getAttribute('data-section');
+            showSection(sectionId);
+        });
+    });
+    
+    // Set up close buttons
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Get the parent section
+            const section = this.closest('.section-content');
+            // Hide the section
+            section.classList.add('hidden');
+            // Scroll back to the top of the page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
     
