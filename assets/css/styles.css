@@ -124,6 +124,12 @@
     display: none;
 }
 
+/* Hide sections when expanded content is shown */
+.expandable-sections-active .cta,
+.expandable-sections-active .limitations-section {
+    display: none;
+}
+
 .section-close {
     display: block;
     margin: 1.5rem auto 0;
@@ -425,6 +431,25 @@ footer {
 .btn-secondary:hover {
     background-color: var(--primary-color);
     color: white;
+}
+
+/* Special styling for See Implementation button */
+#see-implementation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+#see-implementation:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 /* 4-Step Overview Styles */

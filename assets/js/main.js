@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
             section.classList.add('hidden');
         });
         
+        // Remove expandable-sections-active class from all pages
+        pages.forEach(page => {
+            page.classList.remove('expandable-sections-active');
+        });
+        
         // Hide all pages
         pages.forEach(page => {
             page.classList.remove('active');
@@ -62,6 +67,12 @@ document.addEventListener('DOMContentLoaded', function() {
             sectionToShow.classList.remove('hidden');
             // Scroll to the section
             sectionToShow.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Add expandable-sections-active class to the parent container
+            const parentContainer = sectionToShow.closest('.expandable-sections').parentElement;
+            if (parentContainer) {
+                parentContainer.classList.add('expandable-sections-active');
+            }
         }
     }
     
@@ -121,6 +132,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const section = this.closest('.section-content');
             // Hide the section
             section.classList.add('hidden');
+            
+            // Remove expandable-sections-active class from the page container
+            const expandableSections = section.closest('.expandable-sections');
+            if (expandableSections && expandableSections.parentElement) {
+                expandableSections.parentElement.classList.remove('expandable-sections-active');
+            }
+            
             // Scroll back to the top of the page
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
