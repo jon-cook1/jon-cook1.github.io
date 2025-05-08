@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButtons = document.querySelectorAll('.section-close');
     const sectionContents = document.querySelectorAll('.section-content');
     
+    // Setup responsive tables
+    setupResponsiveTables();
+    
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
@@ -208,4 +211,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show the initial page (home)
     switchPage('home');
+    
+    // Function to setup responsive tables for mobile view
+    function setupResponsiveTables() {
+        const tables = document.querySelectorAll('table');
+        
+        tables.forEach(table => {
+            // Get the header row
+            const headerRow = table.querySelector('thead tr');
+            if (!headerRow) return;
+            
+            // Get all header cell text
+            const headerCells = headerRow.querySelectorAll('th');
+            const headerTexts = Array.from(headerCells).map(cell => cell.textContent.trim());
+            
+            // Apply data-label attributes to all tbody cells
+            const bodyRows = table.querySelectorAll('tbody tr');
+            bodyRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                cells.forEach((cell, index) => {
+                    if (headerTexts[index]) {
+                        cell.setAttribute('data-label', headerTexts[index]);
+                    }
+                });
+            });
+        });
+    }
 });
