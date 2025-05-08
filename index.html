@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSC 102 - How to Test Your Code</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>COSC 102 Testing Guide</h1>
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#home" class="active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#overview" data-page="overview"><i class="fas fa-map"></i> 4-Step Approach</a></li>
+                <li><a href="#step1" data-page="step1"><i class="fas fa-1"></i> Step 1</a></li>
+                <li><a href="#step2" data-page="step2"><i class="fas fa-2"></i> Step 2</a></li>
+                <li><a href="#step3" data-page="step3"><i class="fas fa-3"></i> Step 3</a></li>
+                <li><a href="#advanced" data-page="advanced"><i class="fas fa-code"></i> Advanced</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+    
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>Learn How to Test Your Code</h2>
+                    <p>A comprehensive guide for COSC 102 students</p>
+                </div>
+                <div class="hero-image">
+                    <!-- Placeholder for main image -->
+                    <div class="placeholder-image">
+                        <i class="fas fa-code fa-5x"></i>
+                        <p>Main Image Placeholder</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="motivation">
+                <h2>Why Test Your Code?</h2>
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                        <h3>Why</h3>
+                        <p>[Content about why testing is important]</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-clock"></i></div>
+                        <h3>When</h3>
+                        <p>[Content about when to test your code]</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>How</h3>
+                        <p>[Content about how to approach testing]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta">
+                <h2>Ready to Learn More?</h2>
+                <button class="btn-primary" id="get-started">Get Started</button>
+            </div>
+        </section>
+        
+        <!-- 4-Step Overview Page -->
+        <section id="overview" class="page">
+            <h2>Our 4-Step Testing Approach</h2>
+            <div class="step-overview">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Understanding Requirements</h3>
+                    <p>[Overview of step 1]</p>
+                    <a href="#step1" class="btn-secondary step-details" data-page="step1">Learn More</a>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Designing Test Cases</h3>
+                    <p>[Overview of step 2]</p>
+                    <a href="#step2" class="btn-secondary step-details" data-page="step2">Learn More</a>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Implementing Tests</h3>
+                    <p>[Overview of step 3]</p>
+                    <a href="#step3" class="btn-secondary step-details" data-page="step3">Learn More</a>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Refining Your Code</h3>
+                    <p>[Overview of step 4]</p>
+                    <a href="#step3" class="btn-secondary step-details" data-page="step3">Learn More</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Step 1 Page -->
+        <section id="step1" class="page">
+            <h2>Step 1: Understanding Requirements</h2>
+            <div class="content-container">
+                <div class="text-content">
+                    <p>[Detailed content about understanding requirements]</p>
+                    
+                    <h3>Key Points</h3>
+                    <ul>
+                        <li>[Point 1]</li>
+                        <li>[Point 2]</li>
+                        <li>[Point 3]</li>
+                    </ul>
+                </div>
+                
+                <div class="table-container">
+                    <h3>Example Requirements Analysis</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Requirement</th>
+                                <th>Test Consideration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[Requirement 1]</td>
+                                <td>[Test consideration 1]</td>
+                            </tr>
+                            <tr>
+                                <td>[Requirement 2]</td>
+                                <td>[Test consideration 2]</td>
+                            </tr>
+                            <tr>
+                                <td>[Requirement 3]</td>
+                                <td>[Test consideration 3]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <h3>Example Code</h3>
+                <pre><code>
+// Example code for understanding requirements
+public class Calculator {
+    /**
+     * Adds two numbers
+     * @param a first number
+     * @param b second number
+     * @return sum of a and b
+     */
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+                </code></pre>
+            </div>
+        </section>
+        
+        <!-- Step 2 Page -->
+        <section id="step2" class="page">
+            <h2>Step 2: Designing Test Cases</h2>
+            <div class="content-container">
+                <div class="text-content">
+                    <p>[Detailed content about designing test cases]</p>
+                    
+                    <h3>Test Case Categories</h3>
+                    <ul>
+                        <li>[Category 1]</li>
+                        <li>[Category 2]</li>
+                        <li>[Category 3]</li>
+                    </ul>
+                </div>
+                
+                <div class="table-container">
+                    <h3>Example Test Cases</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Input</th>
+                                <th>Expected Output</th>
+                                <th>Test Case Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[Input 1]</td>
+                                <td>[Expected output 1]</td>
+                                <td>[Type 1]</td>
+                            </tr>
+                            <tr>
+                                <td>[Input 2]</td>
+                                <td>[Expected output 2]</td>
+                                <td>[Type 2]</td>
+                            </tr>
+                            <tr>
+                                <td>[Input 3]</td>
+                                <td>[Expected output 3]</td>
+                                <td>[Type 3]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <h3>Example Code</h3>
+                <pre><code>
+// Example test case design
+// Test cases for Calculator.add(int a, int b)
+
+// Test case 1: positive numbers
+// Input: a=5, b=3
+// Expected: 8
+
+// Test case 2: negative numbers
+// Input: a=-2, b=-7
+// Expected: -9
+
+// Test case 3: mixed sign
+// Input: a=10, b=-5
+// Expected: 5
+                </code></pre>
+            </div>
+        </section>
+        
+        <!-- Step 3 Page -->
+        <section id="step3" class="page">
+            <h2>Step 3: Implementing Tests</h2>
+            <div class="content-container">
+                <div class="text-content">
+                    <p>[Detailed content about implementing tests]</p>
+                    
+                    <h3>Testing Approaches</h3>
+                    <ul>
+                        <li>[Approach 1]</li>
+                        <li>[Approach 2]</li>
+                        <li>[Approach 3]</li>
+                    </ul>
+                </div>
+                
+                <div class="table-container">
+                    <h3>Testing Techniques Comparison</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Technique</th>
+                                <th>Pros</th>
+                                <th>Cons</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[Technique 1]</td>
+                                <td>[Pros 1]</td>
+                                <td>[Cons 1]</td>
+                            </tr>
+                            <tr>
+                                <td>[Technique 2]</td>
+                                <td>[Pros 2]</td>
+                                <td>[Cons 2]</td>
+                            </tr>
+                            <tr>
+                                <td>[Technique 3]</td>
+                                <td>[Pros 3]</td>
+                                <td>[Cons 3]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <h3>Example Code</h3>
+                <pre><code>
+// Example test implementation
+public class CalculatorTest {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        
+        // Test case 1: positive numbers
+        int result1 = calc.add(5, 3);
+        System.out.println("5 + 3 = " + result1 + ", Expected: 8");
+        
+        // Test case 2: negative numbers
+        int result2 = calc.add(-2, -7);
+        System.out.println("-2 + -7 = " + result2 + ", Expected: -9");
+        
+        // Test case 3: mixed sign
+        int result3 = calc.add(10, -5);
+        System.out.println("10 + -5 = " + result3 + ", Expected: 5");
+    }
+}
+                </code></pre>
+            </div>
+        </section>
+        
+        <!-- Advanced Page -->
+        <section id="advanced" class="page">
+            <h2>Advanced Testing Techniques</h2>
+            <div class="advanced-container">
+                <div class="advanced-card">
+                    <h3>Setting Up JUnit</h3>
+                    <p>[Content about setting up and using JUnit]</p>
+                    <div class="code-snippet">
+                        <pre><code>
+// JUnit example code
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
+public class CalculatorJUnitTest {
+    @Test
+    public void testAdd() {
+        Calculator calc = new Calculator();
+        assertEquals(8, calc.add(5, 3));
+        assertEquals(-9, calc.add(-2, -7));
+        assertEquals(5, calc.add(10, -5));
+    }
+}
+                        </code></pre>
+                    </div>
+                </div>
+                
+                <div class="advanced-card">
+                    <h3>JaCoCo Code Coverage</h3>
+                    <p>[Content about setting up and using JaCoCo]</p>
+                    <div class="code-snippet">
+                        <pre><code>
+// JaCoCo Gradle configuration
+plugins {
+    id 'jacoco'
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+                        </code></pre>
+                    </div>
+                </div>
+                
+                <div class="advanced-card">
+                    <h3>Additional Testing Tools</h3>
+                    <p>[Content about other testing tools and approaches]</p>
+                    <ul class="tool-list">
+                        <li>[Tool 1 with brief description]</li>
+                        <li>[Tool 2 with brief description]</li>
+                        <li>[Tool 3 with brief description]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 COSC 102 Testing Guide</p>
+            <p>Created for educational purposes</p>
+        </div>
+    </footer>
+    
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
