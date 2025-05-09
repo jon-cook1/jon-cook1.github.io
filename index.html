@@ -1355,12 +1355,28 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                                 <td>High</td>
                             </tr>
                             <tr>
-                                <td>BVT5</td>
+                                <td>BVT6</td>
                                 <td>Boundary Value</td>
                                 <td>"CRANE"</td>
-                                <td>"SCARS"</td>
-                                <td>Position variation for same letter</td>
+                                <td>"TEACH"</td>
+                                <td>Yellow case - letter in word but wrong position</td>
                                 <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>ECT1</td>
+                                <td>Equivalence Class</td>
+                                <td>"BRAVE"</td>
+                                <td>"BROKE"</td>
+                                <td>Multiple exact matches (green)</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>ECT2</td>
+                                <td>Equivalence Class</td>
+                                <td>"BRAVE"</td>
+                                <td>"EARNS"</td>
+                                <td>Multiple letters in wrong positions (yellow)</td>
+                                <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>ECT3</td>
@@ -1369,30 +1385,6 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                                 <td>"CLOCK"</td>
                                 <td>Complete miss case (all gray)</td>
                                 <td>Medium</td>
-                            </tr>
-                            <tr>
-                                <td>ECT4</td>
-                                <td>Equivalence Class</td>
-                                <td>"BRAVE"</td>
-                                <td>"VALVE"</td>
-                                <td>Mixed case (green, yellow, gray)</td>
-                                <td>High</td>
-                            </tr>
-                            <tr>
-                                <td>SC1</td>
-                                <td>Structural Coverage</td>
-                                <td>"SWEET"</td>
-                                <td>"STEEL"</td>
-                                <td>Duplicate letter handling</td>
-                                <td>Medium</td>
-                            </tr>
-                            <tr>
-                                <td>SC2</td>
-                                <td>Structural Coverage</td>
-                                <td>"BOATS"</td>
-                                <td>"FLOAT"</td>
-                                <td>Key color state management</td>
-                                <td>Low</td>
                             </tr>
                         </tbody>
                     </table>
