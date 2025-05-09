@@ -897,7 +897,13 @@ public int simDailyGrowth(int temp, int weather){
                         </table>
                     </div>
 
-                    <p>After adding this test, our JaCoCo report showed 100% branch coverage for the simDailyGrowth method, confirming we've exercised all possible execution paths.</p>
+                    <p>The JaCoCo report confirms that with our complete test suite, we've achieved full line and branch coverage for the simDailyGrowth method:</p>
+
+                    <div class="coverage-report">
+                        <img src="assets/images/ex2_jacoco.png" alt="JaCoCo coverage report for simDailyGrowth method" class="coverage-image">
+                    </div>
+
+                    <p>As shown in the report, all conditional branches and lines of code are now exercised (indicated by green highlighting), including the default return path at the end of the method. This verifies we have comprehensive coverage of all possible execution paths.</p>
                 </div>
             </div>
 
@@ -915,52 +921,72 @@ public int simDailyGrowth(int temp, int weather){
                         <li>Prioritize the most revealing tests: The wilting transition tests are particularly important</li>
                     </ol>
 
-                    <p>Our refined test suite includes:</p>
+                    <p>Here is our complete comprehensive test suite for the simDailyGrowth function, organized by test type and showing the priority of each test:</p>
 
                     <table>
                         <thead>
                             <tr>
-                                <th>Priority</th>
+                                <th>Test ID</th>
                                 <th>Test Type</th>
                                 <th>Description</th>
-                                <th>Purpose</th>
+                                <th>Inputs</th>
+                                <th>Priority</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>High</td>
-                                <td>Boundary (BVT2)</td>
-                                <td>Wilting transition when counter=1 and temp=CHILLY</td>
-                                <td>Verify critical transitions in plant state</td>
-                            </tr>
-                            <tr>
-                                <td>High</td>
-                                <td>Equivalence (EC3-A/B)</td>
-                                <td>Incremental growth scenarios</td>
-                                <td>Ensure growth accumulation works correctly</td>
-                            </tr>
-                            <tr>
-                                <td>Medium</td>
-                                <td>Boundary (BVT1)</td>
+                                <td>BVT1</td>
+                                <td>Boundary Value</td>
                                 <td>Already wilted plant behavior</td>
-                                <td>Verify wilted plants don't recover automatically</td>
-                            </tr>
-                            <tr>
+                                <td>wilted=true, any temp/weather</td>
                                 <td>Medium</td>
-                                <td>Equivalence (EC2-A/B)</td>
-                                <td>Growth reset in cloudy conditions</td>
-                                <td>Ensure counter resets work correctly</td>
                             </tr>
                             <tr>
+                                <td>BVT2</td>
+                                <td>Boundary Value</td>
+                                <td>Wilting transition</td>
+                                <td>temp=CHILLY, weather=CLOUDY, counter=1</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>BVT3</td>
+                                <td>Boundary Value</td>
+                                <td>First chilly+cloudy day</td>
+                                <td>temp=CHILLY, weather=CLOUDY, counter=0</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>BVT5</td>
+                                <td>Boundary Value</td>
+                                <td>Growth increment</td>
+                                <td>weather!=CLOUDY, previousGrowth=3</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>ECT1</td>
+                                <td>Equivalence Class</td>
+                                <td>Warm weather growth</td>
+                                <td>temp=WARM, weather=SUNNY</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>ECT3</td>
+                                <td>Equivalence Class</td>
+                                <td>Non-chilly cloudy day</td>
+                                <td>temp=HOT, weather=CLOUDY</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>SC1</td>
+                                <td>Structural Coverage</td>
+                                <td>Defensive fallback</td>
+                                <td>weather=3 (invalid), temp=0, counter=1</td>
                                 <td>Low</td>
-                                <td>Structure (SC1)</td>
-                                <td>Default fallback behavior</td>
-                                <td>Complete coverage of all code paths</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once.</p>
+                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once. By eliminating redundant tests and prioritizing the most critical scenarios, we've created a test suite that efficiently validates the simDailyGrowth function's behavior across all its logical boundaries.</p>
                 </div>
             </div>
 
@@ -1273,7 +1299,13 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                         </table>
                     </div>
 
-                    <p>These additional tests helped us achieve 100% branch coverage for the checkLetters method, ensuring all code paths are exercised.</p>
+                    <p>The JaCoCo coverage report confirms that with our combined test suite, we've achieved complete branch coverage for the checkLetters method:</p>
+
+                    <div class="coverage-report">
+                        <img src="assets/images/ex3_jacoco.png" alt="JaCoCo coverage report for checkLetters method" class="coverage-image">
+                    </div>
+
+                    <p>The report shows that all branches of the conditional logic are covered, including the special case handling for colors that have already been assigned. This ensures we've exercised all possible execution paths through the function.</p>
                 </div>
             </div>
 
@@ -1291,52 +1323,80 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                         <li>We need to prioritize tests that exercise complex state transitions in the keyboard coloring logic</li>
                     </ol>
 
-                    <p>Our refined test suite includes:</p>
+                    <p>Here is our complete comprehensive test suite for the checkLetters function, organized by test type and showing all key test cases:</p>
 
                     <table>
                         <thead>
                             <tr>
-                                <th>Priority</th>
+                                <th>Test ID</th>
                                 <th>Test Type</th>
-                                <th>Test IDs</th>
-                                <th>Purpose</th>
+                                <th>Secret Word</th>
+                                <th>Guessed Word</th>
+                                <th>Description</th>
+                                <th>Priority</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td>BVT1</td>
+                                <td>Boundary Value</td>
+                                <td>"CRANE"</td>
+                                <td>"CRASS"</td>
+                                <td>Exact match transition (green)</td>
                                 <td>High</td>
-                                <td>Boundary Tests</td>
-                                <td>BVT1, BVT3, BVT5</td>
-                                <td>Verify critical transitions between color states</td>
                             </tr>
                             <tr>
+                                <td>BVT3</td>
+                                <td>Boundary Value</td>
+                                <td>"CRANE"</td>
+                                <td>"PRANK"</td>
+                                <td>Complete miss transition (gray)</td>
                                 <td>High</td>
-                                <td>Equivalence Class Test</td>
-                                <td>ECT4</td>
-                                <td>Comprehensive mixed-case scenario</td>
                             </tr>
                             <tr>
-                                <td>Medium</td>
-                                <td>Structural Coverage</td>
-                                <td>SC1</td>
-                                <td>Test duplicate letter handling</td>
+                                <td>BVT5</td>
+                                <td>Boundary Value</td>
+                                <td>"CRANE"</td>
+                                <td>"SCARS"</td>
+                                <td>Position variation for same letter</td>
+                                <td>High</td>
                             </tr>
                             <tr>
-                                <td>Medium</td>
-                                <td>Equivalence Class Test</td>
                                 <td>ECT3</td>
-                                <td>Verify complete miss handling</td>
+                                <td>Equivalence Class</td>
+                                <td>"BRAVE"</td>
+                                <td>"CLOCK"</td>
+                                <td>Complete miss case (all gray)</td>
+                                <td>Medium</td>
                             </tr>
                             <tr>
-                                <td>Low</td>
+                                <td>ECT4</td>
+                                <td>Equivalence Class</td>
+                                <td>"BRAVE"</td>
+                                <td>"VALVE"</td>
+                                <td>Mixed case (green, yellow, gray)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>SC1</td>
                                 <td>Structural Coverage</td>
+                                <td>"SWEET"</td>
+                                <td>"STEEL"</td>
+                                <td>Duplicate letter handling</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
                                 <td>SC2</td>
-                                <td>Verify key color state management</td>
+                                <td>Structural Coverage</td>
+                                <td>"BOATS"</td>
+                                <td>"FLOAT"</td>
+                                <td>Key color state management</td>
+                                <td>Low</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once.</p>
+                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once. By organizing our tests in this way, we can quickly see which aspects of the function are most thoroughly tested and which critical behaviors are verified. The high-priority tests capture the essential transition points between the three color states (green, yellow, gray), while the medium and low-priority tests ensure complete coverage of edge cases and defensive code.</p>
                 </div>
             </div>
 
