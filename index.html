@@ -436,31 +436,12 @@
                     <div class="code-example">
                         <h4>The Method We're Testing</h4>
                         <pre><code>
-public class MyCar {
-    private double mpg;          // miles per gallon
-    private double tankSize;     // gallons
-    private double fuelLevel;    // gallons
-    private double totalMiles;   // odometer reading
-    private double gasPrice;     // price per gallon
-
-    // Constructor and other methods omitted
-
-    /**
-     * Simulates driving the car for a specified distance
-     * @param miles the distance to drive in miles
-     * @return true if the car had enough fuel to complete the trip, false otherwise
-     */
-    public boolean driveCar(double miles) {
-        // Check if we have enough fuel to drive the requested distance
-        if (miles < 0 || (miles / mpg) > fuelLevel) {
-            return false;  // Can't drive negative miles or more than our fuel allows
-        }
-
-        // Update fuel level and odometer
-        fuelLevel -= miles / mpg;
-        totalMiles += miles;
-        return true;
+public boolean driveCar(double miles){
+    if (miles < 0 || miles > this.mpg*this.currentGas){
+        return false;
     }
+    this.currentGas = this.currentGas - (miles/this.mpg);
+    return true;
 }
                         </code></pre>
                     </div>
@@ -473,54 +454,58 @@ public class MyCar {
                     <h3>Step 1: Robust Boundary-Value Tests</h3>
                 </div>
                 <div class="step-content">
-                    <p>In this step, we identify the boundaries where behavior might change and test around those boundaries:</p>
-                    
-                    <ul>
-                        <li>We consider the range of valid inputs (all integers)</li>
-                        <li>We identify boundaries such as zero, positive/negative transitions</li>
-                        <li>We look at extreme values like Integer.MAX_VALUE and Integer.MIN_VALUE</li>
-                        <li>We create test cases that focus on these boundary conditions</li>
-                    </ul>
+                    <p>We want to test the boundaries of the variable miles in this function. To do this, we apply the principles of Boundary Value Testing (BVT), which focuses on values at the very edges of a variable's allowed range—specifically where the program's behavior transitions from one state to another. Rather than merely identifying out-of-bounds errors, BVT is used to verify that logical conditions flip precisely when they're supposed to. These transition points might reflect shifts such as false to true, valid to invalid, or rejected to accepted.</p>
+
+                    <p>In order to isolate the behavior of the miles parameter, we'll fix the other variables in the function to known values. Specifically, we set mpg = 20 and currentGas = 5, which means the maximum drivable distance is 20 * 5 = 100 miles.</p>
+
+                    <p>Now we can systematically test values at and around the key thresholds. Because miles is a double, we can test with precise decimal values, not just whole numbers. This allows us to observe how small variations near those critical boundaries affect program behavior.</p>
                     
                     <h4>Test Cases Created in Step 1</h4>
                     <table>
                         <thead>
                             <tr>
-                                <th>Test ID</th>
+                                <th>Test Case</th>
+                                <th>Input (miles)</th>
                                 <th>Description</th>
-                                <th>Input</th>
-                                <th>Expected Output</th>
-                                <th>Boundary Being Tested</th>
+                                <th>Expected Result</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>BVT1</td>
-                                <td>Zero boundary - both zero</td>
-                                <td>a=0, b=0</td>
+                                <td>Min - 1: Just below the allowed minimum (should behave differently)</td>
+                                <td>-0.1</td>
+                                <td>Just below valid range</td>
+                                <td>FALSE</td>
+                            </tr>
+                            <tr>
+                                <td>Min - The exact lower boundary (should be accepted)</td>
                                 <td>0</td>
-                                <td>Zero values</td>
+                                <td>Lower valid boundary</td>
+                                <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>BVT2</td>
-                                <td>Zero boundary - one zero</td>
-                                <td>a=5, b=0</td>
-                                <td>5</td>
-                                <td>One zero operand</td>
+                                <td>Min + 1 Just above the lower boundary (should be accepted)</td>
+                                <td>0.1</td>
+                                <td>Slightly above 0</td>
+                                <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>BVT3</td>
-                                <td>Maximum value boundary</td>
-                                <td>a=Integer.MAX_VALUE, b=1</td>
-                                <td>Exception expected</td>
-                                <td>Overflow threshold</td>
+                                <td>Max - 1 Just below the upper boundary (should be accepted)</td>
+                                <td>99.9</td>
+                                <td>Just below max</td>
+                                <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>BVT4</td>
-                                <td>Minimum value boundary</td>
-                                <td>a=Integer.MIN_VALUE, b=-1</td>
-                                <td>Exception expected</td>
-                                <td>Underflow threshold</td>
+                                <td>Max The exact upper boundary (should be accepted)</td>
+                                <td>100</td>
+                                <td>Upper valid boundary</td>
+                                <td>TRUE</td>
+                            </tr>
+                            <tr>
+                                <td>Max + 1 Just above the allowed maximum (should behave differently)</td>
+                                <td>100.1</td>
+                                <td>Just above max</td>
+                                <td>FALSE</td>
                             </tr>
                         </tbody>
                     </table>
