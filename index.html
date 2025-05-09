@@ -711,7 +711,7 @@ public int simDailyGrowth(int temp, int weather){
     if (isWilted()){ //if wilted
         return 0;
     }
-    if (chillyCounter == 1 && weather == FantasyGarden.TEMP_CHILLY){
+    if (chillyCounter == 1 && temp == FantasyGarden.TEMP_CHILLY){
         wilt(); //wilted condition
         return WILTED_VALUE;
     } else if (weather != FantasyGarden.WEATHER_CLOUDY){
@@ -740,15 +740,15 @@ public int simDailyGrowth(int temp, int weather){
                     <h3>Step 1: Robust Boundary-Value Tests</h3>
                 </div>
                 <div class="step-content">
-                    <p>In this function, boundary value testing isn't about numeric min/max thresholds. Instead, we're testing the logic around conditional transitions, the exact points where the function's behavior flips due to changes in temperature, weather, or internal state. These boundaries may not look like traditional math, but they represent the edges of behavioral change. For example, the plant's transition from healthy to wilted is not determined by a simple number, it's the combination of a specific internal state (chillyCounter == 1) and a triggering input (weather == TEMP_CHILLY).</p>
+                    <p>In this function, boundary value testing isn't about numeric min/max thresholds. Instead, we're testing the logic around conditional transitions, the exact points where the function's behavior flips due to changes in temperature, weather, or internal state. These boundaries may not look like traditional math, but they represent the edges of behavioral change. For example, the plant's transition from healthy to wilted is not determined by a simple number, it's the combination of a specific internal state (chillyCounter == 1) and a triggering input (temp == TEMP_CHILLY).</p>
 
                     <p>BVT is used here to deliberately probe those transitions: when a plant starts to grow, when it resets its growth cycle, or when it shuts down altogether. We don't need to try every possible input; instead, we construct targeted test cases that sit precisely at those flip points. These are the decision thresholds where the program's return value will change based on just one piece of input. For clarity, we'll use the numerical values (0, 1, 2) rather than the constant names in our test cases.</p>
 
                     <p>For example:</p>
                     <ul>
-                        <li>Case 2 tests the moment when the plant switches from being on the edge of wilting to actually wilting. This is only triggered under very specific conditions (counter = 1 and weather = 0, which is the TEMP_CHILLY constant in the code).</li>
-                        <li>Case 4 confirms that non-chilly temperatures on cloudy days do not cause wilting, helping isolate the logic that distinguishes these similar but subtly different paths.</li>
-                        <li>Each test case uses a fresh Plant instance to avoid state contamination between tests, which was critical for tests 3 and 5.</li>
+                        <li>BVT2 tests the moment when the plant switches from being on the edge of wilting to actually wilting. This is only triggered under very specific conditions (counter = 1 and temp = 0, which is the TEMP_CHILLY constant in the code).</li>
+                        <li>BVT4 confirms that non-chilly temperatures on cloudy days do not cause wilting, helping isolate the logic that distinguishes these similar but subtly different paths.</li>
+                        <li>Each test case uses a fresh Plant instance to avoid state contamination between tests, which was critical for tests BVT3 and BVT5.</li>
                     </ul>
 
                     <h4>Test Cases Created in Step 1</h4>
@@ -765,7 +765,7 @@ public int simDailyGrowth(int temp, int weather){
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
+                                <td>BVT1</td>
                                 <td>0</td>
                                 <td>1</td>
                                 <td>wilted=true</td>
@@ -773,7 +773,7 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>0</td>
                             </tr>
                             <tr>
-                                <td>2</td>
+                                <td>BVT2</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>counter=1, fresh Plant</td>
@@ -781,7 +781,7 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>WILTED_VALUE</td>
                             </tr>
                             <tr>
-                                <td>3</td>
+                                <td>BVT3</td>
                                 <td>0</td>
                                 <td>1</td>
                                 <td>counter=0, fresh Plant</td>
@@ -789,7 +789,7 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>4</td>
+                                <td>BVT4</td>
                                 <td>1</td>
                                 <td>1</td>
                                 <td>counter=0, fresh Plant</td>
@@ -797,7 +797,7 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>5</td>
+                                <td>BVT5</td>
                                 <td>1</td>
                                 <td>2</td>
                                 <td>counter=1, previousGrowth=1, fresh Plant</td>
@@ -846,7 +846,7 @@ public int simDailyGrowth(int temp, int weather){
                             <tr>
                                 <td>EC2</td>
                                 <td>Plant about to wilt</td>
-                                <td>chillyCounter == 1 & weather == 0 (TEMP_CHILLY)</td>
+                                <td>chillyCounter == 1 & temp == 0 (TEMP_CHILLY)</td>
                                 <td>Return wilted value</td>
                             </tr>
                             <tr>
@@ -889,7 +889,7 @@ public int simDailyGrowth(int temp, int weather){
                             </tr>
                             <tr>
                                 <td>ECT2</td>
-                                <td>temp = 0, weather = 0, counter = 1, fresh Plant</td>
+                                <td>temp = 0, weather = 0 (WEATHER_SUNNY), counter = 1, fresh Plant</td>
                                 <td>EC2</td>
                                 <td>WILTED_VALUE</td>
                             </tr>
@@ -1254,7 +1254,7 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                                 <td>"TEACH"</td>
                                 <td>2</td>
                                 <td>Green, rightSpot++</td>
-                                <td>'A' exact match at position 2 (EC1)</td>
+                                <td>'A' exact match at position 2 matching 'A' in "CRANE" (EC1)</td>
                             </tr>
                         </tbody>
                     </table>
