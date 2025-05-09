@@ -940,14 +940,30 @@ td:first-child {
 }
 
 /* Make TRUE/FALSE values more distinctive */
+td:last-child {
+    text-align: center;
+    font-weight: bold;
+}
+
 td:last-child:contains("TRUE") {
     color: #5ab74c;
-    font-weight: bold;
 }
 
 td:last-child:contains("FALSE") {
     color: #f75b5b;
-    font-weight: bold;
+}
+
+/* Coverage report styling */
+.coverage-report {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.coverage-image {
+    max-width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .code-example {

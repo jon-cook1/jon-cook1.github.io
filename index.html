@@ -518,64 +518,60 @@ public boolean driveCar(double miles){
                     <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
                 </div>
                 <div class="step-content">
-                    <p>In this step, we create test cases that represent different categories of valid input and expected output behaviors:</p>
-                    
+                    <p>Equivalence Class Testing (ECT) involves dividing input values into categories, or "classes," where all values in a class are expected to produce the same outcome. Rather than testing individual edge values like in BVT, ECT helps ensure the function behaves correctly across broader types of inputs. In the case of driveCar(double miles), we again assume mpg = 20 and currentGas = 5, which means the car can drive a maximum of 100 miles.</p>
+
+                    <p>We can identify the following equivalence classes for the miles input:</p>
                     <ul>
-                        <li>We identify distinct categories of equivalent input scenarios (positive + positive, negative + negative, etc.)</li>
-                        <li>We choose representative values from each category</li>
-                        <li>We ensure all normal (valid) behaviors are covered</li>
-                        <li>We focus on covering fundamental behaviors rather than all possible inputs</li>
+                        <li><strong>EC1:</strong> Negative input values. Any value less than 0 should be considered invalid and return false.</li>
+                        <li><strong>EC2:</strong> Valid range values. Any value greater than or equal to 0 but less than or equal to 100 should return true.</li>
+                        <li><strong>EC3:</strong> Values exceeding the fuel range. Any value greater than 100 should be considered too far to drive and return false.</li>
                     </ul>
-                    
+
+                    <p>To ensure representative coverage across the equivalence classes and validate transitions between them, we design the following four test cases:</p>
+
                     <h4>Test Cases Created in Step 2</h4>
                     <table>
                         <thead>
                             <tr>
-                                <th>Test ID</th>
-                                <th>Description</th>
-                                <th>Input</th>
+                                <th>Test Case</th>
+                                <th>Input (miles)</th>
+                                <th>Transitions Between Classes</th>
                                 <th>Expected Output</th>
-                                <th>Equivalence Class</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>EC1</td>
-                                <td>Both positive</td>
-                                <td>a=5, b=3</td>
-                                <td>8</td>
-                                <td>Positive + Positive</td>
+                                <td>1</td>
+                                <td>-10</td>
+                                <td>Within EC1 (invalid input)</td>
+                                <td>FALSE</td>
                             </tr>
                             <tr>
-                                <td>EC2</td>
-                                <td>Both negative</td>
-                                <td>a=-2, b=-7</td>
-                                <td>-9</td>
-                                <td>Negative + Negative</td>
+                                <td>2</td>
+                                <td>0.1</td>
+                                <td>Transition from EC1 → EC2</td>
+                                <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>EC3</td>
-                                <td>Positive + Negative (|a| > |b|)</td>
-                                <td>a=10, b=-5</td>
-                                <td>5</td>
-                                <td>Mixed signs, positive result</td>
+                                <td>3</td>
+                                <td>99.9</td>
+                                <td>Within EC2 (valid driving range)</td>
+                                <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>EC4</td>
-                                <td>Positive + Negative (|a| < |b|)</td>
-                                <td>a=5, b=-10</td>
-                                <td>-5</td>
-                                <td>Mixed signs, negative result</td>
-                            </tr>
-                            <tr>
-                                <td>EC5</td>
-                                <td>Equal magnitude opposite signs</td>
-                                <td>a=7, b=-7</td>
-                                <td>0</td>
-                                <td>Mixed signs, zero result</td>
+                                <td>4</td>
+                                <td>150</td>
+                                <td>Transition from EC2 → EC3</td>
+                                <td>FALSE</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    <p>These test cases verify that the function correctly interprets inputs from within each behavioral region and handles the transitions across class boundaries appropriately.</p>
+
+                    <p>ECT is most effective when used after BVT has exposed where those behavioral boundaries lie. While BVT stresses the inputs right at the turning points—such as 0.0, 100.0, or just beyond, ECT steps back and ensures each logical region on either side of those boundaries is being properly represented and covered.</p>
+
+                    <p>In this way, building one strategy actually helps inform the construction of the other: BVT pinpoints exactly where logic transitions occur, and ECT maps out the broader regions those transitions define. This allows you to test thoroughly without redundancy, using BVT to confirm precision and ECT to ensure consistent coverage across meaningful input classes.</p>
                 </div>
             </div>
             
@@ -585,17 +581,15 @@ public boolean driveCar(double miles){
                     <h3>Step 3: Structural Coverage Sweep</h3>
                 </div>
                 <div class="step-content">
-                    <p>Using JaCoCo to analyze our code coverage, we identified additional test cases needed:</p>
-                    
-                    <ul>
-                        <li>Test case for Integer.MAX_VALUE boundary: a=Integer.MAX_VALUE, b=1</li>
-                        <li>Test case for Integer.MIN_VALUE boundary: a=Integer.MIN_VALUE, b=-1</li>
-                        <li>Test case for overflow detection</li>
-                    </ul>
-                    
-                    <div class="placeholder-image">
-                        <p>[JaCoCo coverage results image will be added here]</p>
+                    <p>Using JaCoCo to analyze our code coverage, we can verify that our test cases from the previous steps provide complete coverage of the driveCar method.</p>
+
+                    <p>The JaCoCo report confirms that our BVT and ECT test cases fully exercise all lines and branches in the method:</p>
+
+                    <div class="coverage-report">
+                        <img src="assets/images/ex1_jacoco.png" alt="JaCoCo coverage report for driveCar method" class="coverage-image">
                     </div>
+
+                    <p>As shown in the report, this function is very simple and JaCoCo confirms that it is fully covered by our BVT and ECT test cases. The coverage analysis shows that we've exercised both the true and false conditions of the if statement, ensuring that all execution paths have been tested.</p>
                 </div>
             </div>
             
@@ -605,58 +599,15 @@ public boolean driveCar(double miles){
                     <h3>Step 4: Suite Refinement</h3>
                 </div>
                 <div class="step-content">
-                    <p>After reviewing all our test cases, we've refined our test suite to the following essential tests:</p>
-                    
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Test ID</th>
-                                <th>Test Case</th>
-                                <th>Input</th>
-                                <th>Expected Output</th>
-                                <th>Purpose</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>T1</td>
-                                <td>Basic positive</td>
-                                <td>a=5, b=3</td>
-                                <td>8</td>
-                                <td>Core functionality</td>
-                            </tr>
-                            <tr>
-                                <td>T2</td>
-                                <td>Both negative</td>
-                                <td>a=-2, b=-7</td>
-                                <td>-9</td>
-                                <td>Sign handling</td>
-                            </tr>
-                            <tr>
-                                <td>T3</td>
-                                <td>Mixed signs</td>
-                                <td>a=10, b=-5</td>
-                                <td>5</td>
-                                <td>Sign handling</td>
-                            </tr>
-                            <tr>
-                                <td>T4</td>
-                                <td>MAX_VALUE boundary</td>
-                                <td>a=MAX_VALUE, b=1</td>
-                                <td>Exception</td>
-                                <td>Overflow detection</td>
-                            </tr>
-                            <tr>
-                                <td>T5</td>
-                                <td>MIN_VALUE boundary</td>
-                                <td>a=MIN_VALUE, b=-1</td>
-                                <td>Exception</td>
-                                <td>Underflow detection</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <p>We eliminated redundant zero-handling tests as they didn't add significant value to the test suite.</p>
+                    <p>For this simple example, no significant refinement is needed. The driveCar method has straightforward logic with clear boundaries and equivalence classes that we've already covered in our BVT and ECT test cases.</p>
+
+                    <p>Our combined test strategy includes:</p>
+                    <ul>
+                        <li>Six boundary test cases that verify behavior at and around the minimum (0) and maximum (100) boundaries</li>
+                        <li>Four equivalence class test cases that cover the main behavioral regions and transitions between them</li>
+                    </ul>
+
+                    <p>JaCoCo confirms we've achieved 100% code coverage, and our tests are minimal and non-redundant. Since this is a simple and straightforward example, there's no need to eliminate redundant tests or optimize our test suite further.</p>
                 </div>
             </div>
             
