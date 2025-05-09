@@ -416,38 +416,50 @@
         
         <!-- Example 1 Page -->
         <section id="example1" class="page">
-            <h2>Example 1: Calculator Function</h2>
+            <h2>Example 1: Car Simulation - Drive Method</h2>
             <div class="example-overview">
-                <p>In this example, we'll walk through the process of testing a simple calculator addition function using our 4-step approach.</p>
+                <p>In this example, we'll walk through the process of testing a car simulation's drive method using our 4-step approach.</p>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">0</div>
-                    <h3>Understanding Requirements</h3>
+                    <h3>Overview</h3>
                 </div>
                 <div class="step-content">
-                    <p>For our calculator addition function, we need to understand exactly what it should do:</p>
-                    
-                    <ul>
-                        <li>Take two integer inputs</li>
-                        <li>Return their sum as an integer</li>
-                        <li>Handle positive numbers, negative numbers, and zero</li>
-                        <li>Handle overflow according to Java integer rules</li>
-                    </ul>
-                    
+                    <p>This function is part of a larger program that models a MyCar class, an object-oriented simulation of a car's essential behaviors such as fuel consumption, mileage tracking, and gas refilling. The class includes attributes like fuel efficiency (mpg), gas tank size, total mileage, and gas price, and supports methods that simulate realistic interactions with a car, such as driving, refueling, and maintenance tracking.</p>
+
+                    <p>The driveCar(double miles) method plays a central role in modeling how fuel is consumed when a car is driven. It checks whether the requested number of miles can be driven based on the car's current gas level and miles-per-gallon efficiency. If the request is valid, it updates the fuel level accordingly and returns true; otherwise, it denies the request and returns false. This simple check ensures that the simulation remains realistic, drivers can't magically exceed their car's fuel limits.</p>
+
+                    <p>Testing this method is essential because it represents a core mechanic of the simulation: the link between fuel and distance traveled. If the function allows negative or overly long trips to be recorded, the simulation becomes unrealistic. By applying both Boundary Value Testing and Equivalence Class Testing, we can ensure that the driveCar() method behaves as expected across all relevant input ranges and scenarios, preserving both the integrity and believability of the simulation.</p>
+
                     <div class="code-example">
-                        <h4>The Function We're Testing</h4>
+                        <h4>The Method We're Testing</h4>
                         <pre><code>
-public class Calculator {
+public class MyCar {
+    private double mpg;          // miles per gallon
+    private double tankSize;     // gallons
+    private double fuelLevel;    // gallons
+    private double totalMiles;   // odometer reading
+    private double gasPrice;     // price per gallon
+
+    // Constructor and other methods omitted
+
     /**
-     * Adds two numbers
-     * @param a first number
-     * @param b second number
-     * @return sum of a and b
+     * Simulates driving the car for a specified distance
+     * @param miles the distance to drive in miles
+     * @return true if the car had enough fuel to complete the trip, false otherwise
      */
-    public int add(int a, int b) {
-        return a + b;
+    public boolean driveCar(double miles) {
+        // Check if we have enough fuel to drive the requested distance
+        if (miles < 0 || (miles / mpg) > fuelLevel) {
+            return false;  // Can't drive negative miles or more than our fuel allows
+        }
+
+        // Update fuel level and odometer
+        fuelLevel -= miles / mpg;
+        totalMiles += miles;
+        return true;
     }
 }
                         </code></pre>

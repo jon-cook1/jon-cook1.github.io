@@ -753,6 +753,11 @@ footer {
     margin-bottom: 0;
 }
 
+/* Remove empty paragraphs used for spacing */
+.card-content p:empty {
+    display: none;
+}
+
 .cta {
     text-align: center;
     padding: 1.5rem;
