@@ -163,20 +163,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Code highlighting with line numbers
+    // Code highlighting without line numbers
     const codeBlocks = document.querySelectorAll('pre code');
     codeBlocks.forEach(block => {
-        // Add line numbers
+        // No line numbers needed
         const lines = block.textContent.split('\n');
-        let numberedLines = '';
-        
+        let formattedLines = '';
+
         lines.forEach((line, index) => {
             if (index < lines.length - 1 || line.trim() !== '') {
-                numberedLines += `<span class="line-number">${index + 1}</span>${line}\n`;
+                formattedLines += `${line}\n`;
             }
         });
-        
-        block.innerHTML = numberedLines;
+
+        block.innerHTML = formattedLines;
     });
     
     // Interactive elements for test cases

@@ -1004,6 +1004,17 @@ pre {
     font-size: 0.9rem;
     white-space: pre-wrap;
     word-break: break-word;
+    position: relative;
+}
+
+pre code {
+    display: block;
+    font-family: var(--font-code);
+}
+
+/* Remove any existing line number elements */
+.line-number {
+    display: none;
 }
 
 code {
