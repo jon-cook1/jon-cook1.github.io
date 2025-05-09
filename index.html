@@ -865,15 +865,15 @@ public int simDailyGrowth(int temp, int weather){
                     <h3>Step 3: Structural Coverage Sweep</h3>
                 </div>
                 <div class="step-content">
-                    <p>After running our BVT and ECT tests through JaCoCo, we found a crucial edge case that wasn't being covered:</p>
+                    <p>After running our BVT and ECT tests through JaCoCo, we found that there was still one line of code that wasn't being executed at all (shown in red in the JaCoCo report):</p>
 
                     <ul>
-                        <li>The JaCoCo report showed yellow highlighting for the first else-if condition that combines chillyCounter == 1 with weather == TEMP_CHILLY</li>
-                        <li>The final return 0 statement at the bottom was also never executed</li>
-                        <li>These represent cases where specific combinations of conditions in the function cause the code to fall through to the default path</li>
+                        <li>The final return 0 statement at the bottom was never executed (red line)</li>
+                        <li>This represents an important edge case in our ECT that we missed in our original analysis</li>
+                        <li>While there was also yellow highlighting for some conditions, we're primarily focused on achieving line and branch coverage at this stage, not condition coverage</li>
                     </ul>
 
-                    <p>To achieve complete branch coverage, we added a specific test to target the fall-through path:</p>
+                    <p>To achieve complete line and branch coverage, we added a specific test to target the red line (the uncovered fall-through path):</p>
 
                     <div class="coverage-table">
                         <table>
@@ -910,13 +910,13 @@ void cloudyChillyWithCounterOneFallsThrough() {
 }
                     </code></pre>
 
-                    <p>The JaCoCo report now confirms that with our complete test suite, we've achieved full line and branch coverage for the simDailyGrowth method:</p>
+                    <p>The JaCoCo report now confirms that with our complete test suite, we've eliminated all red lines, achieving full line and branch coverage for the simDailyGrowth method. This test case was essential because it represents a missed equivalence class in our earlier analysis - a case where the plant has a chillyCounter of 1 on a cloudy, chilly day but doesn't wilt:</p>
 
                     <div class="coverage-report">
                         <img src="assets/images/ex2_jacoco.png" alt="JaCoCo coverage report for simDailyGrowth method" class="coverage-image">
                     </div>
 
-                    <p>As shown in the report, all conditional branches and lines of code are now exercised (indicated by green highlighting), including the default return path at the end of the method. This verifies we have comprehensive coverage of all possible execution paths.</p>
+                    <p>As shown in the report, all lines of code are now exercised, with no red lines remaining. While some conditions may still show yellow highlighting (indicating that not all possible boolean combinations were tested), we've achieved our primary goal of ensuring every line of code and every branch is exercised at least once. This highlights why JaCoCo is such a valuable final check - it revealed a meaningful edge case that our ECT analysis had overlooked.</p>
                 </div>
             </div>
 
