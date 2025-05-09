@@ -191,19 +191,54 @@
                 </div>
                 
                 <div id="section3" class="section-content hidden">
-                    <h3>Structural Coverage Sweep - Detailed</h3>
+                    <h3>Structural Coverage Sweep - Hunt for Blind Spots</h3>
                     <div class="content-container">
                         <div class="text-content">
-                            <p>[Detailed content about hunting for blind spots in test coverage]</p>
+                            <p>This strategy focuses on achieving comprehensive test coverage by ensuring that every line of code and every logical branch (i.e., conditionals that can evaluate to true or false) is executed during testing. This is known as line and branch coverage. We use a coverage analysis tool, JaCoCo in our case, to evaluate how thoroughly our test suite exercises the codebase. JaCoCo provides a visual and numerical breakdown of which lines have been executed and whether both the true and false paths of each conditional have been tested.</p>
 
-                            <h4>Key Concepts</h4>
-                            <ul>
-                                <li>Code coverage identifies untested execution paths</li>
-                                <li>Statement coverage: ensure every line runs at least once</li>
-                                <li>Branch coverage: ensure every decision (if/else) is tested</li>
-                                <li>Path coverage: ensure all possible execution paths are tested</li>
-                                <li>Finding blind spots leads to discovering untested edge cases</li>
-                            </ul>
+                            <p>Full branch coverage requires that for every if, else, or logical expression in the code, the test suite must include at least one scenario where the condition evaluates to true and another where it evaluates to false. This guarantees that all possible execution paths are tested, helping to catch bugs that may only arise under specific logical conditions.</p>
+
+                            <div class="coverage-guide">
+                                <h4>Understanding JaCoCo Coverage Reports</h4>
+                                <p>To implement this strategy, begin by running JaCoCo on your code and reviewing the coverage report it generates. In the report:</p>
+
+                                <div class="coverage-indicators">
+                                    <div class="coverage-indicator red">
+                                        <div class="color-block red-block"></div>
+                                        <div class="indicator-info">
+                                            <span class="indicator-label">Red</span>
+                                            <span class="indicator-desc">A line or branch that has not been executed at all.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="coverage-indicator yellow">
+                                        <div class="color-block yellow-block"></div>
+                                        <div class="indicator-info">
+                                            <span class="indicator-label">Yellow</span>
+                                            <span class="indicator-desc">The line was run, but one possible outcome of a conditional has not been tested (e.g., only the "true" case was evaluated).</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="coverage-indicator green">
+                                        <div class="color-block green-block"></div>
+                                        <div class="indicator-info">
+                                            <span class="indicator-label">Green</span>
+                                            <span class="indicator-desc">The line was executed and all conditional outcomes were tested.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p>This approach complements both Boundary Value Testing (BVT) and Equivalence Class Testing (ECT) by validating whether the test cases you've written are actually exercising the decision points identified through those strategies. While BVT checks the precise thresholds where program behavior flips and ECT ensures you're testing meaningful categories of input, line and branch coverage confirms that those logical transitions are being activated during execution. In essence, BVT and ECT help you choose the right test cases, and line/branch coverage helps you confirm those tests are hitting all the code paths they need to. Together, they provide a layered approach to robust and meaningful software testing.</p>
+                            </div>
+
+                            <h4>Action Plan Based on Coverage Feedback</h4>
+                            <ol class="coverage-steps">
+                                <li><strong>Identify lines or branches with incomplete coverage.</strong> Look for red and yellow markings in your JaCoCo report.</li>
+                                <li><strong>Write targeted test cases that intentionally execute any untested paths</strong> (e.g., force a condition to evaluate to false if only true was tested).</li>
+                                <li><strong>Re-run JaCoCo to ensure your tests now fully cover those gaps.</strong> Verify that previously red or yellow sections have turned green.</li>
+                            </ol>
+
+                            <p class="insight">Line and branch coverage helps ensure that your program is not only functionally correct under typical inputs but also resilient across edge cases and alternate execution paths. By systematically covering every conditional route, you reduce the risk of silent failures in rarely triggered logic and strengthen the long-term reliability of your codebase.</p>
                         </div>
                     </div>
                     <button class="btn-primary section-close">Close</button>
