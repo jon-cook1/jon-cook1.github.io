@@ -889,7 +889,7 @@ public int simDailyGrowth(int temp, int weather){
                             <tbody>
                                 <tr>
                                     <td>SC1</td>
-                                    <td>temp=TEMP_CHILLY (0), weather=WEATHER_CLOUDY (1)</td>
+                                    <td>temp=0, weather=1</td>
                                     <td>counter=1, fresh Plant</td>
                                     <td>Test cloudy+chilly with counter=1 fallthrough path</td>
                                     <td>0</td>
@@ -939,49 +939,77 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>BVT1</td>
                                 <td>Boundary Value</td>
                                 <td>Already wilted plant behavior</td>
-                                <td>wilted=true, any temp/weather</td>
+                                <td>wilted=true, any temp/weather, fresh Plant</td>
                                 <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>BVT2</td>
                                 <td>Boundary Value</td>
                                 <td>Wilting transition</td>
-                                <td>temp=CHILLY, weather=TEMP_CHILLY, counter=1, fresh Plant</td>
+                                <td>temp=0, weather=0, counter=1, fresh Plant</td>
                                 <td>High</td>
                             </tr>
                             <tr>
                                 <td>BVT3</td>
                                 <td>Boundary Value</td>
                                 <td>First chilly+cloudy day</td>
-                                <td>temp=CHILLY, weather=CLOUDY, counter=0, fresh Plant</td>
+                                <td>temp=0, weather=1, counter=0, fresh Plant</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>BVT4</td>
+                                <td>Boundary Value</td>
+                                <td>Cloudy + warm resets counter</td>
+                                <td>temp=1, weather=1, counter=0, fresh Plant</td>
                                 <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>BVT5</td>
                                 <td>Boundary Value</td>
                                 <td>Growth increment</td>
-                                <td>temp=WARM, weather=RAINY, counter=1, previousGrowth=1, fresh Plant</td>
+                                <td>temp=1, weather=2, counter=1, previousGrowth=1, fresh Plant</td>
                                 <td>High</td>
                             </tr>
                             <tr>
                                 <td>ECT1</td>
                                 <td>Equivalence Class</td>
-                                <td>Warm weather growth</td>
-                                <td>temp=WARM, weather=SUNNY, fresh Plant</td>
+                                <td>Already wilted plant</td>
+                                <td>wilted=true, any temp/weather, fresh Plant</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>ECT2</td>
+                                <td>Equivalence Class</td>
+                                <td>Plant about to wilt</td>
+                                <td>temp=0, weather=0, counter=1, fresh Plant</td>
                                 <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>ECT3</td>
                                 <td>Equivalence Class</td>
-                                <td>Non-chilly cloudy day</td>
-                                <td>temp=HOT, weather=CLOUDY, fresh Plant</td>
+                                <td>First chilly cloudy day</td>
+                                <td>temp=0, weather=1, counter=0, fresh Plant</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>ECT4</td>
+                                <td>Equivalence Class</td>
+                                <td>Cloudy but not chilly</td>
+                                <td>temp=1, weather=1, counter=0, fresh Plant</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>ECT5</td>
+                                <td>Equivalence Class</td>
+                                <td>Not cloudy weather</td>
+                                <td>temp=1, weather=2, previousGrowth=3, fresh Plant</td>
                                 <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>SC1</td>
                                 <td>Structural Coverage</td>
-                                <td>Cloudy+chilly fallthrough</td>
-                                <td>temp=TEMP_CHILLY (0), weather=WEATHER_CLOUDY (1), counter=1</td>
+                                <td>Cloudy+chilly with counter=1 fallthrough</td>
+                                <td>temp=0, weather=1, counter=1, fresh Plant</td>
                                 <td>Low</td>
                             </tr>
                         </tbody>
