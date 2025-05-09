@@ -865,15 +865,15 @@ public int simDailyGrowth(int temp, int weather){
                     <h3>Step 3: Structural Coverage Sweep</h3>
                 </div>
                 <div class="step-content">
-                    <p>After running our BVT and ECT tests through JaCoCo, we found one edge case that wasn't being covered:</p>
+                    <p>After running our BVT and ECT tests through JaCoCo, we found a crucial edge case that wasn't being covered:</p>
 
                     <ul>
-                        <li>The final return 0 statement was never executed</li>
-                        <li>This represents a case where all other conditions in the function fail</li>
-                        <li>Since the logic seems to handle all possible input combinations, this may be a defensive fallback that shouldn't be reachable</li>
+                        <li>The JaCoCo report showed yellow highlighting for the first else-if condition that combines chillyCounter == 1 with weather == TEMP_CHILLY</li>
+                        <li>The final return 0 statement at the bottom was also never executed</li>
+                        <li>These represent cases where specific combinations of conditions in the function cause the code to fall through to the default path</li>
                     </ul>
 
-                    <p>To ensure complete coverage, we added one additional test case with unusual inputs to verify this branch:</p>
+                    <p>To achieve complete branch coverage, we added a specific test to target the fall-through path:</p>
 
                     <div class="coverage-table">
                         <table>
@@ -889,16 +889,28 @@ public int simDailyGrowth(int temp, int weather){
                             <tbody>
                                 <tr>
                                     <td>SC1</td>
-                                    <td>weather=3 (invalid), temp=0</td>
-                                    <td>counter=1</td>
-                                    <td>Test unreachable default return</td>
+                                    <td>temp=TEMP_CHILLY (0), weather=WEATHER_CLOUDY (1)</td>
+                                    <td>counter=1, fresh Plant</td>
+                                    <td>Test cloudy+chilly with counter=1 fallthrough path</td>
                                     <td>0</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <p>The JaCoCo report confirms that with our complete test suite, we've achieved full line and branch coverage for the simDailyGrowth method:</p>
+                    <pre><code>
+@Test
+void cloudyChillyWithCounterOneFallsThrough() {
+    Plant p = new Plant();
+    p.chillyCounter = 1;                           // counter = 1
+    int out = p.simDailyGrowth(
+        FantasyGarden.TEMP_CHILLY,                 // temp = 0
+        FantasyGarden.WEATHER_CLOUDY);             // weather = 1
+    assertEquals(0, out);                          // triggers final return 0
+}
+                    </code></pre>
+
+                    <p>The JaCoCo report now confirms that with our complete test suite, we've achieved full line and branch coverage for the simDailyGrowth method:</p>
 
                     <div class="coverage-report">
                         <img src="assets/images/ex2_jacoco.png" alt="JaCoCo coverage report for simDailyGrowth method" class="coverage-image">
@@ -980,8 +992,8 @@ public int simDailyGrowth(int temp, int weather){
                             <tr>
                                 <td>SC1</td>
                                 <td>Structural Coverage</td>
-                                <td>Defensive fallback</td>
-                                <td>weather=3 (invalid), temp=0, counter=1</td>
+                                <td>Cloudy+chilly fallthrough</td>
+                                <td>temp=TEMP_CHILLY (0), weather=WEATHER_CLOUDY (1), counter=1</td>
                                 <td>Low</td>
                             </tr>
                         </tbody>
