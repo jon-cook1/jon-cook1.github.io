@@ -683,11 +683,11 @@ public int simDailyGrowth(int temp, int weather){
                 <div class="step-content">
                     <p>In this function, boundary value testing isn't about numeric min/max thresholds. Instead, we're testing the logic around conditional transitions, the exact points where the function's behavior flips due to changes in temperature, weather, or internal state. These boundaries may not look like traditional math, but they represent the edges of behavioral change. For example, the plant's transition from healthy to wilted is not determined by a simple number, it's the combination of a specific internal state (chillyCounter == 1) and a triggering input (weather == TEMP_CHILLY).</p>
 
-                    <p>BVT is used here to deliberately probe those transitions: when a plant starts to grow, when it resets its growth cycle, or when it shuts down altogether. We don't need to try every possible input; instead, we construct targeted test cases that sit precisely at those flip points. These are the decision thresholds where the program's return value will change based on just one piece of input.</p>
+                    <p>BVT is used here to deliberately probe those transitions: when a plant starts to grow, when it resets its growth cycle, or when it shuts down altogether. We don't need to try every possible input; instead, we construct targeted test cases that sit precisely at those flip points. These are the decision thresholds where the program's return value will change based on just one piece of input. For clarity, we'll use the numerical values (0, 1, 2) rather than the constant names in our test cases.</p>
 
                     <p>For example:</p>
                     <ul>
-                        <li>Case 2 tests the moment when the plant switches from being on the edge of wilting to actually wilting. This is only triggered under very specific conditions (counter = 1 and weather = TEMP_CHILLY). Note that in the code, TEMP_CHILLY is the constant value 0, which might be confusing since we also use 0 for temperature values.</li>
+                        <li>Case 2 tests the moment when the plant switches from being on the edge of wilting to actually wilting. This is only triggered under very specific conditions (counter = 1 and weather = 0, which is the TEMP_CHILLY constant in the code).</li>
                         <li>Case 4 confirms that non-chilly temperatures on cloudy days do not cause wilting, helping isolate the logic that distinguishes these similar but subtly different paths.</li>
                         <li>Each test case uses a fresh Plant instance to avoid state contamination between tests, which was critical for tests 3 and 5.</li>
                     </ul>
@@ -787,25 +787,25 @@ public int simDailyGrowth(int temp, int weather){
                             <tr>
                                 <td>EC2</td>
                                 <td>Plant about to wilt</td>
-                                <td>chillyCounter == 1 & current weather is chilly</td>
+                                <td>chillyCounter == 1 & weather == 0 (TEMP_CHILLY)</td>
                                 <td>Return wilted value</td>
                             </tr>
                             <tr>
                                 <td>EC3</td>
                                 <td>First chilly, cloudy day</td>
-                                <td>chillyCounter == 0 & weather == CLOUDY & temp == CHILLY</td>
+                                <td>chillyCounter == 0 & weather == 1 (CLOUDY) & temp == 0 (CHILLY)</td>
                                 <td>Set chillyCounter = 1, Return grow(1)</td>
                             </tr>
                             <tr>
                                 <td>EC4</td>
                                 <td>Cloudy but not chilly</td>
-                                <td>weather == CLOUDY & temp != CHILLY</td>
+                                <td>weather == 1 (CLOUDY) & temp != 0 (not CHILLY)</td>
                                 <td>Reset chillyCounter, Return grow(1)</td>
                             </tr>
                             <tr>
                                 <td>EC5</td>
                                 <td>Not cloudy weather</td>
-                                <td>weather != CLOUDY</td>
+                                <td>weather != 1 (not CLOUDY)</td>
                                 <td>Reset chillyCounter, grow by previousGrowth+1</td>
                             </tr>
                         </tbody>
