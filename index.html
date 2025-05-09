@@ -1222,99 +1222,119 @@ public class CSVProcessor {
             </div>
         </section>
         
-        <!-- Advanced Page -->
+        <!-- Advanced Page - Maven & JaCoCo Blog-Style -->
         <section id="advanced" class="page">
-            <h2>Advanced Testing Techniques</h2>
-            <div class="step-overview">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Setting Up JUnit</h3>
-                    <p>[Overview of JUnit setup]</p>
-                    <button class="btn-secondary expand-details" data-section="advanced1">Learn More</button>
+            <h2>Advanced Testing Tools</h2>
+            <div class="example-overview">
+                <p>Setting up a robust testing environment is essential for effective test-driven development. Learn how to leverage Maven and JaCoCo to streamline your testing workflow.</p>
+            </div>
+
+            <div class="approach-step blog-post">
+                <div class="blog-header">
+                    <h3>Maven & JaCoCo: Your Complete Testing Toolkit</h3>
+                    <div class="blog-metadata">
+                        <span class="blog-tag"><i class="fas fa-tag"></i> Testing Tools</span>
+                        <span class="blog-time"><i class="fas fa-clock"></i> 5 min read</span>
+                    </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>JaCoCo Code Coverage</h3>
-                    <p>[Overview of JaCoCo]</p>
-                    <button class="btn-secondary expand-details" data-section="advanced2">Learn More</button>
+
+                <div class="blog-content">
+                    <p>Maven is the build engine that fetches your dependencies, compiles your code, runs every JUnit test, and—thanks to the bundled JaCoCo plug‑in—spits out a line‑by‑line coverage report in HTML. Getting that toolchain wired up from scratch can be a headache, but don't worry, we've got you covered.</p>
+
+                    <h4>Quick Start Guide</h4>
+                    <div class="steps-container">
+                        <div class="step-item">
+                            <div class="step-icon"><i class="fas fa-code-branch"></i></div>
+                            <div class="step-content">
+                                <h5>1. Clone the Repository</h5>
+                                <p>Clone the ready‑made harness at <a href="https://github.com/jon-cook1/102-coverage" target="_blank">https://github.com/jon-cook1/102-coverage</a> into the folder that sits next to your lab.</p>
+                                <div class="code-example">
+                                    <pre><code>git clone https://github.com/jon-cook1/102-coverage</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                            <div class="step-content">
+                                <h5>2. Set Up the Testing Environment</h5>
+                                <p>Run the setup script once to configure the testing environment for your lab.</p>
+                                <div class="code-example">
+                                    <pre><code>./setup_tests.sh ../YourLabFolder</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-icon"><i class="fas fa-vial"></i></div>
+                            <div class="step-content">
+                                <h5>3. Run Your Tests</h5>
+                                <p>After the initial setup, just call the run script whenever you want fresh results.</p>
+                                <div class="code-example">
+                                    <pre><code>./run_tests.sh</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-icon"><i class="fas fa-sync-alt"></i></div>
+                            <div class="step-content">
+                                <h5>4. Testing a Different Project</h5>
+                                <p>Need to test a different project? Just rerun the setup script with the new folder path.</p>
+                                <div class="code-example">
+                                    <pre><code>./setup_tests.sh ../NewLabFolder</code></pre>
+                                </div>
+                                <p class="note"><i class="fas fa-info-circle"></i> Note: Changing labs wipes the tests already inside the harness, because this beta is meant as a quick‑start demo rather than a permanent test repository.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="info-content">
+                            <h4>How It Works</h4>
+                            <p>The 102-coverage harness automates the entire testing process:</p>
+                            <ul>
+                                <li>Configures Maven to work with your Java project</li>
+                                <li>Sets up JUnit test execution</li>
+                                <li>Integrates JaCoCo for code coverage analysis</li>
+                                <li>Generates HTML reports showing your test coverage</li>
+                                <li>Provides a simple interface to run and view test results</li>
+                            </ul>
+                            <p>Full step‑by‑step instructions are available in the repo's README.</p>
+                        </div>
+                    </div>
+
+                    <div class="tool-showcase">
+                        <div class="tool-item">
+                            <div class="tool-icon"><i class="fas fa-box"></i></div>
+                            <h4>Maven</h4>
+                            <p>Industry-standard build tool that manages dependencies, compiles code, and runs tests with a simple command.</p>
+                        </div>
+
+                        <div class="tool-item">
+                            <div class="tool-icon"><i class="fas fa-chart-pie"></i></div>
+                            <h4>JaCoCo</h4>
+                            <p>Code coverage library that shows exactly which lines of your code are tested and which are not, with intuitive visual reports.</p>
+                        </div>
+                    </div>
+
+                    <div class="result-preview">
+                        <h4>Coverage Report Preview</h4>
+                        <div class="report-image">
+                            <div class="placeholder-image">
+                                <i class="fas fa-file-alt fa-3x"></i>
+                                <p>JaCoCo HTML Report</p>
+                            </div>
+                        </div>
+                        <p class="image-caption">The JaCoCo HTML report shows your code with color coding: green for covered lines, red for uncovered lines, and yellow for partially covered branches.</p>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Expandable Sections -->
-            <div class="expandable-sections">
-                <div id="advanced1" class="section-content hidden">
-                    <h3>Setting Up JUnit - Detailed</h3>
-                    <div class="content-container">
-                        <div class="text-content">
-                            <p>[Detailed content about setting up and using JUnit]</p>
-                            
-                            <h4>Key Features</h4>
-                            <ul>
-                                <li>[Feature 1]</li>
-                                <li>[Feature 2]</li>
-                                <li>[Feature 3]</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="code-example">
-                        <h4>Example Code</h4>
-                        <pre><code>
-// JUnit example code
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
-public class CalculatorJUnitTest {
-    @Test
-    public void testAdd() {
-        Calculator calc = new Calculator();
-        assertEquals(8, calc.add(5, 3));
-        assertEquals(-9, calc.add(-2, -7));
-        assertEquals(5, calc.add(10, -5));
-    }
-}
-                        </code></pre>
-                    </div>
-                    <button class="btn-primary section-close">Close</button>
-                </div>
-                
-                <div id="advanced2" class="section-content hidden">
-                    <h3>JaCoCo Code Coverage - Detailed</h3>
-                    <div class="content-container">
-                        <div class="text-content">
-                            <p>[Detailed content about setting up and using JaCoCo]</p>
-                            
-                            <h4>Benefits of Code Coverage</h4>
-                            <ul>
-                                <li>[Benefit 1]</li>
-                                <li>[Benefit 2]</li>
-                                <li>[Benefit 3]</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="code-example">
-                        <h4>Configuration Example</h4>
-                        <pre><code>
-// JaCoCo Gradle configuration
-plugins {
-    id 'jacoco'
-}
-
-jacoco {
-    toolVersion = "0.8.7"
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled true
-    }
-}
-                        </code></pre>
-                    </div>
-                    <button class="btn-primary section-close">Close</button>
-                </div>
+            <div class="cta">
+                <h3>Ready to Improve Your Test Coverage?</h3>
+                <a href="https://github.com/jon-cook1/102-coverage" target="_blank" class="btn-primary">Get Started with 102-Coverage</a>
             </div>
         </section>
     </main>
