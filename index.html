@@ -245,19 +245,54 @@
                 </div>
                 
                 <div id="section4" class="section-content hidden">
-                    <h3>Suite Refinement - Detailed</h3>
+                    <h3>Suite Refinement - Keep What Matters, Drop the Rest</h3>
                     <div class="content-container">
                         <div class="text-content">
-                            <p>[Detailed content about refining test suites]</p>
-                            
+                            <p>Once you've written a full set of tests, the next step is refinement, eliminating redundancy and clarifying intent. The goal is not to flood your suite with test cases, but to ensure each one serves a unique and meaningful purpose. Redundant tests that verify the same behavior add noise rather than value, and can make your suite harder to interpret or maintain.</p>
+
+                            <div class="refinement-box">
+                                <h4>Effective Refinement Process</h4>
+                                <p>This phase involves carefully reviewing your test cases and asking: does each one check a different logical path, edge case, or class of input? If multiple tests produce the same result under slightly varied conditions, consider keeping only the most representative example.</p>
+
+                                <div class="naming-examples">
+                                    <div class="naming-header">
+                                        <i class="fas fa-tags"></i>
+                                        <h5>Clear Test Naming</h5>
+                                    </div>
+                                    <p>It's important to rename your test methods so their purpose is clear to someone reading them for the first time. Descriptive names make it obvious what scenario is being evaluated.</p>
+
+                                    <div class="example-container">
+                                        <div class="good-example">
+                                            <div class="example-label">Good Examples:</div>
+                                            <ul>
+                                                <li><code>testRejectsNegativeAgeInput()</code></li>
+                                                <li><code>testAcceptsUpperBoundaryValue()</code></li>
+                                                <li><code>testHandlesEmptyStringInput()</code></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="bad-example">
+                                            <div class="example-label">Avoid:</div>
+                                            <ul>
+                                                <li><code>test1()</code></li>
+                                                <li><code>testInput()</code></li>
+                                                <li><code>randomTestCase()</code></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <h4>Key Refinement Strategies</h4>
-                            <ul>
-                                <li>Eliminate redundant tests that cover the same cases</li>
-                                <li>Prioritize tests based on importance and risk</li>
-                                <li>Remove tests that don't add value or coverage</li>
-                                <li>Combine similar tests for efficiency</li>
-                                <li>Organize tests for better maintainability</li>
+                            <ul class="strategy-list">
+                                <li><i class="fas fa-minus-circle"></i> <span>Eliminate redundant tests that cover the same cases</span></li>
+                                <li><i class="fas fa-sort-amount-up"></i> <span>Prioritize tests based on importance and risk</span></li>
+                                <li><i class="fas fa-trash-alt"></i> <span>Remove tests that don't add value or coverage</span></li>
+                                <li><i class="fas fa-object-group"></i> <span>Combine similar tests for efficiency</span></li>
+                                <li><i class="fas fa-folder-tree"></i> <span>Organize tests for better maintainability</span></li>
                             </ul>
+
+                            <p class="insight">In COSC 102, this practice is especially useful for learning to distill complex test coverage into a streamlined, readable, and purposeful suite. Instead of "run-all-the-inputs" brute force, suite refinement teaches you how to test smart—prioritizing clarity and coverage over volume.</p>
                         </div>
                     </div>
                     <button class="btn-primary section-close">Close</button>
