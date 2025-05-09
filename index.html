@@ -687,8 +687,9 @@ public int simDailyGrowth(int temp, int weather){
 
                     <p>For example:</p>
                     <ul>
-                        <li>Case 2 tests the moment when the plant switches from being on the edge of wilting to actually wilting. This is only triggered under very specific conditions (counter = 1 and TEMP_CHILLY).</li>
+                        <li>Case 2 tests the moment when the plant switches from being on the edge of wilting to actually wilting. This is only triggered under very specific conditions (counter = 1 and weather = TEMP_CHILLY). Note that in the code, TEMP_CHILLY is the constant value 0, which might be confusing since we also use 0 for temperature values.</li>
                         <li>Case 4 confirms that non-chilly temperatures on cloudy days do not cause wilting, helping isolate the logic that distinguishes these similar but subtly different paths.</li>
+                        <li>Each test case uses a fresh Plant instance to avoid state contamination between tests, which was critical for tests 3 and 5.</li>
                     </ul>
 
                     <h4>Test Cases Created in Step 1</h4>
@@ -715,8 +716,8 @@ public int simDailyGrowth(int temp, int weather){
                             <tr>
                                 <td>2</td>
                                 <td>0</td>
-                                <td>1</td>
-                                <td>counter=1</td>
+                                <td>0</td>
+                                <td>counter=1, fresh Plant</td>
                                 <td>Repeated chilly days trigger wilt</td>
                                 <td>WILTED_VALUE</td>
                             </tr>
@@ -724,7 +725,7 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>3</td>
                                 <td>0</td>
                                 <td>1</td>
-                                <td>counter=0</td>
+                                <td>counter=0, fresh Plant</td>
                                 <td>Cloudy + chilly sets up counter = 1</td>
                                 <td>grow(1)</td>
                             </tr>
@@ -732,17 +733,17 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>4</td>
                                 <td>1</td>
                                 <td>1</td>
-                                <td>counter=0</td>
+                                <td>counter=0, fresh Plant</td>
                                 <td>Cloudy + warm resets counter = 0</td>
                                 <td>grow(1)</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>1</td>
-                                <td>0</td>
-                                <td>counter=1</td>
-                                <td>Sunny + warm, growth increments</td>
-                                <td>grow(previous+1)</td>
+                                <td>2</td>
+                                <td>counter=1, previousGrowth=1, fresh Plant</td>
+                                <td>Rainy + warm day, increments growth</td>
+                                <td>grow(2)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -823,31 +824,31 @@ public int simDailyGrowth(int temp, int weather){
                         <tbody>
                             <tr>
                                 <td>ECT1</td>
-                                <td>Any values, wilted = true</td>
+                                <td>Any values, wilted = true, fresh Plant</td>
                                 <td>EC1</td>
                                 <td>0</td>
                             </tr>
                             <tr>
                                 <td>ECT2</td>
-                                <td>temp = 0, weather = 1, counter = 1</td>
+                                <td>temp = 0, weather = 0, counter = 1, fresh Plant</td>
                                 <td>EC2</td>
                                 <td>WILTED_VALUE</td>
                             </tr>
                             <tr>
                                 <td>ECT3</td>
-                                <td>temp = 0, weather = 1, counter = 0</td>
+                                <td>temp = 0, weather = 1, counter = 0, fresh Plant</td>
                                 <td>EC3</td>
                                 <td>grow(1)</td>
                             </tr>
                             <tr>
                                 <td>ECT4</td>
-                                <td>temp = 1, weather = 1, counter = 0</td>
+                                <td>temp = 1, weather = 1, counter = 0, fresh Plant</td>
                                 <td>EC4</td>
                                 <td>grow(1)</td>
                             </tr>
                             <tr>
                                 <td>ECT5</td>
-                                <td>temp = 1, weather = 0, previousGrowth = 3</td>
+                                <td>temp = 1, weather = 2, previousGrowth = 3, fresh Plant</td>
                                 <td>EC5</td>
                                 <td>grow(4)</td>
                             </tr>
@@ -945,35 +946,35 @@ public int simDailyGrowth(int temp, int weather){
                                 <td>BVT2</td>
                                 <td>Boundary Value</td>
                                 <td>Wilting transition</td>
-                                <td>temp=CHILLY, weather=CLOUDY, counter=1</td>
+                                <td>temp=CHILLY, weather=TEMP_CHILLY, counter=1, fresh Plant</td>
                                 <td>High</td>
                             </tr>
                             <tr>
                                 <td>BVT3</td>
                                 <td>Boundary Value</td>
                                 <td>First chilly+cloudy day</td>
-                                <td>temp=CHILLY, weather=CLOUDY, counter=0</td>
+                                <td>temp=CHILLY, weather=CLOUDY, counter=0, fresh Plant</td>
                                 <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>BVT5</td>
                                 <td>Boundary Value</td>
                                 <td>Growth increment</td>
-                                <td>weather!=CLOUDY, previousGrowth=3</td>
+                                <td>temp=WARM, weather=RAINY, counter=1, previousGrowth=1, fresh Plant</td>
                                 <td>High</td>
                             </tr>
                             <tr>
                                 <td>ECT1</td>
                                 <td>Equivalence Class</td>
                                 <td>Warm weather growth</td>
-                                <td>temp=WARM, weather=SUNNY</td>
+                                <td>temp=WARM, weather=SUNNY, fresh Plant</td>
                                 <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>ECT3</td>
                                 <td>Equivalence Class</td>
                                 <td>Non-chilly cloudy day</td>
-                                <td>temp=HOT, weather=CLOUDY</td>
+                                <td>temp=HOT, weather=CLOUDY, fresh Plant</td>
                                 <td>Medium</td>
                             </tr>
                             <tr>
