@@ -898,25 +898,13 @@ public int simDailyGrowth(int temp, int weather){
                         </table>
                     </div>
 
-                    <pre><code>
-@Test
-void cloudyChillyWithCounterOneFallsThrough() {
-    Plant p = new Plant();
-    p.chillyCounter = 1;                           // counter = 1
-    int out = p.simDailyGrowth(
-        FantasyGarden.TEMP_CHILLY,                 // temp = 0
-        FantasyGarden.WEATHER_CLOUDY);             // weather = 1
-    assertEquals(0, out);                          // triggers final return 0
-}
-                    </code></pre>
-
                     <p>The JaCoCo report now confirms that with our complete test suite, we've eliminated all red lines, achieving full line and branch coverage for the simDailyGrowth method. This test case was essential because it represents a missed equivalence class in our earlier analysis - a case where the plant has a chillyCounter of 1 on a cloudy, chilly day but doesn't wilt:</p>
 
                     <div class="coverage-report">
                         <img src="assets/images/ex2_jacoco.png" alt="JaCoCo coverage report for simDailyGrowth method" class="coverage-image">
                     </div>
 
-                    <p>As shown in the report, all lines of code are now exercised, with no red lines remaining. While some conditions may still show yellow highlighting (indicating that not all possible boolean combinations were tested), we've achieved our primary goal of ensuring every line of code and every branch is exercised at least once. This highlights why JaCoCo is such a valuable final check - it revealed a meaningful edge case that our ECT analysis had overlooked.</p>
+                    <p>As shown in the report, all lines of code are now exercised, with no red lines remaining. Upon rerunning JaCoCo with our updated test suite, the previously missed return line (line 671) turned green. While some conditions may still show yellow highlighting (indicating that not all possible boolean combinations were tested), we've achieved our primary goal of ensuring every line of code and every branch is exercised at least once. This highlights why JaCoCo is such a valuable final check - it revealed a meaningful edge case that our ECT analysis had overlooked.</p>
                 </div>
             </div>
 
