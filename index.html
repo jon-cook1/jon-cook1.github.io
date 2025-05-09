@@ -1367,15 +1367,15 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                     <h3>Step 4: Suite Refinement</h3>
                 </div>
                 <div class="step-content">
-                    <p>After examining our complete test suite, we identified opportunities to eliminate redundancy while maintaining comprehensive coverage:</p>
+                    <p>After examining our complete test suite, we identified opportunities to optimize our testing approach while maintaining comprehensive coverage:</p>
 
                     <ol>
-                        <li>We can combine some of our position-specific tests that test similar behaviors</li>
-                        <li>We can reduce the number of similar yellow-case tests since they exercise the same code path</li>
-                        <li>We need to prioritize tests that exercise complex state transitions in the keyboard coloring logic</li>
+                        <li>We want to retain tests that verify each of the three main color outcomes (green, yellow, gray)</li>
+                        <li>We need to keep both the single-character tests (BVT) and the multi-character tests (ECT)</li>
+                        <li>We want to ensure tests across different positions to verify index-based behavior</li>
                     </ol>
 
-                    <p>Here is our complete comprehensive test suite for the checkLetters function, organized by test type and showing all key test cases:</p>
+                    <p>Here is our refined comprehensive test suite for the checkLetters function, organized by test type:</p>
 
                     <table>
                         <thead>
@@ -1394,7 +1394,15 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                                 <td>Boundary Value</td>
                                 <td>"CRANE"</td>
                                 <td>"CRASS"</td>
-                                <td>Exact match transition (green)</td>
+                                <td>Exact match at position 0 (green)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>BVT2</td>
+                                <td>Boundary Value</td>
+                                <td>"CRANE"</td>
+                                <td>"EATER"</td>
+                                <td>Letter in word but wrong position at index 0 (yellow)</td>
                                 <td>High</td>
                             </tr>
                             <tr>
@@ -1402,15 +1410,23 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                                 <td>Boundary Value</td>
                                 <td>"CRANE"</td>
                                 <td>"PRANK"</td>
-                                <td>Complete miss transition (gray)</td>
+                                <td>Letter not in word at index 0 (gray)</td>
                                 <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>BVT5</td>
+                                <td>Boundary Value</td>
+                                <td>"CRANE"</td>
+                                <td>"SCARS"</td>
+                                <td>Letter not in word at that position for index 1 (gray)</td>
+                                <td>Medium</td>
                             </tr>
                             <tr>
                                 <td>BVT6</td>
                                 <td>Boundary Value</td>
                                 <td>"CRANE"</td>
                                 <td>"TEACH"</td>
-                                <td>Yellow case - letter in word but wrong position</td>
+                                <td>Exact match at position 2 (green)</td>
                                 <td>High</td>
                             </tr>
                             <tr>
@@ -1437,10 +1453,30 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                                 <td>Complete miss case (all gray)</td>
                                 <td>Medium</td>
                             </tr>
+                            <tr>
+                                <td>ECT4</td>
+                                <td>Equivalence Class</td>
+                                <td>"BRAVE"</td>
+                                <td>"VALVE"</td>
+                                <td>Mixed case: exact matches and wrong position in one word</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>ECT5</td>
+                                <td>Equivalence Class</td>
+                                <td>"SPEED"</td>
+                                <td>"SPELL"</td>
+                                <td>Multiple instances: handling of repeated letters</td>
+                                <td>Medium</td>
+                            </tr>
                         </tbody>
                     </table>
 
-                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once. By organizing our tests in this way, we can quickly see which aspects of the function are most thoroughly tested and which critical behaviors are verified. The high-priority tests capture the essential transition points between the three color states (green, yellow, gray), while the medium and low-priority tests ensure complete coverage of edge cases and defensive code.</p>
+                    <p>We've dropped BVT4 as it provided similar coverage to BVT1, testing an exact match but at a different position. Since we've retained BVT6 which tests an exact match at position 2, we have sufficient position variation coverage without BVT4.</p>
+
+                    <p>The structural coverage tests (SC1 and SC2) from our earlier analysis were also eliminated as JaCoCo confirmed that our BVT and ECT tests already provide sufficient coverage of all execution paths.</p>
+
+                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once. By organizing our tests in this way, we can quickly see which aspects of the function are most thoroughly tested and which critical behaviors are verified. The high-priority tests capture the essential transition points between the three color states (green, yellow, gray), while the medium-priority tests ensure complete coverage of edge cases.</p>
                 </div>
             </div>
 
