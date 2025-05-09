@@ -403,6 +403,48 @@ footer {
     font-size: 1.05rem;
 }
 
+/* Boundary Value Styling */
+.boundary-values {
+    margin: 1.5rem 0;
+    background-color: var(--bg-light);
+    padding: 1.25rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+}
+
+.boundary-value {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.boundary-value:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.boundary-label {
+    font-weight: bold;
+    color: var(--primary-color);
+    display: inline-block;
+    width: 75px;
+}
+
+.boundary-desc {
+    font-style: italic;
+}
+
+.insight {
+    background-color: rgba(74, 109, 229, 0.1);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
 .motivation {
     margin-bottom: 3rem;
 }

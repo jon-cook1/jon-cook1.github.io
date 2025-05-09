@@ -104,17 +104,44 @@
             <!-- Expandable Sections -->
             <div class="expandable-sections">
                 <div id="section1" class="section-content hidden">
-                    <h3>Robust Boundary-Value Tests - Detailed</h3>
+                    <h3>Robust Boundary-Value Tests - Filter Valid vs Invalid</h3>
                     <div class="content-container">
                         <div class="text-content">
-                            <p>[Detailed content about understanding requirements]</p>
+                            <p>This approach primarily follows a "guard the gate" strategy. The idea is to rigorously test the transitions between different behavioral conditions by examining values at and around the boundary points of input ranges. These boundaries often represent moments where the program's logic flips, from accepting to rejecting, from true to false, or from one output to another. Testing right at these borders helps confirm that the logic changes when and where it should.</p>
 
-                            <h4>Key Points</h4>
-                            <ul>
-                                <li>[Point 1]</li>
-                                <li>[Point 2]</li>
-                                <li>[Point 3]</li>
-                            </ul>
+                            <p>This is especially important when working with numeric or ordered inputs, where subtle errors, like off-by-one mistakes or incorrect inequality signs, can cause unexpected or inconsistent behavior. Boundary Value Testing doesn't just aim to catch invalid inputs; it ensures the program behaves predictably and correctly around the edges of decision-making logic.</p>
+
+                            <h4>Systematic Testing Framework</h4>
+                            <p>To apply this strategy, we systematically test six values per input variable:</p>
+
+                            <div class="boundary-values">
+                                <div class="boundary-value">
+                                    <span class="boundary-label">Min - 1:</span>
+                                    <span class="boundary-desc">Just below the allowed minimum (should be rejected or behave differently)</span>
+                                </div>
+                                <div class="boundary-value">
+                                    <span class="boundary-label">Min:</span>
+                                    <span class="boundary-desc">The exact lower boundary (should be accepted)</span>
+                                </div>
+                                <div class="boundary-value">
+                                    <span class="boundary-label">Min + 1:</span>
+                                    <span class="boundary-desc">Just above the lower boundary (should be accepted)</span>
+                                </div>
+                                <div class="boundary-value">
+                                    <span class="boundary-label">Max - 1:</span>
+                                    <span class="boundary-desc">Just below the upper boundary (should be accepted)</span>
+                                </div>
+                                <div class="boundary-value">
+                                    <span class="boundary-label">Max:</span>
+                                    <span class="boundary-desc">The exact upper boundary (should be accepted)</span>
+                                </div>
+                                <div class="boundary-value">
+                                    <span class="boundary-label">Max + 1:</span>
+                                    <span class="boundary-desc">Just above the allowed maximum (should be rejected or behave differently)</span>
+                                </div>
+                            </div>
+
+                            <p class="insight">This pattern helps verify that the program consistently transitions between states at the correct thresholds and fails gracefully when inputs cross those boundaries. If the program unexpectedly accepts an out-of-range value or rejects a valid boundary value, it likely indicates a logic error that needs further investigation. This systematic method provides clarity and confidence in your program's behavior, especially around critical decision points.</p>
                         </div>
                     </div>
                     <button class="btn-primary section-close">Close</button>
