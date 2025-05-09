@@ -757,73 +757,104 @@ public int simDailyGrowth(int temp, int weather){
                     <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
                 </div>
                 <div class="step-content">
-                    <p>For the simDailyGrowth function, equivalence class testing helps us organize inputs into groups that should produce similar behaviors. Rather than focusing just on the boundary transitions as we did in BVT, we're now exploring the broader categories of plant behavior in various conditions.</p>
+                    <p>Here we categorize input scenarios that result in consistent behavior and group them into equivalence classes. These categories help simplify the testing process by covering more ground with fewer cases. Instead of trying every single permutation of temp, weather, and internal state, we select one representative input for each class that exhibits a unique behavior pattern. This function presents a classic case where internal state influences outcomes just as much as input parameters. For example, a test where temp = TEMP_CHILLY and weather = WEATHER_CLOUDY might result in different outcomes depending on whether chillyCounter is 0 or 1. That's why our equivalence classes take both current inputs and the plant's internal memory into account.</p>
 
-                    <p>We can identify the following major equivalence classes:</p>
+                    <p>Each test here is chosen to represent a class of behavior, not just a unique line of code:</p>
                     <ul>
-                        <li><strong>EC1:</strong> Non-operational states - When the plant is already wilted or about to wilt</li>
-                        <li><strong>EC2:</strong> Growth reset states - When previous growth is reset to a base value</li>
-                        <li><strong>EC3:</strong> Incremental growth states - When the plant builds on previous growth</li>
+                        <li>EC1 is a hard stop: once a plant is wilted, nothing else matters, it always returns 0.</li>
+                        <li>EC3 and EC4 both deal with cloudy days, but the difference in temperature causes very different logic to execute. These are tested separately because they reflect two distinct branches of the function.</li>
+                        <li>EC5 captures all non-cloudy weather outcomes where growth should continue, offering a broader behavioral region that's consistent in logic.</li>
                     </ul>
+
+                    <h4>Equivalence Classes for simDailyGrowth</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class ID</th>
+                                <th>Description</th>
+                                <th>Input/State Conditions</th>
+                                <th>Expected Behavior</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>EC1</td>
+                                <td>Already wilted plant</td>
+                                <td>isWilted() == true</td>
+                                <td>Return 0 (no growth)</td>
+                            </tr>
+                            <tr>
+                                <td>EC2</td>
+                                <td>Plant about to wilt</td>
+                                <td>chillyCounter == 1 & current weather is chilly</td>
+                                <td>Return wilted value</td>
+                            </tr>
+                            <tr>
+                                <td>EC3</td>
+                                <td>First chilly, cloudy day</td>
+                                <td>chillyCounter == 0 & weather == CLOUDY & temp == CHILLY</td>
+                                <td>Set chillyCounter = 1, Return grow(1)</td>
+                            </tr>
+                            <tr>
+                                <td>EC4</td>
+                                <td>Cloudy but not chilly</td>
+                                <td>weather == CLOUDY & temp != CHILLY</td>
+                                <td>Reset chillyCounter, Return grow(1)</td>
+                            </tr>
+                            <tr>
+                                <td>EC5</td>
+                                <td>Not cloudy weather</td>
+                                <td>weather != CLOUDY</td>
+                                <td>Reset chillyCounter, grow by previousGrowth+1</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <h4>Test Cases Created in Step 2</h4>
                     <table>
                         <thead>
                             <tr>
                                 <th>Test Case</th>
-                                <th>Input Combination</th>
-                                <th>Internal State</th>
+                                <th>Input Values</th>
                                 <th>Equivalence Class</th>
-                                <th>Expected Output</th>
+                                <th>Expected Result</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>EC1-A</td>
-                                <td>Any temp/weather</td>
-                                <td>wilted=true</td>
-                                <td>EC1: Already wilted plant</td>
+                                <td>ECT1</td>
+                                <td>Any values, wilted = true</td>
+                                <td>EC1</td>
                                 <td>0</td>
                             </tr>
                             <tr>
-                                <td>EC1-B</td>
-                                <td>temp=CHILLY, weather=CLOUDY</td>
-                                <td>counter=1</td>
-                                <td>EC1: About to wilt</td>
+                                <td>ECT2</td>
+                                <td>temp = 0, weather = 1, counter = 1</td>
+                                <td>EC2</td>
                                 <td>WILTED_VALUE</td>
                             </tr>
                             <tr>
-                                <td>EC2-A</td>
-                                <td>temp=CHILLY, weather=CLOUDY</td>
-                                <td>counter=0</td>
-                                <td>EC2: Growth reset (cloudy & chilly)</td>
+                                <td>ECT3</td>
+                                <td>temp = 0, weather = 1, counter = 0</td>
+                                <td>EC3</td>
                                 <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>EC2-B</td>
-                                <td>temp=WARM, weather=CLOUDY</td>
-                                <td>counter=0</td>
-                                <td>EC2: Growth reset (cloudy & not chilly)</td>
+                                <td>ECT4</td>
+                                <td>temp = 1, weather = 1, counter = 0</td>
+                                <td>EC4</td>
                                 <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>EC3-A</td>
-                                <td>temp=WARM, weather=SUNNY</td>
-                                <td>previousGrowth=2</td>
-                                <td>EC3: Incremental growth</td>
-                                <td>grow(3)</td>
-                            </tr>
-                            <tr>
-                                <td>EC3-B</td>
-                                <td>temp=HOT, weather=RAINY</td>
-                                <td>previousGrowth=5</td>
-                                <td>EC3: Incremental growth (alternate values)</td>
-                                <td>grow(6)</td>
+                                <td>ECT5</td>
+                                <td>temp = 1, weather = 0, previousGrowth = 3</td>
+                                <td>EC5</td>
+                                <td>grow(4)</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <p>These test cases give us confidence that each major category of behavior is working as expected, complementing our boundary value tests by ensuring comprehensive coverage across different input combinations and internal states.</p>
+                    <p>By clearly separating these equivalence classes and testing only once per class, we avoid redundancy while still ensuring total behavioral coverage. It's a high-efficiency way to confirm that each type of scenario behaves as expected without overwhelming the test suite with duplicates.</p>
                 </div>
             </div>
 
