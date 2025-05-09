@@ -1,17 +1,13 @@
 # COSC 102 Testing Guide Website
 
-<<<<<<< HEAD
 ## Running:
 ```git clone https://github.com/jon-cook1/testing-102```
 
 open `index` file with chrome
-=======
 A simple website for teaching COSC 102 students how to test their code, following a unique approach designed to balance quick implementation and robust coverage.
->>>>>>> fbfd62a3797239ba90ecb311bf20fa9f81cb72f5
 
 Live at [102 Testing](https://www.102testing.site)
 
-<<<<<<< HEAD
 - `index.html` - Main HTML file containing the full website structure
 - `assets/css/styles.css` - All styles for the website
 - `assets/js/main.js` - JavaScript for navigation and interactivity
@@ -70,6 +66,9 @@ Live at [102 Testing](https://www.102testing.site)
 4. **Advanced Section**
    - Add content about JUnit and JaCoCo
    - List additional tools and resources
-=======
+   
+A simple website for teaching COSC 102 students how to test their code, following a unique approach designed to balance quick implementation and robust coverage.
+
+Live at [102 Testing](https://www.102testing.site)
+
 Mobile view unsupported
->>>>>>> fbfd62a3797239ba90ecb311bf20fa9f81cb72f5
