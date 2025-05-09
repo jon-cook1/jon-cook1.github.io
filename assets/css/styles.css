@@ -1,4 +1,197 @@
 /* Base Styles */
+
+/* Expandable Section Styles */
+.expandable-sections {
+    margin-top: 2rem;
+}
+
+/* Button container for multiple buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Limitations section styling */
+.limitations-section {
+    margin-top: 2rem;
+    padding: 1.25rem;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.limitations-preview {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.limitation-preview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 120px;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.limitation-preview-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.limitation-preview-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.limitation-preview-item p {
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Detailed limitations styles */
+.limitations-intro, .limitations-conclusion {
+    text-align: center;
+    max-width: 800px;
+    margin: 1.5rem auto;
+}
+
+.limitations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.limitation-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid var(--primary-color);
+}
+
+.limitation-icon {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.limitation-card h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.limitation-tag {
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--border-color);
+    margin-top: 1rem;
+}
+
+.limitation-tag span {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.section-content {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.section-content.hidden {
+    display: none;
+}
+
+/* Hide sections when expanded content is shown */
+.expandable-sections-active .cta,
+.expandable-sections-active .limitations-section {
+    display: none;
+}
+
+.section-close {
+    display: block;
+    margin: 1.5rem auto 0;
+}
+
+.approach-step {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.approach-step .step-number {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.step-content {
+    margin-left: 1rem;
+}
+
+.example-overview {
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.example-conclusion {
+    margin-top: 2rem;
+    padding: 1.25rem;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    box-sizing: border-box;
+}
 :root {
     --primary-color: #4a6de5;
     --secondary-color: #f0f2ff;
@@ -65,7 +258,7 @@ a:hover {
 header {
     background-color: var(--primary-color);
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -73,6 +266,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 .logo h1 {
@@ -92,11 +288,12 @@ nav ul li {
 
 nav ul li a {
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     gap: 5px;
+    white-space: nowrap;
 }
 
 nav ul li a i {
@@ -108,9 +305,11 @@ nav ul li a:hover, nav ul li a.active {
 }
 
 main {
-    padding: 2rem;
+    padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer {
@@ -191,6 +390,7 @@ footer {
     display: flex;
     gap: 1.5rem;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card {
@@ -201,6 +401,7 @@ footer {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     transition: var(--transition);
+    margin-bottom: 1rem;
 }
 
 .card:hover {
@@ -216,9 +417,12 @@ footer {
 
 .cta {
     text-align: center;
-    padding: 2rem;
+    padding: 1.5rem;
     background-color: var(--secondary-color);
     border-radius: var(--border-radius);
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
 }
 
 .btn-primary {
@@ -252,12 +456,32 @@ footer {
     color: white;
 }
 
+/* Special styling for See Implementation button */
+#see-implementation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+#see-implementation:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
 /* 4-Step Overview Styles */
 .step-overview {
     display: flex;
     gap: 1.5rem;
     flex-wrap: wrap;
     margin-top: 2rem;
+    justify-content: center;
 }
 
 .step {
@@ -317,7 +541,8 @@ footer {
 
 .table-container {
     flex: 1;
-    min-width: 300px;
+    width: 100%;
+    margin-bottom: 1.5rem;
 }
 
 table {
@@ -346,9 +571,12 @@ tr:hover {
 
 .code-example {
     background-color: var(--bg-light);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: var(--border-radius);
     margin-top: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
 }
 
 .code-example h3 {
@@ -358,11 +586,14 @@ tr:hover {
 pre {
     background-color: var(--bg-dark);
     color: #f8f8f8;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: var(--border-radius);
     overflow-x: auto;
     font-family: var(--font-code);
     line-height: 1.5;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 code {
@@ -413,25 +644,36 @@ code {
 @media (max-width: 768px) {
     header {
         flex-direction: column;
-        padding: 1rem;
+        padding: 0.75rem;
     }
     
     .logo {
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.3rem;
     }
     
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
+        padding: 0;
     }
     
     nav ul li {
         margin: 0.25rem;
     }
     
+    nav ul li a {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.9rem;
+    }
+    
     .hero {
         flex-direction: column;
         text-align: center;
+        padding: 1.5rem 1rem;
     }
     
     .hero-content {
@@ -441,18 +683,158 @@ code {
     .content-container {
         flex-direction: column;
     }
+    
+    .step {
+        min-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    
+    .approach-step {
+        padding: 1rem;
+    }
+    
+    .approach-step .step-content {
+        margin-left: 0;
+    }
+    
+    /* Responsive table styles */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    table {
+        background: none;
+        border-radius: 0;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        background-color: var(--bg-light);
+    }
+    
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        text-align: right;
+        border-bottom: 1px solid var(--border-color);
+        min-height: 1.5rem;
+    }
+    
+    td:last-child {
+        border-bottom: none;
+    }
+    
+    td:before {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        content: attr(data-label);
+        color: var(--primary-color);
+    }
+    
+    .code-example {
+        padding: 1rem;
+    }
+    
+    pre {
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
     main {
-        padding: 1rem;
+        padding: 0.75rem;
     }
     
-    .card-container, .step-overview, .advanced-container {
+    .card-container, .step-overview, .advanced-container, .limitations-preview {
         flex-direction: column;
     }
     
     .hero-content h2 {
-        font-size: 2rem;
+        font-size: 1.75rem;
+    }
+    
+    .table-container table {
+        font-size: 0.85rem;
+    }
+    
+    .limitation-preview-item {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+    
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    .limitations-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-content {
+        padding: 1rem;
+    }
+    
+    nav ul li a {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+    
+    header {
+        padding: 0.5rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    nav ul li a i {
+        font-size: 0.8rem;
+        margin-right: 0.2rem;
+    }
+    
+    nav ul li a {
+        padding: 0.25rem 0.4rem;
+        font-size: 0.75rem;
+    }
+    
+    nav ul {
+        gap: 0.2rem;
+    }
+    
+    .logo h1 {
+        font-size: 1rem;
     }
 }
