@@ -354,8 +354,15 @@ footer {
 
 .hero-content h2 {
     font-size: 2.8rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     color: var(--primary-color);
+}
+
+.hero-content .authors {
+    font-style: italic;
+    color: var(--text-light);
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
 }
 
 .placeholder-image {
@@ -714,6 +721,9 @@ footer {
     box-shadow: var(--shadow);
     transition: var(--transition);
     margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .card:hover {
@@ -725,6 +735,22 @@ footer {
     font-size: 2rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content p {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.card-content p:last-child {
+    margin-bottom: 0;
 }
 
 .cta {
@@ -805,6 +831,9 @@ footer {
     box-shadow: var(--shadow);
     position: relative;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .step:hover {
@@ -826,6 +855,18 @@ footer {
     align-items: center;
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.step h3 {
+    margin-top: 0.5rem;
+}
+
+.step p {
+    margin-bottom: 1.25rem;
+}
+
+.step .btn-secondary {
+    margin-top: auto;
 }
 
 .step-details {
