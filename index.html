@@ -619,297 +619,321 @@ public boolean driveCar(double miles){
         
         <!-- Example 2 Page -->
         <section id="example2" class="page">
-            <h2>Example 2: String Validator</h2>
+            <h2>Example 2: Fantasy Garden Plant Growth</h2>
             <div class="example-overview">
-                <p>In this example, we'll apply our 4-step approach to test a string validation function that checks if a string meets certain criteria.</p>
+                <p>In this example, we'll test a more complex function with state-dependent behavior and multiple conditions using our 4-step approach.</p>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">0</div>
-                    <h3>Understanding Requirements</h3>
+                    <h3>Function Context</h3>
                 </div>
                 <div class="step-content">
-                    <p>For our string validator, we need to understand the validation rules:</p>
-                    
-                    <ul>
-                        <li>String must be between 8 and 20 characters long</li>
-                        <li>String must contain at least one uppercase letter</li>
-                        <li>String must contain at least one digit</li>
-                        <li>String must not contain spaces</li>
-                    </ul>
-                    
+                    <p>This function comes from the Fantasy Garden project in COSC 102, where students simulate plant growth based on environmental conditions. The simDailyGrowth(int temp, int weather) method models a plant's daily growth depending on both current weather and temperature inputs, but also internal state such as whether the plant is wilted and how many consecutive chilly days have occurred. The function includes several conditional branches and makes use of constants defined in the FantasyGarden class:</p>
+
+                    <pre><code>
+// Temperature types
+public static final int TEMP_CHILLY = 0;
+public static final int TEMP_WARM = 1;
+public static final int TEMP_HOT = 2;
+// Weather types
+public static final int WEATHER_SUNNY = 0;
+public static final int WEATHER_CLOUDY = 1;
+public static final int WEATHER_RAINY = 2;
+                    </code></pre>
+
+                    <p>The growth logic is influenced by whether the plant is already wilted (isWilted()), if the day is chilly, and whether the weather is cloudy or not. If specific chilly and cloudy conditions repeat, the plant may wilt. If the day is suitable, it grows by incrementing previousGrowth. If not, it might reset the growth counter or even return zero. This function illustrates both the challenge of managing internal object state and the complexity introduced when conditions depend on multiple variables interacting.</p>
+
                     <div class="code-example">
                         <h4>The Function We're Testing</h4>
                         <pre><code>
-public class StringValidator {
-    /**
-     * Validates a string according to specific rules
-     * @param input the string to validate
-     * @return true if the string is valid, false otherwise
-     */
-    public boolean isValid(String input) {
-        // Check length
-        if (input == null || input.length() < 8 || input.length() > 20) {
-            return false;
-        }
-        
-        // Check for uppercase letter
-        boolean hasUppercase = false;
-        // Check for digit
-        boolean hasDigit = false;
-        // Check for spaces
-        boolean hasSpace = false;
-        
-        for (char c : input.toCharArray()) {
-            if (Character.isUpperCase(c)) {
-                hasUppercase = true;
-            }
-            if (Character.isDigit(c)) {
-                hasDigit = true;
-            }
-            if (Character.isWhitespace(c)) {
-                hasSpace = true;
-            }
-        }
-        
-        return hasUppercase && hasDigit && !hasSpace;
+public int simDailyGrowth(int temp, int weather){
+    if (isWilted()){ //if wilted
+        return 0;
     }
+    if (chillyCounter == 1 && weather == FantasyGarden.TEMP_CHILLY){
+        wilt(); //wilted condition
+        return WILTED_VALUE;
+    } else if (weather != FantasyGarden.WEATHER_CLOUDY){
+        chillyCounter = 0;
+        previousGrowth += 1;
+        return (grow(previousGrowth));
+    } else if (chillyCounter != 1 && weather == FantasyGarden.WEATHER_CLOUDY && temp == FantasyGarden.TEMP_CHILLY){
+        previousGrowth = 1;
+        chillyCounter = 1;
+        return (grow(previousGrowth));
+    } else if (weather == FantasyGarden.WEATHER_CLOUDY && temp != FantasyGarden.TEMP_CHILLY){
+        previousGrowth = 1;
+        chillyCounter = 0;
+        return grow(previousGrowth);
+    }
+    return 0;
 }
                         </code></pre>
                     </div>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">1</div>
                     <h3>Step 1: Robust Boundary-Value Tests</h3>
                 </div>
                 <div class="step-content">
-                    <p>In this step, we focus on testing the boundaries specified in the requirements:</p>
-                    
+                    <p>In this function, boundary value testing isn't about numeric min/max thresholds. Instead, we're testing the logic around conditional transitions, the exact points where the function's behavior flips due to changes in temperature, weather, or internal state. These boundaries may not look like traditional math, but they represent the edges of behavioral change. For example, the plant's transition from healthy to wilted is not determined by a simple number, it's the combination of a specific internal state (chillyCounter == 1) and a triggering input (weather == TEMP_CHILLY).</p>
+
+                    <p>BVT is used here to deliberately probe those transitions: when a plant starts to grow, when it resets its growth cycle, or when it shuts down altogether. We don't need to try every possible input; instead, we construct targeted test cases that sit precisely at those flip points. These are the decision thresholds where the program's return value will change based on just one piece of input.</p>
+
+                    <p>For example:</p>
                     <ul>
-                        <li>We test the minimum and maximum length boundaries (8 and 20 characters)</li>
-                        <li>We test exactly at the boundaries (8 characters, 20 characters)</li>
-                        <li>We test just outside the boundaries (7 characters, 21 characters)</li>
-                        <li>We test special cases like null input</li>
+                        <li>Case 2 tests the moment when the plant switches from being on the edge of wilting to actually wilting. This is only triggered under very specific conditions (counter = 1 and TEMP_CHILLY).</li>
+                        <li>Case 4 confirms that non-chilly temperatures on cloudy days do not cause wilting, helping isolate the logic that distinguishes these similar but subtly different paths.</li>
                     </ul>
-                    
+
                     <h4>Test Cases Created in Step 1</h4>
                     <table>
                         <thead>
                             <tr>
-                                <th>Test ID</th>
+                                <th>Test Case</th>
+                                <th>temp</th>
+                                <th>weather</th>
+                                <th>Internal State</th>
                                 <th>Description</th>
-                                <th>Input</th>
                                 <th>Expected Output</th>
-                                <th>Boundary Being Tested</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>BVT1</td>
-                                <td>Null input</td>
-                                <td>null</td>
-                                <td>false</td>
-                                <td>Special null case</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>wilted=true</td>
+                                <td>Already wilted plant</td>
+                                <td>0</td>
                             </tr>
                             <tr>
-                                <td>BVT2</td>
-                                <td>Exactly minimum length</td>
-                                <td>"Abcde123" (8 chars)</td>
-                                <td>true</td>
-                                <td>Minimum length boundary</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>counter=1</td>
+                                <td>Repeated chilly days trigger wilt</td>
+                                <td>WILTED_VALUE</td>
                             </tr>
                             <tr>
-                                <td>BVT3</td>
-                                <td>Just under minimum length</td>
-                                <td>"Abcde12" (7 chars)</td>
-                                <td>false</td>
-                                <td>Below minimum length</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>counter=0</td>
+                                <td>Cloudy + chilly sets up counter = 1</td>
+                                <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>BVT4</td>
-                                <td>Exactly maximum length</td>
-                                <td>"Abcdefghij1234567890" (20 chars)</td>
-                                <td>true</td>
-                                <td>Maximum length boundary</td>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>counter=0</td>
+                                <td>Cloudy + warm resets counter = 0</td>
+                                <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>BVT5</td>
-                                <td>Just over maximum length</td>
-                                <td>"Abcdefghij12345678901" (21 chars)</td>
-                                <td>false</td>
-                                <td>Above maximum length</td>
+                                <td>5</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>counter=1</td>
+                                <td>Sunny + warm, growth increments</td>
+                                <td>grow(previous+1)</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    <p>This focused approach lets us quickly confirm that all logical gates in the function work properly without needing a bloated test suite. It emphasizes precision over repetition.</p>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">2</div>
                     <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
                 </div>
                 <div class="step-content">
-                    <p>In this step, we create test cases for different categories of valid and invalid inputs based on the other requirements:</p>
-                    
+                    <p>For the simDailyGrowth function, equivalence class testing helps us organize inputs into groups that should produce similar behaviors. Rather than focusing just on the boundary transitions as we did in BVT, we're now exploring the broader categories of plant behavior in various conditions.</p>
+
+                    <p>We can identify the following major equivalence classes:</p>
                     <ul>
-                        <li>We test combinations of requirements (uppercase, digit, no spaces)</li>
-                        <li>We create tests for each failing condition</li>
-                        <li>We ensure all validation rules are individually tested</li>
+                        <li><strong>EC1:</strong> Non-operational states - When the plant is already wilted or about to wilt</li>
+                        <li><strong>EC2:</strong> Growth reset states - When previous growth is reset to a base value</li>
+                        <li><strong>EC3:</strong> Incremental growth states - When the plant builds on previous growth</li>
                     </ul>
-                    
+
                     <h4>Test Cases Created in Step 2</h4>
                     <table>
                         <thead>
                             <tr>
-                                <th>Test ID</th>
-                                <th>Description</th>
-                                <th>Input</th>
-                                <th>Expected Output</th>
+                                <th>Test Case</th>
+                                <th>Input Combination</th>
+                                <th>Internal State</th>
                                 <th>Equivalence Class</th>
+                                <th>Expected Output</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>EC1</td>
-                                <td>Valid input - all requirements met</td>
-                                <td>"Password123"</td>
-                                <td>true</td>
-                                <td>Valid string</td>
+                                <td>EC1-A</td>
+                                <td>Any temp/weather</td>
+                                <td>wilted=true</td>
+                                <td>EC1: Already wilted plant</td>
+                                <td>0</td>
                             </tr>
                             <tr>
-                                <td>EC2</td>
-                                <td>Missing uppercase letter</td>
-                                <td>"password123"</td>
-                                <td>false</td>
-                                <td>Missing uppercase requirement</td>
+                                <td>EC1-B</td>
+                                <td>temp=CHILLY, weather=CLOUDY</td>
+                                <td>counter=1</td>
+                                <td>EC1: About to wilt</td>
+                                <td>WILTED_VALUE</td>
                             </tr>
                             <tr>
-                                <td>EC3</td>
-                                <td>Missing digit</td>
-                                <td>"PasswordTest"</td>
-                                <td>false</td>
-                                <td>Missing digit requirement</td>
+                                <td>EC2-A</td>
+                                <td>temp=CHILLY, weather=CLOUDY</td>
+                                <td>counter=0</td>
+                                <td>EC2: Growth reset (cloudy & chilly)</td>
+                                <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>EC4</td>
-                                <td>Contains space</td>
-                                <td>"Password 123"</td>
-                                <td>false</td>
-                                <td>Contains forbidden character</td>
+                                <td>EC2-B</td>
+                                <td>temp=WARM, weather=CLOUDY</td>
+                                <td>counter=0</td>
+                                <td>EC2: Growth reset (cloudy & not chilly)</td>
+                                <td>grow(1)</td>
                             </tr>
                             <tr>
-                                <td>EC5</td>
-                                <td>Special characters (allowed)</td>
-                                <td>"P@ssw0rd#$!"</td>
-                                <td>true</td>
-                                <td>Valid with special characters</td>
+                                <td>EC3-A</td>
+                                <td>temp=WARM, weather=SUNNY</td>
+                                <td>previousGrowth=2</td>
+                                <td>EC3: Incremental growth</td>
+                                <td>grow(3)</td>
+                            </tr>
+                            <tr>
+                                <td>EC3-B</td>
+                                <td>temp=HOT, weather=RAINY</td>
+                                <td>previousGrowth=5</td>
+                                <td>EC3: Incremental growth (alternate values)</td>
+                                <td>grow(6)</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    <p>These test cases give us confidence that each major category of behavior is working as expected, complementing our boundary value tests by ensuring comprehensive coverage across different input combinations and internal states.</p>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">3</div>
                     <h3>Step 3: Structural Coverage Sweep</h3>
                 </div>
                 <div class="step-content">
-                    <p>Using JaCoCo to analyze our code coverage, we identified additional test cases needed:</p>
-                    
+                    <p>After running our BVT and ECT tests through JaCoCo, we found one edge case that wasn't being covered:</p>
+
                     <ul>
-                        <li>Test case where only the space check fails (other conditions pass)</li>
-                        <li>Test case for input with both uppercase and digits but no other requirements</li>
-                        <li>Test for early return conditions in sequence</li>
+                        <li>The final return 0 statement was never executed</li>
+                        <li>This represents a case where all other conditions in the function fail</li>
+                        <li>Since the logic seems to handle all possible input combinations, this may be a defensive fallback that shouldn't be reachable</li>
                     </ul>
-                    
-                    <div class="placeholder-image">
-                        <p>[JaCoCo coverage results image will be added here]</p>
+
+                    <p>To ensure complete coverage, we added one additional test case with unusual inputs to verify this branch:</p>
+
+                    <div class="coverage-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test ID</th>
+                                    <th>Inputs</th>
+                                    <th>Internal State</th>
+                                    <th>Purpose</th>
+                                    <th>Expected Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SC1</td>
+                                    <td>weather=3 (invalid), temp=0</td>
+                                    <td>counter=1</td>
+                                    <td>Test unreachable default return</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
+                    <p>After adding this test, our JaCoCo report showed 100% branch coverage for the simDailyGrowth method, confirming we've exercised all possible execution paths.</p>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">4</div>
                     <h3>Step 4: Suite Refinement</h3>
                 </div>
                 <div class="step-content">
-                    <p>After reviewing all our test cases, we've refined our test suite to the following essential tests:</p>
-                    
+                    <p>After examining our complete test suite, we can make the following refinements:</p>
+
+                    <ol>
+                        <li>Eliminate redundancy: EC1-A duplicates BVT Case 1, so we can remove one of them</li>
+                        <li>Combine similar cases: EC2-A and BVT Case 3 test the same condition, so we can merge them</li>
+                        <li>Prioritize the most revealing tests: The wilting transition tests are particularly important</li>
+                    </ol>
+
+                    <p>Our refined test suite includes:</p>
+
                     <table>
                         <thead>
                             <tr>
-                                <th>Test ID</th>
+                                <th>Priority</th>
+                                <th>Test Type</th>
                                 <th>Description</th>
-                                <th>Input</th>
-                                <th>Expected Output</th>
                                 <th>Purpose</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>RT1</td>
-                                <td>Valid string</td>
-                                <td>"Password123"</td>
-                                <td>true</td>
-                                <td>Valid case verification</td>
+                                <td>High</td>
+                                <td>Boundary (BVT2)</td>
+                                <td>Wilting transition when counter=1 and temp=CHILLY</td>
+                                <td>Verify critical transitions in plant state</td>
                             </tr>
                             <tr>
-                                <td>RT2</td>
-                                <td>Null input</td>
-                                <td>null</td>
-                                <td>false</td>
-                                <td>Special case handling</td>
+                                <td>High</td>
+                                <td>Equivalence (EC3-A/B)</td>
+                                <td>Incremental growth scenarios</td>
+                                <td>Ensure growth accumulation works correctly</td>
                             </tr>
                             <tr>
-                                <td>RT3</td>
-                                <td>Length boundary - too short</td>
-                                <td>"Abc1"</td>
-                                <td>false</td>
-                                <td>Minimum length verification</td>
+                                <td>Medium</td>
+                                <td>Boundary (BVT1)</td>
+                                <td>Already wilted plant behavior</td>
+                                <td>Verify wilted plants don't recover automatically</td>
                             </tr>
                             <tr>
-                                <td>RT4</td>
-                                <td>Length boundary - too long</td>
-                                <td>"Abcdefghij1234567890X"</td>
-                                <td>false</td>
-                                <td>Maximum length verification</td>
+                                <td>Medium</td>
+                                <td>Equivalence (EC2-A/B)</td>
+                                <td>Growth reset in cloudy conditions</td>
+                                <td>Ensure counter resets work correctly</td>
                             </tr>
                             <tr>
-                                <td>RT5</td>
-                                <td>Missing uppercase</td>
-                                <td>"password123"</td>
-                                <td>false</td>
-                                <td>Uppercase requirement</td>
-                            </tr>
-                            <tr>
-                                <td>RT6</td>
-                                <td>Missing digit</td>
-                                <td>"PasswordTest"</td>
-                                <td>false</td>
-                                <td>Digit requirement</td>
-                            </tr>
-                            <tr>
-                                <td>RT7</td>
-                                <td>Contains space</td>
-                                <td>"Password 123"</td>
-                                <td>false</td>
-                                <td>No-space requirement</td>
+                                <td>Low</td>
+                                <td>Structure (SC1)</td>
+                                <td>Default fallback behavior</td>
+                                <td>Complete coverage of all code paths</td>
                             </tr>
                         </tbody>
                     </table>
-                    
-                    <p>We eliminated some redundant test cases and focused on a minimal set that still provides 100% code coverage.</p>
+
+                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once.</p>
                 </div>
             </div>
-            
-            
+
+
             <div class="cta">
                 <button class="btn-primary next-example" data-next="example3">Next Example</button>
             </div>

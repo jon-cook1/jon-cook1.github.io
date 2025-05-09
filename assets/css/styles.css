@@ -939,7 +939,7 @@ td:first-child {
     font-weight: 500;
 }
 
-/* Make TRUE/FALSE values more distinctive */
+/* Make distinctive values more visible */
 td:last-child {
     text-align: center;
     font-weight: bold;
@@ -951,6 +951,19 @@ td:last-child:contains("TRUE") {
 
 td:last-child:contains("FALSE") {
     color: #f75b5b;
+}
+
+td:last-child:contains("grow") {
+    color: #5ab74c;
+}
+
+td:last-child:contains("WILTED") {
+    color: #f75b5b;
+}
+
+/* Coverage table styling */
+.coverage-table {
+    margin: 1.5rem 0;
 }
 
 /* Coverage report styling */
