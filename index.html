@@ -108,7 +108,7 @@
                     <div class="content-container">
                         <div class="text-content">
                             <p>[Detailed content about understanding requirements]</p>
-                            
+
                             <h4>Key Points</h4>
                             <ul>
                                 <li>[Point 1]</li>
@@ -116,50 +116,6 @@
                                 <li>[Point 3]</li>
                             </ul>
                         </div>
-                        
-                        <div class="table-container">
-                            <h4>Example Requirements Analysis</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Requirement</th>
-                                        <th>Test Consideration</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>[Requirement 1]</td>
-                                        <td>[Test consideration 1]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>[Requirement 2]</td>
-                                        <td>[Test consideration 2]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>[Requirement 3]</td>
-                                        <td>[Test consideration 3]</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="code-example">
-                        <h4>Example Code</h4>
-                        <pre><code>
-// Example code for understanding requirements
-public class Calculator {
-    /**
-     * Adds two numbers
-     * @param a first number
-     * @param b second number
-     * @return sum of a and b
-     */
-    public int add(int a, int b) {
-        return a + b;
-    }
-}
-                        </code></pre>
                     </div>
                     <button class="btn-primary section-close">Close</button>
                 </div>
@@ -169,7 +125,7 @@ public class Calculator {
                     <div class="content-container">
                         <div class="text-content">
                             <p>[Detailed content about designing test cases]</p>
-                            
+
                             <h4>Test Case Categories</h4>
                             <ul>
                                 <li>[Category 1]</li>
@@ -177,56 +133,6 @@ public class Calculator {
                                 <li>[Category 3]</li>
                             </ul>
                         </div>
-                        
-                        <div class="table-container">
-                            <h4>Example Test Cases</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Input</th>
-                                        <th>Expected Output</th>
-                                        <th>Test Case Type</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>[Input 1]</td>
-                                        <td>[Expected output 1]</td>
-                                        <td>[Type 1]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>[Input 2]</td>
-                                        <td>[Expected output 2]</td>
-                                        <td>[Type 2]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>[Input 3]</td>
-                                        <td>[Expected output 3]</td>
-                                        <td>[Type 3]</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="code-example">
-                        <h4>Example Code</h4>
-                        <pre><code>
-// Example test case design
-// Test cases for Calculator.add(int a, int b)
-
-// Test case 1: positive numbers
-// Input: a=5, b=3
-// Expected: 8
-
-// Test case 2: negative numbers
-// Input: a=-2, b=-7
-// Expected: -9
-
-// Test case 3: mixed sign
-// Input: a=10, b=-5
-// Expected: 5
-                        </code></pre>
                     </div>
                     <button class="btn-primary section-close">Close</button>
                 </div>
@@ -236,7 +142,7 @@ public class Calculator {
                     <div class="content-container">
                         <div class="text-content">
                             <p>[Detailed content about hunting for blind spots in test coverage]</p>
-                            
+
                             <h4>Key Concepts</h4>
                             <ul>
                                 <li>Code coverage identifies untested execution paths</li>
@@ -247,12 +153,7 @@ public class Calculator {
                             </ul>
                         </div>
                     </div>
-                    <div class="button-container">
-                        <button class="btn-primary section-close">Close</button>
-                        <button class="btn-secondary" id="see-implementation">
-                            <i class="fas fa-code"></i> See Implementation
-                        </button>
-                    </div>
+                    <button class="btn-primary section-close">Close</button>
                 </div>
                 
                 <div id="section4" class="section-content hidden">
@@ -277,55 +178,55 @@ public class Calculator {
                 <div id="section5" class="section-content hidden">
                     <h3>Approach Limitations in Context</h3>
                     <p class="limitations-intro">Our 4-step approach excels at systematically testing functional correctness, but like all methods, it has specific limitations to consider when planning your testing strategy.</p>
-                    
+
                     <div class="limitations-grid">
                         <div class="limitation-card">
                             <div class="limitation-icon">
-                                <i class="fas fa-sitemap fa-2x"></i>
+                                <i class="fas fa-chart-line fa-2x"></i>
                             </div>
-                            <h4>State-Based System Limitations</h4>
-                            <p>This approach works well for pure functions but becomes more complex with stateful systems where the outcome depends on previous operations. Testing state-dependent behavior requires more sophisticated strategies beyond this approach.</p>
+                            <h4>Coverage ≠ Completeness</h4>
+                            <p>Line/branch coverage only proves every path ran. If you overlook a boundary or mis-group an equivalence class, the suite could still pass while bugs lurk untested. This suite is designed to provide generally sufficient coverage with minimal cases.</p>
                             <div class="limitation-tag">
-                                <span>Supplement with:</span> State transition testing, model-based testing
+                                <span>Supplement with:</span> Boundary analysis, equivalence partitioning
                             </div>
                         </div>
-                        
+
                         <div class="limitation-card">
                             <div class="limitation-icon">
-                                <i class="fas fa-tachometer-alt fa-2x"></i>
+                                <i class="fas fa-tasks fa-2x"></i>
                             </div>
-                            <h4>Performance Testing Gaps</h4>
-                            <p>Our approach focuses primarily on functional correctness rather than performance characteristics. Performance issues like memory leaks, execution time, and resource utilization require specialized testing techniques not covered here.</p>
+                            <h4>Manual Effort Can Scale Rapidly</h4>
+                            <p>Drawing boundaries, classes, and crafting extra cases for uncovered branches is quick on small methods but grows increasingly time-consuming with larger functions or deep nesting. We can see the complexity grow quickly with 40 cases for the classify method. While properly written functions should be single-responsibility and lightweight, automated generators or coverage tools can still become necessary.</p>
                             <div class="limitation-tag">
-                                <span>Supplement with:</span> Load testing, profiling, benchmarking
+                                <span>Supplement with:</span> Automated test generators, coverage tools
                             </div>
                         </div>
-                        
+
                         <div class="limitation-card">
                             <div class="limitation-icon">
-                                <i class="fas fa-user-friends fa-2x"></i>
+                                <i class="fas fa-cubes fa-2x"></i>
                             </div>
-                            <h4>User Experience Blind Spots</h4>
-                            <p>This technique doesn't address usability or experience aspects of software. For user interfaces or interactive systems, additional human-centered testing approaches are necessary to complement this method.</p>
+                            <h4>Object-Oriented Programming is Nuanced</h4>
+                            <p>Once students reach classes and inheritance, bugs often depend on object state, call sequences, or subclass overrides. The template's single-call focus must be extended to cover those interactions.</p>
                             <div class="limitation-tag">
-                                <span>Supplement with:</span> Usability testing, A/B testing, user feedback
+                                <span>Supplement with:</span> State-based testing, integration testing
                             </div>
                         </div>
-                        
+
                         <div class="limitation-card">
                             <div class="limitation-icon">
-                                <i class="fas fa-shield-alt fa-2x"></i>
+                                <i class="fas fa-server fa-2x"></i>
                             </div>
-                            <h4>Security Testing Insufficiency</h4>
-                            <p>While our approach may catch some security issues through boundary testing, it doesn't systematically address security vulnerabilities. Dedicated security testing methodologies should be used alongside this approach for security-critical applications.</p>
+                            <h4>Non-Functional and External Concerns</h4>
+                            <p>Performance, randomness, file I/O, and networking calls are not covered by this workflow. Properly testing code that uses these practices may require more complex methods such as mocking. In practice, dependencies that require mocking are present in more advanced code, typically outside the scope of 102 assignments.</p>
                             <div class="limitation-tag">
-                                <span>Supplement with:</span> Penetration testing, security code review, threat modeling
+                                <span>Supplement with:</span> Mocking, performance testing, specialized frameworks
                             </div>
                         </div>
                     </div>
-                    
+
                     <p class="limitations-conclusion">By understanding these limitations, you can better determine when to apply this 4-step approach and when to complement it with other testing strategies for comprehensive quality assurance.</p>
-                    
+
                     <button class="btn-primary section-close">Close</button>
                 </div>
             </div>
@@ -340,20 +241,20 @@ public class Calculator {
                 <p>Even the best testing approaches have constraints. Being aware of these limitations helps you supplement with other testing methods when necessary.</p>
                 <div class="limitations-preview">
                     <div class="limitation-preview-item">
-                        <i class="fas fa-sitemap"></i>
-                        <p>State-Based Systems</p>
+                        <i class="fas fa-chart-line"></i>
+                        <p>Coverage ≠ Completeness</p>
                     </div>
                     <div class="limitation-preview-item">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <p>Performance Aspects</p>
+                        <i class="fas fa-tasks"></i>
+                        <p>Manual Effort Scaling</p>
                     </div>
                     <div class="limitation-preview-item">
-                        <i class="fas fa-user-friends"></i>
-                        <p>User Experience</p>
+                        <i class="fas fa-cubes"></i>
+                        <p>OOP Complexity</p>
                     </div>
                     <div class="limitation-preview-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <p>Security Concerns</p>
+                        <i class="fas fa-server"></i>
+                        <p>External Dependencies</p>
                     </div>
                 </div>
                 <button class="btn-secondary expand-details" data-section="section5">Explore Limitations in Detail</button>
@@ -1232,10 +1133,6 @@ public class CSVProcessor {
             <div class="approach-step blog-post">
                 <div class="blog-header">
                     <h3>Maven & JaCoCo: Your Complete Testing Toolkit</h3>
-                    <div class="blog-metadata">
-                        <span class="blog-tag"><i class="fas fa-tag"></i> Testing Tools</span>
-                        <span class="blog-time"><i class="fas fa-clock"></i> 5 min read</span>
-                    </div>
                 </div>
 
                 <div class="blog-content">
@@ -1319,22 +1216,19 @@ public class CSVProcessor {
                         </div>
                     </div>
 
-                    <div class="result-preview">
-                        <h4>Coverage Report Preview</h4>
-                        <div class="report-image">
-                            <div class="placeholder-image">
-                                <i class="fas fa-file-alt fa-3x"></i>
-                                <p>JaCoCo HTML Report</p>
-                            </div>
-                        </div>
-                        <p class="image-caption">The JaCoCo HTML report shows your code with color coding: green for covered lines, red for uncovered lines, and yellow for partially covered branches.</p>
-                    </div>
                 </div>
             </div>
 
             <div class="cta">
                 <h3>Ready to Improve Your Test Coverage?</h3>
-                <a href="https://github.com/jon-cook1/102-coverage" target="_blank" class="btn-primary">Get Started with 102-Coverage</a>
+                <div class="button-container">
+                    <a href="https://github.com/jon-cook1/102-coverage" target="_blank" class="btn-primary">
+                        <i class="fas fa-code-branch"></i> Go to Repository
+                    </a>
+                    <a href="https://github.com/jon-cook1/102-coverage#readme" target="_blank" class="btn-secondary">
+                        <i class="fas fa-book"></i> View Setup Instructions
+                    </a>
+                </div>
             </div>
         </section>
     </main>
