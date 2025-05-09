@@ -148,17 +148,43 @@
                 </div>
                 
                 <div id="section2" class="section-content hidden">
-                    <h3>Edge-Focused Weak Normal Equivalence-Class Test - Detailed</h3>
+                    <h3>Edge-Focused Weak Normal Equivalence-Class Tests - Cover Valid Outputs</h3>
                     <div class="content-container">
                         <div class="text-content">
-                            <p>[Detailed content about designing test cases]</p>
+                            <p>The goal of Equivalence Class Testing (ECT) is to verify that a program behaves correctly across distinct categories of input. Rather than testing every possible value, ECT simplifies the process by dividing the input space into groups, called equivalence classes, where all members of a class are expected to produce the same output or behavior. The underlying assumption is that if one representative value from a class behaves correctly, the rest will too. This allows you to reduce the number of test cases while still covering the full range of program behavior.</p>
 
-                            <h4>Test Case Categories</h4>
-                            <ul>
-                                <li>[Category 1]</li>
-                                <li>[Category 2]</li>
-                                <li>[Category 3]</li>
-                            </ul>
+                            <p>While Boundary Value Testing (BVT) focuses on verifying behavior at the edges of individual conditions, ECT complements this by identifying the broader logic that governs those conditions. Instead of testing just around where the program changes behavior (as in BVT), ECT targets the reason why behavior changes. It helps you define the conditions themselves—mapping out where one class of logic flips to another. In this way, ECT simplifies the challenge of designing BVT cases: once the equivalence classes are defined, you know exactly where transitions occur and where to apply more fine-grained boundary checks.</p>
+
+                            <h4>Implementation Strategy</h4>
+                            <p>To implement ECT effectively, follow these three steps:</p>
+
+                            <div class="ect-steps">
+                                <div class="ect-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h5>Partition the input space</h5>
+                                        <p>For each input parameter, identify valid and invalid ranges where inputs produce the same type of outcome. Group these into equivalence classes, each defined by producing a unique behavior or result.</p>
+                                    </div>
+                                </div>
+
+                                <div class="ect-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h5>Select representative values</h5>
+                                        <p>Choose values from each equivalence class that represent the typical or defining behavior of that class. Unlike BVT, the goal isn't to test just inside and outside of a boundary but to test values within each class.</p>
+                                    </div>
+                                </div>
+
+                                <div class="ect-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h5>Form test case tuples</h5>
+                                        <p>If your function takes multiple inputs, create test cases that combine representatives from different equivalence classes. The goal is to ensure that every combination of classes is tested at least once, providing broad behavioral coverage without unnecessary repetition.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="insight">By designing tests around these representative values and class combinations, you can validate both typical and edge-case behavior while keeping your test suite efficient and targeted. When used alongside BVT, ECT gives you both a high-level map of program logic and the tools to probe its weak points with precision.</p>
                         </div>
                     </div>
                     <button class="btn-primary section-close">Close</button>
