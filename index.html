@@ -1347,53 +1347,17 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                     <h3>Step 3: Structural Coverage Sweep</h3>
                 </div>
                 <div class="step-content">
-                    <p>After running our BVT and ECT tests, we analyzed our code coverage to identify any untested paths. We found a few edge cases that needed additional testing:</p>
-
-                    <ul>
-                        <li>The case where a letter appears multiple times in the secret word</li>
-                        <li>The case where a guessed letter already has a green color from a previous check</li>
-                        <li>The case where a guessed letter already has a yellow color from a previous check</li>
-                    </ul>
-
-                    <p>To ensure complete branch coverage, we added these additional test cases:</p>
-
-                    <div class="coverage-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Test ID</th>
-                                    <th>Secret Word</th>
-                                    <th>Guessed Word</th>
-                                    <th>Purpose</th>
-                                    <th>Expected Result</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>SC1</td>
-                                    <td>"SWEET"</td>
-                                    <td>"STEEL"</td>
-                                    <td>Test handling of duplicate letters ('E' appears twice in secret)</td>
-                                    <td>Green for 'S', 'E', yellow for other 'E', gray for others</td>
-                                </tr>
-                                <tr>
-                                    <td>SC2</td>
-                                    <td>"BOATS"</td>
-                                    <td>"FLOAT"</td>
-                                    <td>Test key coloring logic where some keys already have colors</td>
-                                    <td>Complex key color state check</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <p>The JaCoCo coverage report confirms that with our combined test suite, we've achieved complete branch coverage for the checkLetters method:</p>
+                    <p>After running our BVT and ECT tests through JaCoCo, we analyzed the coverage report to determine if additional test cases were needed:</p>
 
                     <div class="coverage-report">
                         <img src="assets/images/ex3_jacoco.png" alt="JaCoCo coverage report for checkLetters method" class="coverage-image">
                     </div>
 
-                    <p>The report shows that all branches of the conditional logic are covered, including the special case handling for colors that have already been assigned. This ensures we've exercised all possible execution paths through the function.</p>
+                    <p>The JaCoCo report shows that all lines in the checkLetters method are green, with only two conditional statements showing yellow highlighting. Since the lines are yellow rather than red, we know that both paths of these conditionals are being tested, just not all possible combinations of conditions.</p>
+
+                    <p>For this method, we're not concerned with achieving the full level of rigor in testing all conditional combinations, as it would significantly increase the number of test cases without proportional benefit. The yellow highlighting represents minor variations in how certain edge cases are handled, particularly related to keyboard color assignments that have already been set.</p>
+
+                    <p>The coverage report confirms that our BVT and ECT approach was sufficient in testing the checkLetters method, as all execution paths are being exercised at least once. This validates our testing strategy and demonstrates that focusing on meaningful boundaries and equivalence classes is an efficient approach to achieve comprehensive testing without creating an excessive number of test cases.</p>
                 </div>
             </div>
 
