@@ -1021,11 +1021,9 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                     <h3>Step 1: Robust Boundary-Value Tests</h3>
                 </div>
                 <div class="step-content">
-                    <p>This problem has two dimensions that influence the function's behavior: the index j and the guessed word itself. To thoroughly apply Boundary Value Testing, we isolate each of these variables and test how the logic transitions as we move across their respective boundaries.</p>
+                    <p>This problem has two dimensions that influence the function's behavior: the index j and the guessed word itself. To thoroughly apply Boundary Value Testing, we isolate each of these variables and test how the logic transitions as we move across their respective boundaries. First, we hold the index constant and vary the guessed letter to reveal how matches, near-matches, and mismatches affect the outcome. Next, we hold the guessed word constant and vary the index to examine how the same characters behave across different positions in the word.</p>
 
-                    <p>First, we hold the index constant and vary the guessed letter to reveal how matches, near-matches, and mismatches affect the outcome. In this example, we test the transition between exact matches (green), partial matches (yellow), and complete mismatches (gray) using a fixed index and several guessed characters.</p>
-
-                    <p>Next, we hold the guessed word constant and vary the index to examine how the same characters behave across different positions in the word. This allows us to test whether the function appropriately identifies character matches at different positions and distinguishes them from letters that do not match the secret word at all.</p>
+                    <p>This two-dimensional BVT approach demonstrates how we can apply boundary testing not only across numeric thresholds, but across distinct control flow transitions, validating correctness from multiple interacting angles.</p>
 
                     <h4>Equivalence Classes for checkLetters</h4>
                     <table>
@@ -1059,7 +1057,9 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                         </tbody>
                     </table>
 
-                    <p>To make this truly reflect Boundary Value Testing, we want to observe how the output behavior changes across these logical transitions. These boundaries represent points where the function's behavior flips from one state to another—from exact match (green) to partial match (yellow) to no match (gray).</p>
+                    <p>These values represent boundaries between green → yellow → gray transitions, based on exact character alignment and word inclusion. We keep the index constant (j = 0) and vary only the guessed letter to examine how the output behavior changes across key logical transitions: an exact match, a letter in the word but in the wrong position, and a letter not in the word at all.</p>
+
+                    <p>This isolation allows us to precisely identify the boundaries that shift the program from one behavior (green coloring and incrementing rightSpot) to another (yellow or gray coloring with no increment). Boundary Value Testing is not limited to numeric comparisons; it can be extended to categorical logic, such as character string comparisons and boolean condition transitions, wherever a meaningful behavioral boundary exists.</p>
 
                     <h4>Test Cases Created in Step 1 - Dimension 1: Character Variation</h4>
                     <p>For these tests, we hold the index constant (j = 0) and vary only the guessed letter to examine how the output behavior changes across the key logical transitions.</p>
@@ -1104,7 +1104,7 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                     </table>
 
                     <h4>Test Cases Created in Step 1 - Dimension 2: Position Variation</h4>
-                    <p>For these tests, we hold the letter we are checking as constant and vary the index j to examine how the match logic behaves across different positions.</p>
+                    <p>We then shift focus to the second dimension, position. By keeping the guess word constant and varying the index j, we test how the function applies the same comparison logic across multiple positions in the word. Using a partially overlapping word like "CRASS" against the secret word "CRANE" allows us to track how the same letter behaves differently depending on its position.</p>
 
                     <table>
                         <thead>
@@ -1144,6 +1144,8 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                             </tr>
                         </tbody>
                     </table>
+
+                    <p>To make this truly reflect Boundary Value Testing, we observe how the same guessed letter produces different behavior at different positions. For example, the character 'C' appears in both guess words, "CRASS" and "SCARS", but at different indices. In "CRASS", it aligns with the same position in the secret word (index 0), triggering a correct match (green). In "SCARS", the same 'C' appears at index 1, which does not match the corresponding character in the secret word, resulting in gray. This demonstrates that the function's output is not solely determined by the presence of the letter but also by its position.</p>
                 </div>
             </div>
 
@@ -1153,7 +1155,9 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                     <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
                 </div>
                 <div class="step-content">
-                    <p>While Boundary Value Testing focuses on finding the precise transition points in logic, Equivalence Class Testing helps validate the consistency of behavior within those broader regions. For the Wordle mechanic, we've identified three main equivalence classes:</p>
+                    <p>While BVT focuses on finding the precise transition points in logic, ECT helps validate the consistency of behavior within those broader regions. It is most effective when used after BVT has mapped out where those boundaries occur. For example, once BVT shows that the function transitions from green to yellow when the guessed letter changes or moves, ECT ensures that any value that falls into the "green" or "yellow" category behaves as expected, regardless of the specific input.</p>
+
+                    <p>In the case of checkLetters, BVT helps identify that the output changes based on character match and position. ECT then groups those outcomes into logical classes—exact match, partial match, and no match—and checks whether the function treats all members of each class consistently. This layered approach reduces redundancy while improving coverage: BVT highlights the edges, and ECT confirms the rules within each region.</p>
 
                     <ol>
                         <li><strong>EC1: Exact Character Match</strong> - The guessed letter matches the secret letter at the same position</li>
@@ -1219,7 +1223,7 @@ public static int checkLetters(int j, int rightSpot){ //compares the guessed wor
                         </tbody>
                     </table>
 
-                    <p>By designing test cases around these representative scenarios, we ensure that the function behaves correctly across all types of character matches, not just at the boundary cases. This approach provides broad coverage while keeping our test suite manageable.</p>
+                    <p>By using ECT to sweep across each class, we confirm that the function applies the same logic to any input that falls within a class—ensuring reliability and coherence in its behavior. This approach provides broad coverage while keeping our test suite manageable.</p>
                 </div>
             </div>
 
