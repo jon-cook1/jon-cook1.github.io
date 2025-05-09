@@ -472,39 +472,39 @@ public boolean driveCar(double miles){
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Min - 1: Just below the allowed minimum (should behave differently)</td>
+                                <td>BVT1</td>
                                 <td>-0.1</td>
-                                <td>Just below valid range</td>
+                                <td>Min - 1: Just below the allowed minimum</td>
                                 <td>FALSE</td>
                             </tr>
                             <tr>
-                                <td>Min - The exact lower boundary (should be accepted)</td>
+                                <td>BVT2</td>
                                 <td>0</td>
-                                <td>Lower valid boundary</td>
+                                <td>Min: The exact lower boundary</td>
                                 <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>Min + 1 Just above the lower boundary (should be accepted)</td>
+                                <td>BVT3</td>
                                 <td>0.1</td>
-                                <td>Slightly above 0</td>
+                                <td>Min + 1: Just above the lower boundary</td>
                                 <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>Max - 1 Just below the upper boundary (should be accepted)</td>
+                                <td>BVT4</td>
                                 <td>99.9</td>
-                                <td>Just below max</td>
+                                <td>Max - 1: Just below the upper boundary</td>
                                 <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>Max The exact upper boundary (should be accepted)</td>
+                                <td>BVT5</td>
                                 <td>100</td>
-                                <td>Upper valid boundary</td>
+                                <td>Max: The exact upper boundary</td>
                                 <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>Max + 1 Just above the allowed maximum (should behave differently)</td>
+                                <td>BVT6</td>
                                 <td>100.1</td>
-                                <td>Just above max</td>
+                                <td>Max + 1: Just above the allowed maximum</td>
                                 <td>FALSE</td>
                             </tr>
                         </tbody>
@@ -541,25 +541,25 @@ public boolean driveCar(double miles){
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
+                                <td>ECT1</td>
                                 <td>-10</td>
                                 <td>Within EC1 (invalid input)</td>
                                 <td>FALSE</td>
                             </tr>
                             <tr>
-                                <td>2</td>
+                                <td>ECT2</td>
                                 <td>0.1</td>
                                 <td>Transition from EC1 → EC2</td>
                                 <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>3</td>
+                                <td>ECT3</td>
                                 <td>99.9</td>
                                 <td>Within EC2 (valid driving range)</td>
                                 <td>TRUE</td>
                             </tr>
                             <tr>
-                                <td>4</td>
+                                <td>ECT4</td>
                                 <td>150</td>
                                 <td>Transition from EC2 → EC3</td>
                                 <td>FALSE</td>
@@ -601,13 +601,72 @@ public boolean driveCar(double miles){
                 <div class="step-content">
                     <p>For this simple example, no significant refinement is needed. The driveCar method has straightforward logic with clear boundaries and equivalence classes that we've already covered in our BVT and ECT test cases.</p>
 
-                    <p>Our combined test strategy includes:</p>
-                    <ul>
-                        <li>Six boundary test cases that verify behavior at and around the minimum (0) and maximum (100) boundaries</li>
-                        <li>Four equivalence class test cases that cover the main behavioral regions and transitions between them</li>
-                    </ul>
+                    <p>Here is our complete test suite for the driveCar method, organized by test type:</p>
 
-                    <p>JaCoCo confirms we've achieved 100% code coverage, and our tests are minimal and non-redundant. Since this is a simple and straightforward example, there's no need to eliminate redundant tests or optimize our test suite further.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Test Type</th>
+                                <th>Input (miles)</th>
+                                <th>Description</th>
+                                <th>Expected Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BVT1</td>
+                                <td>Boundary Value</td>
+                                <td>-0.1</td>
+                                <td>Just below minimum</td>
+                                <td>FALSE</td>
+                            </tr>
+                            <tr>
+                                <td>BVT2</td>
+                                <td>Boundary Value</td>
+                                <td>0</td>
+                                <td>Exact lower boundary</td>
+                                <td>TRUE</td>
+                            </tr>
+                            <tr>
+                                <td>BVT5</td>
+                                <td>Boundary Value</td>
+                                <td>100</td>
+                                <td>Exact upper boundary</td>
+                                <td>TRUE</td>
+                            </tr>
+                            <tr>
+                                <td>BVT6</td>
+                                <td>Boundary Value</td>
+                                <td>100.1</td>
+                                <td>Just above maximum</td>
+                                <td>FALSE</td>
+                            </tr>
+                            <tr>
+                                <td>ECT1</td>
+                                <td>Equivalence Class</td>
+                                <td>-10</td>
+                                <td>Invalid negative input</td>
+                                <td>FALSE</td>
+                            </tr>
+                            <tr>
+                                <td>ECT3</td>
+                                <td>Equivalence Class</td>
+                                <td>50</td>
+                                <td>Valid mid-range input</td>
+                                <td>TRUE</td>
+                            </tr>
+                            <tr>
+                                <td>ECT4</td>
+                                <td>Equivalence Class</td>
+                                <td>150</td>
+                                <td>Invalid too large input</td>
+                                <td>FALSE</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>JaCoCo confirms we've achieved 100% code coverage, and our tests are minimal with minimal redundancy. Each test case serves a specific purpose, and together they provide complete coverage of the method's behavior.</p>
                 </div>
             </div>
             
