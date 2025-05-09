@@ -972,299 +972,370 @@ public int simDailyGrowth(int temp, int weather){
         
         <!-- Example 3 Page -->
         <section id="example3" class="page">
-            <h2>Example 3: File Processing Library</h2>
+            <h2>Example 3: Wordle-style Game Mechanic</h2>
             <div class="example-overview">
-                <p>In this example, we'll apply our 4-step approach to test a file processing library that reads and processes data files.</p>
+                <p>In this example, we'll apply our 4-step approach to test a function that supports a Wordle-style game mechanic, which compares guessed letters with a secret word and provides color-coded feedback.</p>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">0</div>
-                    <h3>Understanding Requirements</h3>
+                    <h3>Function Context</h3>
                 </div>
                 <div class="step-content">
-                    <p>For our file processing library, we need to understand the requirements:</p>
-                    
-                    <ul>
-                        <li>Must read CSV files with comma-separated values</li>
-                        <li>Must handle empty files and files with headers</li>
-                        <li>Must convert string data to appropriate types (integers, doubles)</li>
-                        <li>Must handle file errors gracefully (file not found, permission denied)</li>
-                        <li>Must allow filtering and sorting of data</li>
-                    </ul>
-                    
+                    <p>This function supports a Wordle-style game mechanic. It compares the guessed letter at index j in the current row with the secret word's character at the same index. If the characters match exactly, the tile is colored green and the rightSpot counter is incremented. If the guessed character exists elsewhere in the secret word (but not at the current index), the tile is colored yellow unless it's already marked green. If the guessed character is not in the secret word at all, the tile is colored gray.</p>
+
                     <div class="code-example">
-                        <h4>The Class We're Testing</h4>
+                        <h4>The Function We're Testing</h4>
                         <pre><code>
-public class CSVProcessor {
-    /**
-     * Reads a CSV file and returns processed data
-     * @param filePath the path to the CSV file
-     * @param hasHeader whether the file has a header row
-     * @return DataTable containing the processed data
-     * @throws IOException if there's an error reading the file
-     */
-    public DataTable readCSV(String filePath, boolean hasHeader) throws IOException {
-        File file = new File(filePath);
-        if (!file.exists() || !file.canRead()) {
-            throw new IOException("File does not exist or cannot be read: " + filePath);
-        }
-        
-        DataTable table = new DataTable();
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        
-        // Read header if present
-        String line = reader.readLine();
-        if (line == null) {
-            reader.close();
-            return table; // Empty file
-        }
-        
-        if (hasHeader) {
-            String[] headers = line.split(",");
-            table.setHeaders(headers);
-            line = reader.readLine();
-        }
-        
-        // Read data rows
-        while (line != null) {
-            String[] values = line.split(",");
-            table.addRow(values);
-            line = reader.readLine();
-        }
-        
-        reader.close();
-        return table;
-    }
-    
-    // Other methods for filtering, sorting, etc.
-}
+public static int checkLetters(int j, int rightSpot){ //compares the guessed word to the secret word
+    char wordLetter = GameGUI.getSecretWordArr()[j]; //gets letter from answer word
+    char guessLetter = GameGUI.getGridChar(currentRow, j); //gets letter in the spot
+          if (wordLetter == guessLetter){ //colors in boxes if leters are equal
+                GameGUI.setGridColor(currentRow, j, CORRECT_COLOR); //sets color to green
+                GameGUI.setKeyColor(wordLetter, CORRECT_COLOR);
+                rightSpot += 1; // is this guess correct for the secret at this spot, if it is then we color and are done, if it is not then we need to differentiate between yellow and dark gray
+             }else{
+                for (int i = 0; i< MAX_COLS; i++){
+                   if (guessLetter == GameGUI.getSecretWordArr()[i]){
+                      GameGUI.setGridColor(currentRow, j, WRONG_PLACE_COLOR);
+                      if (GameGUI.getKeyColor(guessLetter) != CORRECT_COLOR){
+                         GameGUI.setKeyColor(guessLetter, WRONG_PLACE_COLOR);
+                      }
+                   } else if (GameGUI.getKeyColor(guessLetter) != WRONG_PLACE_COLOR && GameGUI.getKeyColor(guessLetter) != CORRECT_COLOR){
+                      GameGUI.setKeyColor(guessLetter, WRONG_COLOR);
+                   }
+
+                   }
+                }
+             return rightSpot;
+          }
                         </code></pre>
                     </div>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">1</div>
                     <h3>Step 1: Robust Boundary-Value Tests</h3>
                 </div>
                 <div class="step-content">
-                    <p>In this step, we identify boundary conditions for our CSV processor:</p>
-                    
-                    <ul>
-                        <li>File existence and access boundaries (exists vs doesn't exist, readable vs not readable)</li>
-                        <li>File content boundaries (empty file, single line, very large file)</li>
-                        <li>Header presence boundary (with header vs without header)</li>
-                        <li>Special case boundaries (malformed data, invalid paths)</li>
-                    </ul>
-                    
-                    <h4>Test Cases Created in Step 1</h4>
+                    <p>This problem has two dimensions that influence the function's behavior: the index j and the guessed word itself. To thoroughly apply Boundary Value Testing, we isolate each of these variables and test how the logic transitions as we move across their respective boundaries.</p>
+
+                    <p>First, we hold the index constant and vary the guessed letter to reveal how matches, near-matches, and mismatches affect the outcome. In this example, we test the transition between exact matches (green), partial matches (yellow), and complete mismatches (gray) using a fixed index and several guessed characters.</p>
+
+                    <p>Next, we hold the guessed word constant and vary the index to examine how the same characters behave across different positions in the word. This allows us to test whether the function appropriately identifies character matches at different positions and distinguishes them from letters that do not match the secret word at all.</p>
+
+                    <h4>Equivalence Classes for checkLetters</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Condition</th>
+                                <th>Description</th>
+                                <th>Expected Behavior</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>EC1</td>
+                                <td>guess[j] == secret[j]</td>
+                                <td>exact match</td>
+                                <td>green, increment rightSpot</td>
+                            </tr>
+                            <tr>
+                                <td>EC2</td>
+                                <td>guess[j] != secret[j] && guess[j] in secret</td>
+                                <td>in word but wrong position</td>
+                                <td>yellow, rightSpot unchanged</td>
+                            </tr>
+                            <tr>
+                                <td>EC3</td>
+                                <td>guess[j] not in secret</td>
+                                <td>completely incorrect</td>
+                                <td>gray, rightSpot unchanged</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>To make this truly reflect Boundary Value Testing, we want to observe how the output behavior changes across these logical transitions. These boundaries represent points where the function's behavior flips from one state to another—from exact match (green) to partial match (yellow) to no match (gray).</p>
+
+                    <h4>Test Cases Created in Step 1 - Dimension 1: Character Variation</h4>
+                    <p>For these tests, we hold the index constant (j = 0) and vary only the guessed letter to examine how the output behavior changes across the key logical transitions.</p>
+
                     <table>
                         <thead>
                             <tr>
                                 <th>Test ID</th>
-                                <th>Description</th>
-                                <th>Input</th>
-                                <th>Expected Output</th>
+                                <th>Secret Word</th>
+                                <th>Guessed Word</th>
+                                <th>Index (j)</th>
+                                <th>Expected Behavior</th>
                                 <th>Boundary Being Tested</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>BVT1</td>
-                                <td>File doesn't exist</td>
-                                <td>"nonexistent.csv", true</td>
-                                <td>IOException</td>
-                                <td>File existence boundary</td>
+                                <td>"CRANE"</td>
+                                <td>"CRASS"</td>
+                                <td>0</td>
+                                <td>Green, rightSpot++</td>
+                                <td>'C' exact match (EC1)</td>
                             </tr>
                             <tr>
                                 <td>BVT2</td>
-                                <td>Empty file</td>
-                                <td>"empty.csv", true</td>
-                                <td>Empty DataTable</td>
-                                <td>Empty content boundary</td>
+                                <td>"CRANE"</td>
+                                <td>"EATER"</td>
+                                <td>0</td>
+                                <td>Yellow, rightSpot unchanged</td>
+                                <td>'E' in word but wrong position (EC2)</td>
                             </tr>
                             <tr>
                                 <td>BVT3</td>
-                                <td>Single line file with header</td>
-                                <td>"singleline.csv", true</td>
-                                <td>DataTable with headers, no data</td>
-                                <td>Minimum content with header</td>
+                                <td>"CRANE"</td>
+                                <td>"PRANK"</td>
+                                <td>0</td>
+                                <td>Gray, rightSpot unchanged</td>
+                                <td>'P' not in word (EC3)</td>
                             </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Test Cases Created in Step 1 - Dimension 2: Position Variation</h4>
+                    <p>For these tests, we hold the letter we are checking as constant and vary the index j to examine how the match logic behaves across different positions.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test ID</th>
+                                <th>Secret Word</th>
+                                <th>Guessed Word</th>
+                                <th>Index (j)</th>
+                                <th>Expected Behavior</th>
+                                <th>Boundary Being Tested</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td>BVT4</td>
-                                <td>Single line file without header</td>
-                                <td>"singleline.csv", false</td>
-                                <td>DataTable with one data row</td>
-                                <td>Minimum content without header</td>
+                                <td>"CRANE"</td>
+                                <td>"CRASS"</td>
+                                <td>0</td>
+                                <td>Green, rightSpot++</td>
+                                <td>'C' at correct position (EC1)</td>
                             </tr>
                             <tr>
                                 <td>BVT5</td>
-                                <td>No read permission</td>
-                                <td>"nopermission.csv", true</td>
-                                <td>IOException</td>
-                                <td>File permission boundary</td>
+                                <td>"CRANE"</td>
+                                <td>"SCARS"</td>
+                                <td>1</td>
+                                <td>Gray, rightSpot unchanged</td>
+                                <td>'C' at wrong position, but not in word at that position (EC3)</td>
+                            </tr>
+                            <tr>
+                                <td>BVT6</td>
+                                <td>"CRANE"</td>
+                                <td>"TEACH"</td>
+                                <td>2</td>
+                                <td>Yellow, rightSpot unchanged</td>
+                                <td>'A' at wrong position, but in word elsewhere (EC2)</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">2</div>
                     <h3>Step 2: Edge-Focused Weak Normal Equivalence-Class Test</h3>
                 </div>
                 <div class="step-content">
-                    <p>In this step, we identify categories of valid inputs and design one test case for each category:</p>
-                    
-                    <ul>
-                        <li>We categorize different valid file formats and content types</li>
-                        <li>We test representative files from each category</li>
-                        <li>We ensure normal operation cases are covered</li>
-                    </ul>
-                    
+                    <p>While Boundary Value Testing focuses on finding the precise transition points in logic, Equivalence Class Testing helps validate the consistency of behavior within those broader regions. For the Wordle mechanic, we've identified three main equivalence classes:</p>
+
+                    <ol>
+                        <li><strong>EC1: Exact Character Match</strong> - The guessed letter matches the secret letter at the same position</li>
+                        <li><strong>EC2: Character in Word but Wrong Position</strong> - The guessed letter exists in the secret word but not at the current position</li>
+                        <li><strong>EC3: Character Not in Word</strong> - The guessed letter does not appear anywhere in the secret word</li>
+                    </ol>
+
+                    <p>Now we'll create test cases that represent each equivalence class, ensuring that all types of character matches are properly handled by the function.</p>
+
                     <h4>Test Cases Created in Step 2</h4>
                     <table>
                         <thead>
                             <tr>
                                 <th>Test ID</th>
+                                <th>Secret Word</th>
+                                <th>Guessed Word</th>
                                 <th>Description</th>
-                                <th>Input</th>
-                                <th>Expected Output</th>
                                 <th>Equivalence Class</th>
+                                <th>Expected Behavior</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>EC1</td>
-                                <td>Standard CSV with header</td>
-                                <td>"standard.csv", true</td>
-                                <td>DataTable with headers and rows</td>
-                                <td>Standard CSV with header</td>
+                                <td>ECT1</td>
+                                <td>"BRAVE"</td>
+                                <td>"BROKE"</td>
+                                <td>First two letters match exactly</td>
+                                <td>EC1 (for j=0, j=1)</td>
+                                <td>Green for 'B' and 'R', rightSpot+=2</td>
                             </tr>
                             <tr>
-                                <td>EC2</td>
-                                <td>Standard CSV without header</td>
-                                <td>"standard.csv", false</td>
-                                <td>DataTable with rows, no headers</td>
-                                <td>Standard CSV without header</td>
+                                <td>ECT2</td>
+                                <td>"BRAVE"</td>
+                                <td>"EARNS"</td>
+                                <td>Contains 'A', 'E', 'R' in wrong positions</td>
+                                <td>EC2 (for multiple j)</td>
+                                <td>Yellow for 'A', 'E', 'R', rightSpot unchanged</td>
                             </tr>
                             <tr>
-                                <td>EC3</td>
-                                <td>CSV with numeric data only</td>
-                                <td>"numeric.csv", true</td>
-                                <td>DataTable with numeric values</td>
-                                <td>Numeric data CSV</td>
+                                <td>ECT3</td>
+                                <td>"BRAVE"</td>
+                                <td>"CLOCK"</td>
+                                <td>Contains no letters from the secret word</td>
+                                <td>EC3 (for all j)</td>
+                                <td>Gray for all letters, rightSpot unchanged</td>
                             </tr>
                             <tr>
-                                <td>EC4</td>
-                                <td>CSV with text data only</td>
-                                <td>"text.csv", true</td>
-                                <td>DataTable with text values</td>
-                                <td>Text data CSV</td>
+                                <td>ECT4</td>
+                                <td>"BRAVE"</td>
+                                <td>"VALVE"</td>
+                                <td>Mixed case: 'V' and 'E' match at right position, 'A' exists but wrong position</td>
+                                <td>Mix of EC1 and EC2</td>
+                                <td>Green for 'V' and 'E', yellow for 'A', gray for 'L', rightSpot+=2</td>
                             </tr>
                             <tr>
-                                <td>EC5</td>
-                                <td>CSV with mixed data types</td>
-                                <td>"mixed.csv", true</td>
-                                <td>DataTable with mixed values</td>
-                                <td>Mixed data CSV</td>
+                                <td>ECT5</td>
+                                <td>"SPEED"</td>
+                                <td>"SPELL"</td>
+                                <td>Multiple instances: 'S','P','E' match at positions 0,1,2, second 'E' (in SPEED) not matched</td>
+                                <td>Multiple instances of EC1</td>
+                                <td>Green for 'S', 'P', 'E', gray for 'L', 'L', rightSpot+=3</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    <p>By designing test cases around these representative scenarios, we ensure that the function behaves correctly across all types of character matches, not just at the boundary cases. This approach provides broad coverage while keeping our test suite manageable.</p>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">3</div>
                     <h3>Step 3: Structural Coverage Sweep</h3>
                 </div>
                 <div class="step-content">
-                    <p>Using JaCoCo to analyze our code coverage, we identified additional test cases needed:</p>
-                    
+                    <p>After running our BVT and ECT tests, we analyzed our code coverage to identify any untested paths. We found a few edge cases that needed additional testing:</p>
+
                     <ul>
-                        <li>Test case with malformed CSV (inconsistent column count)</li>
-                        <li>Test case with special characters in CSV data</li>
-                        <li>Test case for the file reading exception handling paths</li>
+                        <li>The case where a letter appears multiple times in the secret word</li>
+                        <li>The case where a guessed letter already has a green color from a previous check</li>
+                        <li>The case where a guessed letter already has a yellow color from a previous check</li>
                     </ul>
-                    
-                    <div class="placeholder-image">
-                        <p>[JaCoCo coverage results image will be added here]</p>
+
+                    <p>To ensure complete branch coverage, we added these additional test cases:</p>
+
+                    <div class="coverage-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test ID</th>
+                                    <th>Secret Word</th>
+                                    <th>Guessed Word</th>
+                                    <th>Purpose</th>
+                                    <th>Expected Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SC1</td>
+                                    <td>"SWEET"</td>
+                                    <td>"STEEL"</td>
+                                    <td>Test handling of duplicate letters ('E' appears twice in secret)</td>
+                                    <td>Green for 'S', 'E', yellow for other 'E', gray for others</td>
+                                </tr>
+                                <tr>
+                                    <td>SC2</td>
+                                    <td>"BOATS"</td>
+                                    <td>"FLOAT"</td>
+                                    <td>Test key coloring logic where some keys already have colors</td>
+                                    <td>Complex key color state check</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
+                    <p>These additional tests helped us achieve 100% branch coverage for the checkLetters method, ensuring all code paths are exercised.</p>
                 </div>
             </div>
-            
+
             <div class="approach-step">
                 <div class="step-header">
                     <div class="step-number">4</div>
                     <h3>Step 4: Suite Refinement</h3>
                 </div>
                 <div class="step-content">
-                    <p>After reviewing all our test cases, we've refined our test suite to the following essential tests:</p>
-                    
+                    <p>After examining our complete test suite, we identified opportunities to eliminate redundancy while maintaining comprehensive coverage:</p>
+
+                    <ol>
+                        <li>We can combine some of our position-specific tests that test similar behaviors</li>
+                        <li>We can reduce the number of similar yellow-case tests since they exercise the same code path</li>
+                        <li>We need to prioritize tests that exercise complex state transitions in the keyboard coloring logic</li>
+                    </ol>
+
+                    <p>Our refined test suite includes:</p>
+
                     <table>
                         <thead>
                             <tr>
-                                <th>Test ID</th>
-                                <th>Description</th>
-                                <th>Input</th>
-                                <th>Expected Output</th>
+                                <th>Priority</th>
+                                <th>Test Type</th>
+                                <th>Test IDs</th>
                                 <th>Purpose</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>RT1</td>
-                                <td>Valid file with header</td>
-                                <td>"data.csv", true</td>
-                                <td>Correct DataTable</td>
-                                <td>Basic functionality with header</td>
+                                <td>High</td>
+                                <td>Boundary Tests</td>
+                                <td>BVT1, BVT3, BVT5</td>
+                                <td>Verify critical transitions between color states</td>
                             </tr>
                             <tr>
-                                <td>RT2</td>
-                                <td>Valid file without header</td>
-                                <td>"data.csv", false</td>
-                                <td>Correct DataTable</td>
-                                <td>Basic functionality without header</td>
+                                <td>High</td>
+                                <td>Equivalence Class Test</td>
+                                <td>ECT4</td>
+                                <td>Comprehensive mixed-case scenario</td>
                             </tr>
                             <tr>
-                                <td>RT3</td>
-                                <td>Empty file</td>
-                                <td>"empty.csv", true</td>
-                                <td>Empty DataTable</td>
-                                <td>Empty file handling</td>
+                                <td>Medium</td>
+                                <td>Structural Coverage</td>
+                                <td>SC1</td>
+                                <td>Test duplicate letter handling</td>
                             </tr>
                             <tr>
-                                <td>RT4</td>
-                                <td>File not found</td>
-                                <td>"nonexistent.csv", true</td>
-                                <td>IOException</td>
-                                <td>Error handling</td>
+                                <td>Medium</td>
+                                <td>Equivalence Class Test</td>
+                                <td>ECT3</td>
+                                <td>Verify complete miss handling</td>
                             </tr>
                             <tr>
-                                <td>RT5</td>
-                                <td>Malformed CSV</td>
-                                <td>"malformed.csv", true</td>
-                                <td>Exception or handling</td>
-                                <td>Malformed data handling</td>
-                            </tr>
-                            <tr>
-                                <td>RT6</td>
-                                <td>File with special characters</td>
-                                <td>"special.csv", true</td>
-                                <td>Correct DataTable</td>
-                                <td>Special character handling</td>
+                                <td>Low</td>
+                                <td>Structural Coverage</td>
+                                <td>SC2</td>
+                                <td>Verify key color state management</td>
                             </tr>
                         </tbody>
                     </table>
-                    
-                    <p>We eliminated redundant test cases focusing on a minimal set that ensures all execution paths are covered.</p>
+
+                    <p>This refined suite balances thorough coverage with efficiency, focusing on the most important behavioral aspects while still ensuring all code paths are tested at least once.</p>
                 </div>
             </div>
-            
+
         </section>
         
         <!-- Advanced Page - Maven & JaCoCo Blog-Style -->
